@@ -1,0 +1,92 @@
+,Week,Name1,Score1,Name2,Score2,Type
+0,1,Kris P. Roni,133.92,The Peeping Tomlins,120.56,Regular
+1,1,Blondes Give Me A Chubb,100.16,Nothing to CTE Here,122.72,Regular
+2,1,The Annexation  of Puerto Rico,103.68,Hurts in the Brown Bachs,101.44,Regular
+3,1,I am Magic Claw,78.18,Murican Futball Crusaders,106.9,Regular
+4,1,Purple Reign,57.52,California Sunday School,108.48,Regular
+5,1,Vonnies Chubbies,140.18,Show me your TDs,114.26,Regular
+6,2,Blondes Give Me A Chubb,111.12,Kris P. Roni,133.62,Regular
+7,2,The Peeping Tomlins,103.5,The Annexation  of Puerto Rico,95.26,Regular
+8,2,Nothing to CTE Here,97.18,I am Magic Claw,129.48,Regular
+9,2,Hurts in the Brown Bachs,105.24,Purple Reign,88.74,Regular
+10,2,Murican Futball Crusaders,92.26,Vonnies Chubbies,128.8,Regular
+11,2,California Sunday School,135.76,Show me your TDs,107.07,Regular
+12,3,Kris P. Roni,135.04,The Annexation  of Puerto Rico,92.32,Regular
+13,3,I am Magic Claw,127.66,Blondes Give Me A Chubb,105.26,Regular
+14,3,Purple Reign,113.46,The Peeping Tomlins,91.2,Regular
+15,3,Vonnies Chubbies,103.67,Nothing to CTE Here,107.08,Regular
+16,3,Show me your TDs,108.41,Hurts in the Brown Bachs,110.88,Regular
+17,3,California Sunday School,51.88,Murican Futball Crusaders,78.78,Regular
+18,4,I am Magic Claw,119.46,Kris P. Roni,94.32,Regular
+19,4,The Annexation  of Puerto Rico,68.7,Purple Reign,143.82,Regular
+20,4,Blondes Give Me A Chubb,129.38,Vonnies Chubbies,125.12,Regular
+21,4,The Peeping Tomlins,92.3,Show me your TDs,94.84,Regular
+22,4,Nothing to CTE Here,99.54,California Sunday School,75.86,Regular
+23,4,Hurts in the Brown Bachs,105.9,Murican Futball Crusaders,93.08,Regular
+24,5,Kris P. Roni,117.6,Purple Reign,120.32,Regular
+25,5,Vonnies Chubbies,89.46,I am Magic Claw,107.44,Regular
+26,5,Show me your TDs,88.08,The Annexation  of Puerto Rico,97.94,Regular
+27,5,California Sunday School,119.91,Blondes Give Me A Chubb,131.88,Regular
+28,5,Murican Futball Crusaders,96.66,The Peeping Tomlins,114.44,Regular
+29,5,Hurts in the Brown Bachs,115.24,Nothing to CTE Here,130.72,Regular
+30,6,Vonnies Chubbies,150.4,Kris P. Roni,111.76,Regular
+31,6,Purple Reign,132.66,Show me your TDs,102.62,Regular
+32,6,I am Magic Claw,62.0,California Sunday School,110.88,Regular
+33,6,The Annexation  of Puerto Rico,110.85,Murican Futball Crusaders,116.62,Regular
+34,6,Blondes Give Me A Chubb,100.77,Hurts in the Brown Bachs,81.04,Regular
+35,6,The Peeping Tomlins,113.4,Nothing to CTE Here,91.42,Regular
+36,7,Kris P. Roni,133.06,Show me your TDs,89.28,Regular
+37,7,California Sunday School,99.96,Vonnies Chubbies,94.88,Regular
+38,7,Murican Futball Crusaders,128.9,Purple Reign,85.54,Regular
+39,7,Hurts in the Brown Bachs,109.86,I am Magic Claw,114.3,Regular
+40,7,Nothing to CTE Here,124.64,The Annexation  of Puerto Rico,73.62,Regular
+41,7,The Peeping Tomlins,102.04,Blondes Give Me A Chubb,72.84,Regular
+42,8,California Sunday School,102.58,Kris P. Roni,131.24,Regular
+43,8,Show me your TDs,130.04,Murican Futball Crusaders,133.94,Regular
+44,8,Vonnies Chubbies,121.7,Hurts in the Brown Bachs,134.06,Regular
+45,8,Purple Reign,96.94,Nothing to CTE Here,85.16,Regular
+46,8,I am Magic Claw,109.7,The Peeping Tomlins,119.4,Regular
+47,8,The Annexation  of Puerto Rico,96.92,Blondes Give Me A Chubb,107.06,Regular
+48,9,Kris P. Roni,166.3,Murican Futball Crusaders,85.84,Regular
+49,9,Hurts in the Brown Bachs,101.44,California Sunday School,129.7,Regular
+50,9,Nothing to CTE Here,101.8,Show me your TDs,65.28,Regular
+51,9,The Peeping Tomlins,94.64,Vonnies Chubbies,104.12,Regular
+52,9,Blondes Give Me A Chubb,118.84,Purple Reign,110.24,Regular
+53,9,The Annexation  of Puerto Rico,105.1,I am Magic Claw,81.5,Regular
+54,10,Hurts in the Brown Bachs,72.54,Kris P. Roni,119.18,Regular
+55,10,Murican Futball Crusaders,109.34,Nothing to CTE Here,103.6,Regular
+56,10,California Sunday School,79.7,The Peeping Tomlins,130.42,Regular
+57,10,Show me your TDs,107.64,Blondes Give Me A Chubb,110.62,Regular
+58,10,Vonnies Chubbies,117.72,The Annexation  of Puerto Rico,66.6,Regular
+59,10,Purple Reign,97.78,I am Magic Claw,64.44,Regular
+60,11,Kris P. Roni,122.74,Nothing to CTE Here,79.38,Regular
+61,11,The Peeping Tomlins,127.7,Hurts in the Brown Bachs,120.18,Regular
+62,11,Blondes Give Me A Chubb,112.54,Murican Futball Crusaders,127.84,Regular
+63,11,The Annexation  of Puerto Rico,114.48,California Sunday School,86.7,Regular
+64,11,I am Magic Claw,151.28,Show me your TDs,97.08,Regular
+65,11,Purple Reign,108.74,Vonnies Chubbies,110.16,Regular
+66,12,The Peeping Tomlins,107.26,Kris P. Roni,152.86,Regular
+67,12,Nothing to CTE Here,101.58,Blondes Give Me A Chubb,84.46,Regular
+68,12,Hurts in the Brown Bachs,110.26,The Annexation  of Puerto Rico,108.68,Regular
+69,12,Murican Futball Crusaders,122.0,I am Magic Claw,76.21,Regular
+70,12,California Sunday School,99.4,Purple Reign,90.35,Regular
+71,12,Show me your TDs,114.32,Vonnies Chubbies,93.86,Regular
+72,13,Kris P. Roni,100.82,Blondes Give Me A Chubb,139.96,Regular
+73,13,The Annexation  of Puerto Rico,117.32,The Peeping Tomlins,130.3,Regular
+74,13,I am Magic Claw,111.94,Nothing to CTE Here,111.38,Regular
+75,13,Purple Reign,116.94,Hurts in the Brown Bachs,93.04,Regular
+76,13,Vonnies Chubbies,71.88,Murican Futball Crusaders,138.4,Regular
+77,13,Show me your TDs,83.88,California Sunday School,78.76,Regular
+78,14,The Annexation  of Puerto Rico,176.98,Kris P. Roni,130.22,Regular
+79,14,Blondes Give Me A Chubb,158.16,I am Magic Claw,64.52,Regular
+80,14,The Peeping Tomlins,122.6,Purple Reign,74.06,Regular
+81,14,Nothing to CTE Here,124.18,Vonnies Chubbies,143.5,Regular
+82,14,Hurts in the Brown Bachs,85.3,Show me your TDs,82.42,Regular
+83,14,Murican Futball Crusaders,126.56,California Sunday School,121.02,Regular
+84,15,,,Murican Futball Crusaders,0.0,Playoff
+85,15,Vonnies Chubbies,0.0,Blondes Give Me A Chubb,0.0,Playoff
+86,15,Nothing to CTE Here,0.0,The Peeping Tomlins,0.0,Playoff
+87,15,,,Kris P. Roni,0.0,Playoff
+88,15,I am Magic Claw,0.0,Purple Reign,0.0,Playoff
+89,15,California Sunday School,0.0,Hurts in the Brown Bachs,0.0,Playoff
+90,15,Show me your TDs,0.0,The Annexation  of Puerto Rico,0.0,Playoff

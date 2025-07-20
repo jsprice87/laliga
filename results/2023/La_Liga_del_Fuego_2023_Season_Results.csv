@@ -1,0 +1,92 @@
+,Week,Name1,Score1,Name2,Score2,Type
+0,1,Lucy in the Sky w/ Draft Picks,133.66,Show me your TDs,98.56,Regular
+1,1,Vonnies Chubbies,104.54,Christian Sunday Service,103.44,Regular
+2,1,Purple Reign,108.64,Nothing to CTE Here,69.38,Regular
+3,1,Camacho's Commanders,77.96,The Annexation  of Puerto Rico,97.82,Regular
+4,1,Murican Futball Crusaders,68.56,Moose,88.94,Regular
+5,1,Hurts in the Brown Bachs,97.3,Blondes Give Me A Chubb,74.16,Regular
+6,2,Vonnies Chubbies,126.7,Lucy in the Sky w/ Draft Picks,118.0,Regular
+7,2,Show me your TDs,77.0,Purple Reign,93.54,Regular
+8,2,Christian Sunday Service,128.44,Camacho's Commanders,88.53,Regular
+9,2,Nothing to CTE Here,109.28,Murican Futball Crusaders,131.94,Regular
+10,2,The Annexation  of Puerto Rico,123.7,Hurts in the Brown Bachs,115.12,Regular
+11,2,Moose,115.16,Blondes Give Me A Chubb,77.86,Regular
+12,3,Lucy in the Sky w/ Draft Picks,152.22,Purple Reign,84.86,Regular
+13,3,Camacho's Commanders,122.48,Vonnies Chubbies,104.28,Regular
+14,3,Murican Futball Crusaders,112.28,Show me your TDs,98.0,Regular
+15,3,Hurts in the Brown Bachs,111.68,Christian Sunday Service,78.06,Regular
+16,3,Blondes Give Me A Chubb,99.68,Nothing to CTE Here,141.84,Regular
+17,3,Moose,109.92,The Annexation  of Puerto Rico,102.36,Regular
+18,4,Camacho's Commanders,74.98,Lucy in the Sky w/ Draft Picks,90.02,Regular
+19,4,Purple Reign,85.2,Murican Futball Crusaders,98.2,Regular
+20,4,Vonnies Chubbies,88.52,Hurts in the Brown Bachs,114.46,Regular
+21,4,Show me your TDs,147.18,Blondes Give Me A Chubb,99.66,Regular
+22,4,Christian Sunday Service,112.9,Moose,149.4,Regular
+23,4,Nothing to CTE Here,75.5,The Annexation  of Puerto Rico,114.34,Regular
+24,5,Lucy in the Sky w/ Draft Picks,126.54,Murican Futball Crusaders,79.32,Regular
+25,5,Hurts in the Brown Bachs,160.92,Camacho's Commanders,82.69,Regular
+26,5,Blondes Give Me A Chubb,114.86,Purple Reign,100.48,Regular
+27,5,Moose,106.16,Vonnies Chubbies,70.24,Regular
+28,5,The Annexation  of Puerto Rico,100.58,Show me your TDs,113.06,Regular
+29,5,Nothing to CTE Here,136.38,Christian Sunday Service,126.58,Regular
+30,6,Hurts in the Brown Bachs,106.5,Lucy in the Sky w/ Draft Picks,122.5,Regular
+31,6,Murican Futball Crusaders,139.94,Blondes Give Me A Chubb,86.44,Regular
+32,6,Camacho's Commanders,137.52,Moose,116.36,Regular
+33,6,Purple Reign,82.22,The Annexation  of Puerto Rico,76.88,Regular
+34,6,Vonnies Chubbies,88.04,Nothing to CTE Here,74.4,Regular
+35,6,Show me your TDs,73.78,Christian Sunday Service,104.34,Regular
+36,7,Lucy in the Sky w/ Draft Picks,69.9,Blondes Give Me A Chubb,91.62,Regular
+37,7,Moose,96.9,Hurts in the Brown Bachs,113.76,Regular
+38,7,The Annexation  of Puerto Rico,86.9,Murican Futball Crusaders,97.74,Regular
+39,7,Nothing to CTE Here,92.46,Camacho's Commanders,125.64,Regular
+40,7,Christian Sunday Service,127.38,Purple Reign,108.86,Regular
+41,7,Show me your TDs,80.16,Vonnies Chubbies,122.76,Regular
+42,8,Moose,143.76,Lucy in the Sky w/ Draft Picks,101.56,Regular
+43,8,Blondes Give Me A Chubb,107.46,The Annexation  of Puerto Rico,121.86,Regular
+44,8,Hurts in the Brown Bachs,156.96,Nothing to CTE Here,98.12,Regular
+45,8,Murican Futball Crusaders,106.78,Christian Sunday Service,103.38,Regular
+46,8,Camacho's Commanders,82.68,Show me your TDs,111.92,Regular
+47,8,Purple Reign,116.18,Vonnies Chubbies,91.1,Regular
+48,9,Lucy in the Sky w/ Draft Picks,97.92,The Annexation  of Puerto Rico,104.01,Regular
+49,9,Nothing to CTE Here,111.92,Moose,97.82,Regular
+50,9,Christian Sunday Service,108.1,Blondes Give Me A Chubb,66.52,Regular
+51,9,Show me your TDs,126.24,Hurts in the Brown Bachs,115.08,Regular
+52,9,Vonnies Chubbies,70.4,Murican Futball Crusaders,119.8,Regular
+53,9,Purple Reign,77.04,Camacho's Commanders,76.88,Regular
+54,10,Nothing to CTE Here,94.18,Lucy in the Sky w/ Draft Picks,117.42,Regular
+55,10,The Annexation  of Puerto Rico,132.56,Christian Sunday Service,101.12,Regular
+56,10,Moose,85.88,Show me your TDs,103.92,Regular
+57,10,Blondes Give Me A Chubb,96.75,Vonnies Chubbies,138.52,Regular
+58,10,Hurts in the Brown Bachs,149.56,Purple Reign,91.46,Regular
+59,10,Murican Futball Crusaders,115.18,Camacho's Commanders,100.12,Regular
+60,11,Lucy in the Sky w/ Draft Picks,111.21,Christian Sunday Service,116.32,Regular
+61,11,Show me your TDs,76.14,Nothing to CTE Here,129.04,Regular
+62,11,Vonnies Chubbies,127.43,The Annexation  of Puerto Rico,110.66,Regular
+63,11,Purple Reign,82.66,Moose,93.1,Regular
+64,11,Camacho's Commanders,114.66,Blondes Give Me A Chubb,92.3,Regular
+65,11,Murican Futball Crusaders,99.44,Hurts in the Brown Bachs,95.9,Regular
+66,12,Show me your TDs,118.66,Lucy in the Sky w/ Draft Picks,107.86,Regular
+67,12,Christian Sunday Service,117.26,Vonnies Chubbies,86.72,Regular
+68,12,Nothing to CTE Here,108.48,Purple Reign,113.74,Regular
+69,12,The Annexation  of Puerto Rico,123.94,Camacho's Commanders,84.18,Regular
+70,12,Moose,126.76,Murican Futball Crusaders,120.6,Regular
+71,12,Blondes Give Me A Chubb,77.82,Hurts in the Brown Bachs,110.2,Regular
+72,13,Lucy in the Sky w/ Draft Picks,117.34,Vonnies Chubbies,92.8,Regular
+73,13,Purple Reign,101.9,Show me your TDs,99.06,Regular
+74,13,Camacho's Commanders,102.14,Christian Sunday Service,135.76,Regular
+75,13,Murican Futball Crusaders,103.48,Nothing to CTE Here,131.78,Regular
+76,13,Hurts in the Brown Bachs,136.12,The Annexation  of Puerto Rico,157.18,Regular
+77,13,Blondes Give Me A Chubb,87.6,Moose,93.02,Regular
+78,14,Purple Reign,90.8,Lucy in the Sky w/ Draft Picks,81.76,Regular
+79,14,Vonnies Chubbies,102.04,Camacho's Commanders,125.54,Regular
+80,14,Show me your TDs,65.24,Murican Futball Crusaders,101.64,Regular
+81,14,Christian Sunday Service,100.32,Hurts in the Brown Bachs,126.68,Regular
+82,14,Nothing to CTE Here,144.62,Blondes Give Me A Chubb,53.6,Regular
+83,14,The Annexation  of Puerto Rico,145.54,Moose,113.12,Regular
+84,15,,,Murican Futball Crusaders,0.0,Playoff
+85,15,Purple Reign,0.0,Moose,0.0,Playoff
+86,15,Christian Sunday Service,0.0,The Annexation  of Puerto Rico,0.0,Playoff
+87,15,,,Hurts in the Brown Bachs,0.0,Playoff
+88,15,Nothing to CTE Here,0.0,Lucy in the Sky w/ Draft Picks,0.0,Playoff
+89,15,Show me your TDs,0.0,Vonnies Chubbies,0.0,Playoff
+90,15,Blondes Give Me A Chubb,0.0,Camacho's Commanders,0.0,Playoff
