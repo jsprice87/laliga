@@ -1,0 +1,32 @@
+{
+  "name": "laliga",
+  "version": "1.0.0",
+  "description": "python scripts for tracking ESPN fantasy football data for La Liga Del Fuego",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:api\"",
+    "dev:frontend": "cd laliga-final-trophy-dashboard && python3 -m http.server 8000",
+    "dev:api": "nodemon api/index.js",
+    "build": "npm run build:frontend",
+    "build:frontend": "echo 'Static files ready for deployment'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "mongodb": "5.5",
+    "node-cron": "^4.2.1"
+  }
+}

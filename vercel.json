@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "laliga-final-trophy-dashboard/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/laliga-final-trophy-dashboard/$1"
+    }
+  ],
+  "env": {
+    "ESPN_S2": "@espn_s2",
+    "ESPN_SWID": "@espn_swid",
+    "ESPN_LEAGUE_ID": "@espn_league_id",
+    "MONGODB_URI": "@mongodb_uri"
+  }
+}
