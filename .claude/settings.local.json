@@ -15,7 +15,22 @@
       "Bash(npm install:*)",
       "Bash(curl http://localhost:3000/api/health)",
       "Bash(curl:*)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "WebFetch(domain:laliga-qiuhrop2i-justin-prices-projects-eb47dd12.vercel.app)",
+      "Bash(vercel ls:*)",
+      "Bash(vercel env add:*)",
+      "Bash(vercel:*)",
+      "WebFetch(domain:laliga-16bypzz4r-justin-prices-projects-eb47dd12.vercel.app)",
+      "Bash(npm run dev:api:*)",
+      "WebFetch(domain:laliga-ervj3ki6a-justin-prices-projects-eb47dd12.vercel.app)",
+      "Bash(cp:*)",
+      "WebFetch(domain:laliga-h4a8zq4lo-justin-prices-projects-eb47dd12.vercel.app)",
+      "WebFetch(domain:laliga-nine.vercel.app)",
+      "Bash(ls:*)",
+      "Bash(npm run dev:frontend:*)",
+      "Bash(python3:*)",
+      "WebFetch(domain:fantasy.espn.com)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }

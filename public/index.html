@@ -66,10 +66,6 @@
                     </div>
                 </div>
                 <div class="header-stats">
-                    <div id="user-info" class="stat-box">
-                        <!-- User authentication info populated by JavaScript -->
-                        <span class="user-welcome">Loading...</span>
-                    </div>
                     <div class="stat-box">
                         <div class="stat-label">PRIZE POOL</div>
                         <div class="stat-value">$1,200</div>
@@ -376,80 +372,7 @@
         </div>
     </div>
 
-    <!-- Authentication Modal -->
-    <div class="modal-overlay" id="auth-modal" style="display: none;">
-        <div class="modal-content game-panel auth-modal">
-            <div class="modal-header">
-                <div class="panel-header" id="auth-modal-title">
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
-                    LOGIN TO LA LIGA DEL FUEGO
-                </div>
-            </div>
-            <div class="modal-body">
-                <!-- Login Form -->
-                <form id="auth-login-form" class="auth-form">
-                    <div class="auth-error" style="display: none;"></div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">EMAIL OR USERNAME</label>
-                        <input type="text" name="email" class="form-control game-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">PASSWORD</label>
-                        <input type="password" name="password" class="form-control game-input" required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary game-button">LOGIN</button>
-                    
-                    <div class="auth-toggle">
-                        <span>Don't have an account?</span>
-                        <button type="button" class="btn btn-link" id="show-register">REGISTER HERE</button>
-                    </div>
-                </form>
-
-                <!-- Registration Form -->
-                <form id="auth-register-form" class="auth-form" style="display: none;">
-                    <div class="auth-error" style="display: none;"></div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">USERNAME</label>
-                        <input type="text" name="username" class="form-control game-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">EMAIL</label>
-                        <input type="email" name="email" class="form-control game-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">FANTASY TEAM NAME</label>
-                        <input type="text" name="teamName" class="form-control game-input" placeholder="Optional">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">PASSWORD</label>
-                        <input type="password" name="password" class="form-control game-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">CONFIRM PASSWORD</label>
-                        <input type="password" name="confirmPassword" class="form-control game-input" required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary game-button">CREATE ACCOUNT</button>
-                    
-                    <div class="auth-toggle">
-                        <span>Already have an account?</span>
-                        <button type="button" class="btn btn-link" id="show-login">LOGIN HERE</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <script src="api-client.js"></script>
-    <script src="auth.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

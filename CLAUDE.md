@@ -32,29 +32,22 @@ La Liga del Fuego is a fantasy football league management system with two main c
 ## Core Commands
 
 ### Web Dashboard (Primary Development)
-```bash
-# Navigate to main project
-cd laliga-final-trophy-dashboard
+- Dashboard files located in `/laliga-final-trophy-dashboard/`
+- No build process needed - pure HTML/CSS/JS
+- All development and testing should be handled by Claude Code agent
+- **DO NOT ask user to run terminal commands - Claude Code handles all CLI operations**
 
-# Open dashboard in browser (no build process needed)
-open index.html
+### API Development
+- API located in `/api/` directory  
+- Node.js serverless functions for Vercel deployment
+- MongoDB integration for data persistence
+- ESPN API integration for live data
+- **Claude Code manages all API testing, deployment, and debugging**
 
-# Live development server (optional)
-python3 -m http.server 8000
-# Then visit http://localhost:8000
-```
-
-### Legacy Python Scripts (Reference)
-```bash
-# Navigate to legacy system
-cd legacy-python
-
-# Run original data collection
-python3 main.py
-
-# Create Google Sheets
-python3 createSheet.py
-```
+### Legacy Python Scripts (Reference Only)
+- Historical data collection scripts in `/legacy-python/`
+- Contains ESPN API credentials and league configuration
+- Used for reference but not active development
 
 ## Dashboard Features (All Implemented)
 

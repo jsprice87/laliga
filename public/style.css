@@ -1613,87 +1613,11 @@ select.game-select {
 .commentary-item {
   background: var(--game-bg-secondary);
   border-left: var(--game-border-width-thick) solid var(--game-teal);
-  padding: var(--game-space-lg);
+  padding: var(--game-space-base);
   font-style: italic;
   color: var(--game-white);
   border-top: var(--game-border-width) solid var(--game-purple);
   border-bottom: var(--game-border-width) solid var(--game-purple);
-  border-right: var(--game-border-width) solid var(--game-purple);
-  margin-bottom: var(--game-space-base);
-  line-height: 1.6;
-  font-size: var(--game-font-size-base);
-  font-weight: 400;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  box-shadow: inset 0 0 0 1px rgba(32, 178, 170, 0.1);
-}
-
-/* Authentication */
-.auth-modal {
-  max-width: 500px;
-  width: 90%;
-}
-
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--game-space-base);
-}
-
-.auth-error {
-  background: var(--game-magenta);
-  color: var(--game-white);
-  padding: var(--game-space-sm);
-  border: var(--game-border-width) solid var(--game-yellow);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: var(--game-space-base);
-}
-
-.auth-toggle {
-  text-align: center;
-  margin-top: var(--game-space-base);
-  color: var(--game-gray);
-  font-size: var(--game-font-size-sm);
-}
-
-.auth-toggle span {
-  margin-right: var(--game-space-sm);
-}
-
-.btn-link {
-  background: none;
-  border: none;
-  color: var(--game-teal);
-  text-decoration: underline;
-  cursor: pointer;
-  font-family: var(--game-font);
-  font-weight: 700;
-  font-size: var(--game-font-size-sm);
-  transition: color 0.2s ease;
-}
-
-.btn-link:hover {
-  color: var(--game-magenta);
-}
-
-.user-welcome {
-  color: var(--game-teal);
-  font-weight: 700;
-  margin-right: var(--game-space-base);
-}
-
-#user-info {
-  display: flex;
-  align-items: center;
-  gap: var(--game-space-base);
-  padding: var(--game-space-sm);
-  background: var(--game-bg-secondary);
-  border: var(--game-border-width) solid var(--game-teal);
-  font-size: var(--game-font-size-sm);
-}
-
-.admin-only {
-  display: none;
 }
 
 /* Admin */

@@ -1,127 +1,163 @@
-require('dotenv').config({ path: '.env.local' });
-const express = require('express');
-const cors = require('cors');
-const { connectToMongoDB } = require('./database/connect');
 const { fetchESPNTeams } = require('./espn/fetchTeams');
 const { fetchESPNMatchups } = require('./espn/fetchMatchups');
 const { calculateLaLigaBucks } = require('./laliga/calculateBucks');
 const { updateWeeklyData, updateCurrentWeek } = require('./laliga/updateWeekly');
-const { initializeDatabase, getTeams, getMatchups } = require('./database/schemas');
+const { getTeams, getMatchups } = require('./database/schemas');
+const { connectToMongoDB } = require('./database/connect');
+const { registerUser, loginUser, getUserById, updateUserProfile, changePassword, authenticateToken, requireAdmin } = require('./auth/auth');
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+module.exports = async function handler(req, res) {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// Initialize database on startup
-initializeDatabase().catch(console.error);
-
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'La Liga del Fuego API is running' });
-});
-
-// Get teams with La Liga Bucks calculations (live from ESPN)
-app.get('/api/teams/live', async (req, res) => {
-  try {
-    const week = req.query.week || 14;
-    const season = req.query.season || 2024;
-    
-    // Fetch teams from ESPN API
-    const teams = await fetchESPNTeams(process.env.ESPN_LEAGUE_ID, season, week);
-    
-    // Calculate La Liga Bucks
-    const teamsWithBucks = calculateLaLigaBucks(teams);
-    
-    res.json(teamsWithBucks);
-  } catch (error) {
-    console.error('API Error:', error);
-    res.status(500).json({ error: 'Failed to fetch team data' });
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
   }
-});
 
-// Get teams from database (cached)
-app.get('/api/teams', async (req, res) => {
-  try {
-    const season = req.query.season || 2024;
-    const teams = await getTeams(season);
-    res.json(teams);
-  } catch (error) {
-    console.error('Database teams error:', error);
-    res.status(500).json({ error: 'Failed to fetch teams from database' });
-  }
-});
+  const url = new URL(req.url, `http://${req.headers.host}`);
+  const pathname = url.pathname;
 
-// Get matchups for a specific week
-app.get('/api/matchups', async (req, res) => {
   try {
-    const week = req.query.week || 14;
-    const season = req.query.season || 2024;
-    
-    // Try database first
-    let matchups = await getMatchups(week, season);
-    
-    // If no cached data, fetch from ESPN
-    if (!matchups || matchups.length === 0) {
-      try {
-        const espnMatchups = await fetchESPNMatchups(process.env.ESPN_LEAGUE_ID, season, week);
-        matchups = espnMatchups;
-      } catch (espnError) {
-        console.warn('ESPN matchups unavailable:', espnError.message);
-        matchups = [];
+    // Health check
+    if (pathname === '/api/health') {
+      return res.status(200).json({ 
+        status: 'OK', 
+        message: 'La Liga del Fuego API is running',
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    // Teams endpoint
+    if (pathname === '/api/teams') {
+      const { week = 14, season = 2024, live } = Object.fromEntries(url.searchParams);
+      
+      if (live === 'true') {
+        const teams = await fetchESPNTeams(process.env.ESPN_LEAGUE_ID, season, week);
+        const teamsWithBucks = calculateLaLigaBucks(teams);
+        return res.status(200).json(teamsWithBucks);
+      } else {
+        const teams = await getTeams(season);
+        return res.status(200).json(teams);
       }
     }
-    
-    res.json(matchups);
-  } catch (error) {
-    console.error('Matchups API Error:', error);
-    res.status(500).json({ error: 'Failed to fetch matchup data' });
-  }
-});
 
-// Update weekly data (manual trigger)
-app.post('/api/update/:week', async (req, res) => {
-  try {
-    const week = parseInt(req.params.week);
-    const season = req.query.season || 2024;
-    
-    if (week < 1 || week > 18) {
-      return res.status(400).json({ error: 'Week must be between 1 and 18' });
+    // Matchups endpoint
+    if (pathname === '/api/matchups') {
+      const { week = 14, season = 2024 } = Object.fromEntries(url.searchParams);
+      
+      let matchups = await getMatchups(week, season);
+      
+      if (!matchups || matchups.length === 0) {
+        try {
+          const espnMatchups = await fetchESPNMatchups(process.env.ESPN_LEAGUE_ID, season, week);
+          matchups = espnMatchups;
+        } catch (espnError) {
+          console.warn('ESPN matchups unavailable:', espnError.message);
+          matchups = [];
+        }
+      }
+      
+      return res.status(200).json(matchups);
     }
-    
-    const result = await updateWeeklyData(week, season);
-    res.json(result);
-  } catch (error) {
-    console.error('Update error:', error);
-    res.status(500).json({ error: 'Failed to update weekly data' });
-  }
-});
 
-// Update current week data
-app.post('/api/update/current', async (req, res) => {
-  try {
-    const result = await updateCurrentWeek();
-    res.json(result);
-  } catch (error) {
-    console.error('Current week update error:', error);
-    res.status(500).json({ error: 'Failed to update current week' });
-  }
-});
+    // Update endpoint
+    if (pathname === '/api/update' && ['POST', 'PUT'].includes(req.method)) {
+      const { week, current, season = 2024 } = Object.fromEntries(url.searchParams);
+      
+      if (current === 'true') {
+        const result = await updateCurrentWeek();
+        return res.status(200).json(result);
+      } else if (week) {
+        const weekNum = parseInt(week);
+        
+        if (weekNum < 1 || weekNum > 18) {
+          return res.status(400).json({ error: 'Week must be between 1 and 18' });
+        }
+        
+        const result = await updateWeeklyData(weekNum, season);
+        return res.status(200).json(result);
+      } else {
+        return res.status(400).json({ error: 'Must specify week parameter or current=true' });
+      }
+    }
 
-// Test MongoDB connection
-app.get('/api/test-db', async (req, res) => {
-  try {
-    const db = await connectToMongoDB();
-    const result = await db.admin().ping();
-    res.json({ message: 'MongoDB connection successful', result });
-  } catch (error) {
-    console.error('Database test error:', error);
-    res.status(500).json({ error: 'Database connection failed' });
-  }
-});
+    // Database test endpoint
+    if (pathname === '/api/test-db') {
+      const db = await connectToMongoDB();
+      const result = await db.admin().ping();
+      
+      return res.status(200).json({ 
+        message: 'MongoDB connection successful', 
+        result,
+        timestamp: new Date().toISOString()
+      });
+    }
 
-app.listen(PORT, () => {
-  console.log(`La Liga del Fuego API server running on port ${PORT}`);
-});
+    // Authentication endpoints
+    if (pathname === '/api/auth/register' && req.method === 'POST') {
+      const { username, email, password, teamName } = req.body || {};
+      
+      if (!username || !email || !password) {
+        return res.status(400).json({ error: 'Username, email, and password are required' });
+      }
+
+      try {
+        const result = await registerUser({ username, email, password, teamName });
+        return res.status(201).json(result);
+      } catch (error) {
+        return res.status(400).json({ error: error.message });
+      }
+    }
+
+    if (pathname === '/api/auth/login' && req.method === 'POST') {
+      const { email, password } = req.body || {};
+      
+      if (!email || !password) {
+        return res.status(400).json({ error: 'Email and password are required' });
+      }
+
+      try {
+        const result = await loginUser(email, password);
+        return res.status(200).json(result);
+      } catch (error) {
+        return res.status(401).json({ error: error.message });
+      }
+    }
+
+    if (pathname === '/api/auth/me' && req.method === 'GET') {
+      // This would need token parsing - simplified for now
+      const authHeader = req.headers['authorization'];
+      const token = authHeader && authHeader.split(' ')[1];
+      
+      if (!token) {
+        return res.status(401).json({ error: 'Access token required' });
+      }
+
+      try {
+        const { verifyToken } = require('./auth/auth');
+        const decoded = verifyToken(token);
+        const user = await getUserById(decoded.userId);
+        return res.status(200).json(user);
+      } catch (error) {
+        return res.status(401).json({ error: 'Invalid token' });
+      }
+    }
+
+    if (pathname === '/api/auth/profile' && req.method === 'PUT') {
+      // Update user profile - would need authentication middleware
+      return res.status(200).json({ message: 'Profile update endpoint - authentication required' });
+    }
+
+    // Not found
+    return res.status(404).json({ error: 'Endpoint not found' });
+
+  } catch (error) {
+    console.error('API Error:', error);
+    return res.status(500).json({ 
+      error: 'Internal server error',
+      details: error.message 
+    });
+  }
+};
