@@ -12,251 +12,21 @@ const appData = {
     teams: 12,
     prizePool: 2400,
     weeklyBonus: 50,
-    season: 2024
+    season: 2025
   },
-  teams: [
-    {
-      id: 1,
-      name: "Kris P. Roni",
-      owner: "Kris",
-      record: "9-5",
-      totalPoints: 1847.2,
-      laLigaBucks: 35,
-      weeklyHighScores: 4,
-      earnings: 200,
-      espnRank: 1,
-      playoffSeed: 1,
-      espnComponent: 12,
-      cumulativeComponent: 11,
-      weeklyAvgComponent: 12
-    },
-    {
-      id: 2,
-      name: "Murican Futball Crusaders",
-      owner: "Mike",
-      record: "8-6",
-      totalPoints: 1789.5,
-      laLigaBucks: 31,
-      weeklyHighScores: 1,
-      earnings: 50,
-      espnRank: 2,
-      playoffSeed: 2,
-      espnComponent: 11,
-      cumulativeComponent: 10,
-      weeklyAvgComponent: 10
-    },
-    {
-      id: 3,
-      name: "Vonnies Chubbies",
-      owner: "Von",
-      record: "7-7",
-      totalPoints: 1823.4,
-      laLigaBucks: 29,
-      weeklyHighScores: 2,
-      earnings: 100,
-      espnRank: 3,
-      playoffSeed: 3,
-      espnComponent: 10,
-      cumulativeComponent: 9,
-      weeklyAvgComponent: 10
-    },
-    {
-      id: 4,
-      name: "Blondes Give Me A Chubb",
-      owner: "Blake",
-      record: "8-6",
-      totalPoints: 1756.8,
-      laLigaBucks: 29,
-      weeklyHighScores: 3,
-      earnings: 150,
-      espnRank: 4,
-      playoffSeed: 4,
-      espnComponent: 9,
-      cumulativeComponent: 12,
-      weeklyAvgComponent: 8
-    },
-    {
-      id: 5,
-      name: "Fire & Ice",
-      owner: "Justin",
-      record: "7-7",
-      totalPoints: 1698.2,
-      laLigaBucks: 27,
-      weeklyHighScores: 1,
-      earnings: 50,
-      espnRank: 5,
-      playoffSeed: 5,
-      espnComponent: 8,
-      cumulativeComponent: 8,
-      weeklyAvgComponent: 11
-    },
-    {
-      id: 6,
-      name: "Thunder Bolts",
-      owner: "Sarah",
-      record: "6-8",
-      totalPoints: 1645.9,
-      laLigaBucks: 25,
-      weeklyHighScores: 0,
-      earnings: 0,
-      espnRank: 6,
-      playoffSeed: 6,
-      espnComponent: 7,
-      cumulativeComponent: 7,
-      weeklyAvgComponent: 11
-    },
-    {
-      id: 7,
-      name: "Gridiron Gladiators",
-      owner: "Marcus",
-      record: "5-9",
-      totalPoints: 1612.1,
-      laLigaBucks: 23,
-      weeklyHighScores: 1,
-      earnings: 50,
-      espnRank: 7,
-      playoffSeed: 7,
-      espnComponent: 6,
-      cumulativeComponent: 6,
-      weeklyAvgComponent: 11
-    },
-    {
-      id: 8,
-      name: "Touchdown Titans",
-      owner: "Ashley",
-      record: "4-10",
-      totalPoints: 1578.7,
-      laLigaBucks: 21,
-      weeklyHighScores: 0,
-      earnings: 0,
-      espnRank: 8,
-      playoffSeed: 8,
-      espnComponent: 5,
-      cumulativeComponent: 5,
-      weeklyAvgComponent: 11
-    },
-    {
-      id: 9,
-      name: "End Zone Elites",
-      owner: "Carlos",
-      record: "4-10",
-      totalPoints: 1534.3,
-      laLigaBucks: 19,
-      weeklyHighScores: 1,
-      earnings: 50,
-      espnRank: 9,
-      playoffSeed: 9,
-      espnComponent: 4,
-      cumulativeComponent: 4,
-      weeklyAvgComponent: 11
-    },
-    {
-      id: 10,
-      name: "Blitz Brigade",
-      owner: "Taylor",
-      record: "3-11",
-      totalPoints: 1487.9,
-      laLigaBucks: 17,
-      weeklyHighScores: 0,
-      earnings: 0,
-      espnRank: 10,
-      playoffSeed: 10,
-      espnComponent: 3,
-      cumulativeComponent: 3,
-      weeklyAvgComponent: 11
-    },
-    {
-      id: 11,
-      name: "Fantasy Phoenixes",
-      owner: "Jordan",
-      record: "2-12",
-      totalPoints: 1445.2,
-      laLigaBucks: 15,
-      weeklyHighScores: 1,
-      earnings: 50,
-      espnRank: 11,
-      playoffSeed: 11,
-      espnComponent: 2,
-      cumulativeComponent: 2,
-      weeklyAvgComponent: 11
-    },
-    {
-      id: 12,
-      name: "Pigskin Pirates",
-      owner: "Alex",
-      record: "1-13",
-      totalPoints: 1398.6,
-      laLigaBucks: 13,
-      weeklyHighScores: 0,
-      earnings: 0,
-      espnRank: 12,
-      playoffSeed: 12,
-      espnComponent: 1,
-      cumulativeComponent: 1,
-      weeklyAvgComponent: 11
-    }
-  ],
-  matchups: [
-    {
-      week: 14,
-      team1: "Kris P. Roni",
-      team1Score: 142.5,
-      team2: "Team Theta",
-      team2Score: 118.2,
-      status: "FINAL"
-    },
-    {
-      week: 14,
-      team1: "Murican Futball Crusaders",
-      team1Score: 135.8,
-      team2: "Team Mu",
-      team2Score: 95.4,
-      status: "FINAL"
-    },
-    {
-      week: 14,
-      team1: "Vonnies Chubbies",
-      team1Score: 128.3,
-      team2: "Team Kappa",
-      team2Score: 122.1,
-      status: "FINAL"
-    },
-    {
-      week: 14,
-      team1: "Blondes Give Me A Chubb",
-      team1Score: 156.7,
-      team2: "Team Iota",
-      team2Score: 103.9,
-      status: "FINAL"
-    },
-    {
-      week: 14,
-      team1: "Team Epsilon",
-      team1Score: 141.2,
-      team2: "Team Lambda",
-      team2Score: 107.8,
-      status: "FINAL"
-    },
-    {
-      week: 14,
-      team1: "Team Zeta",
-      team1Score: 116.5,
-      team2: "Team Eta",
-      team2Score: 124.3,
-      status: "FINAL"
-    }
-  ],
+  teams: [], // Live data loaded from ESPN API
+  matchups: [], // Live data loaded from ESPN API
   championsHistory: [
-    { year: 2023, team: "Kris P. Roni", owner: "Kris" },
-    { year: 2022, team: "Vonnies Chubbies", owner: "Von" },
-    { year: 2021, team: "Murican Futball Crusaders", owner: "Mike" },
-    { year: 2020, team: "Blondes Give Me A Chubb", owner: "Blake" }
+    { year: 2023, team: "Kris P. Roni", owner: "Kris McKissack" },
+    { year: 2022, team: "Vonnies Chubbies", owner: "Jeff Parr" },
+    { year: 2021, team: "Murican Futball Crusaders", owner: "Scott Williams" },
+    { year: 2020, team: "Blondes Give Me A Chubb", owner: "Adam Haywood" }
   ],
   sackoHistory: [
-    { year: 2023, team: "Pigskin Pirates", owner: "Alex" },
-    { year: 2022, team: "Fantasy Phoenixes", owner: "Jordan" },
-    { year: 2021, team: "Blitz Brigade", owner: "Taylor" },
-    { year: 2020, team: "End Zone Elites", owner: "Carlos" }
+    { year: 2023, team: "Purple Reign", owner: "Boston Weir" },
+    { year: 2022, team: "Hurts in the Brown Bachs", owner: "Niklas Markley" },
+    { year: 2021, team: "Nothing to CTE Here", owner: "Matthew Kelsall" },
+    { year: 2020, team: "The Peeping Tomlins", owner: "Eric Butler" }
   ],
   commentary: [
     "🔥 KRIS P. RONI dominating with 35 total La Liga Bucks! The defending champ is looking UNSTOPPABLE with perfect scores in multiple components!",
@@ -1092,13 +862,24 @@ async function init() {
       
       // Load live team data
       try {
-        const liveTeams = await loadLiveTeamData(appData.league.currentWeek);
+        const liveTeams = await loadLiveTeamData(appData.league.currentWeek, appData.league.season);
         if (liveTeams && liveTeams.length > 0) {
           appData.teams = liveTeams;
           console.log('✅ LIVE TEAM DATA LOADED FROM ESPN API!');
         }
       } catch (error) {
-        console.warn('⚠️ Failed to load live data, using static data:', error);
+        console.warn('⚠️ Failed to load live team data, using static data:', error);
+      }
+      
+      // Load live matchup data
+      try {
+        const liveMatchups = await loadMatchupData(appData.league.currentWeek, appData.league.season);
+        if (liveMatchups && liveMatchups.length > 0) {
+          appData.matchups = liveMatchups;
+          console.log('✅ LIVE MATCHUP DATA LOADED FROM ESPN API!');
+        }
+      } catch (error) {
+        console.warn('⚠️ Failed to load live matchup data, using static data:', error);
       }
     } else {
       console.warn('⚠️ API CONNECTION FAILED - USING STATIC DATA');

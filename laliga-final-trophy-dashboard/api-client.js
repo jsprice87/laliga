@@ -6,7 +6,7 @@
  ********************/
 const API_CONFIG = {
   development: {
-    baseUrl: 'http://localhost:3001/api',
+    baseUrl: '/api', // Serverless functions on same domain
     pollInterval: 60000 // 1 minute for development
   },
   production: {
@@ -79,22 +79,22 @@ class LaLigaAPI {
   }
 
   // Get teams data (live from ESPN)
-  async getTeamsLive(week = 14, season = 2024) {
-    return this.fetch(`/teams/live?week=${week}&season=${season}`);
+  async getTeamsLive(week = 14, season = 2025) {
+    return this.fetch(`/teams?live=true&week=${week}&season=${season}`);
   }
 
   // Get teams data (cached from database)
-  async getTeams(season = 2024) {
+  async getTeams(season = 2025) {
     return this.fetch(`/teams?season=${season}`);
   }
 
   // Get matchups for a specific week
-  async getMatchups(week = 14, season = 2024) {
+  async getMatchups(week = 14, season = 2025) {
     return this.fetch(`/matchups?week=${week}&season=${season}`);
   }
 
   // Update weekly data
-  async updateWeeklyData(week, season = 2024) {
+  async updateWeeklyData(week, season = 2025) {
     return this.fetch(`/update/${week}?season=${season}`, {
       method: 'POST'
     });
@@ -164,10 +164,10 @@ window.laLigaAPI = new LaLigaAPI();
  ********************/
 
 // Load live team data from API
-async function loadLiveTeamData(week = 14) {
+async function loadLiveTeamData(week = 14, season = 2025) {
   try {
-    console.log(`Loading live team data for week ${week}...`);
-    const rawTeams = await window.laLigaAPI.getTeamsLive(week);
+    console.log(`Loading live team data for week ${week}, season ${season}...`);
+    const rawTeams = await window.laLigaAPI.getTeamsLive(week, season);
     const transformedTeams = window.laLigaAPI.transformTeamData(rawTeams);
     
     // Sort by La Liga Bucks total
@@ -185,10 +185,10 @@ async function loadLiveTeamData(week = 14) {
 }
 
 // Load matchup data from API
-async function loadMatchupData(week = 14) {
+async function loadMatchupData(week = 14, season = 2025) {
   try {
-    console.log(`Loading matchup data for week ${week}...`);
-    const matchups = await window.laLigaAPI.getMatchups(week);
+    console.log(`Loading matchup data for week ${week}, season ${season}...`);
+    const matchups = await window.laLigaAPI.getMatchups(week, season);
     console.log(`Loaded ${matchups.length} matchups from API`);
     return matchups;
   } catch (error) {
