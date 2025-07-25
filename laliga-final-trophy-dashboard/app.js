@@ -10,7 +10,7 @@ const appData = {
     currentWeek: 14,
     totalWeeks: 17,
     teams: 12,
-    prizePool: 1200,
+    prizePool: 2400,
     weeklyBonus: 50,
     season: 2024
   },
@@ -77,8 +77,8 @@ const appData = {
     },
     {
       id: 5,
-      name: "Team Epsilon",
-      owner: "Owner5",
+      name: "Fire & Ice",
+      owner: "Justin",
       record: "7-7",
       totalPoints: 1698.2,
       laLigaBucks: 27,
@@ -92,8 +92,8 @@ const appData = {
     },
     {
       id: 6,
-      name: "Team Zeta",
-      owner: "Owner6",
+      name: "Thunder Bolts",
+      owner: "Sarah",
       record: "6-8",
       totalPoints: 1645.9,
       laLigaBucks: 25,
@@ -107,8 +107,8 @@ const appData = {
     },
     {
       id: 7,
-      name: "Team Eta",
-      owner: "Owner7",
+      name: "Gridiron Gladiators",
+      owner: "Marcus",
       record: "5-9",
       totalPoints: 1612.1,
       laLigaBucks: 23,
@@ -122,8 +122,8 @@ const appData = {
     },
     {
       id: 8,
-      name: "Team Theta",
-      owner: "Owner8",
+      name: "Touchdown Titans",
+      owner: "Ashley",
       record: "4-10",
       totalPoints: 1578.7,
       laLigaBucks: 21,
@@ -137,8 +137,8 @@ const appData = {
     },
     {
       id: 9,
-      name: "Team Iota",
-      owner: "Owner9",
+      name: "End Zone Elites",
+      owner: "Carlos",
       record: "4-10",
       totalPoints: 1534.3,
       laLigaBucks: 19,
@@ -152,8 +152,8 @@ const appData = {
     },
     {
       id: 10,
-      name: "Team Kappa",
-      owner: "Owner10",
+      name: "Blitz Brigade",
+      owner: "Taylor",
       record: "3-11",
       totalPoints: 1487.9,
       laLigaBucks: 17,
@@ -167,8 +167,8 @@ const appData = {
     },
     {
       id: 11,
-      name: "Team Lambda",
-      owner: "Owner11",
+      name: "Fantasy Phoenixes",
+      owner: "Jordan",
       record: "2-12",
       totalPoints: 1445.2,
       laLigaBucks: 15,
@@ -182,8 +182,8 @@ const appData = {
     },
     {
       id: 12,
-      name: "Team Mu",
-      owner: "Owner12",
+      name: "Pigskin Pirates",
+      owner: "Alex",
       record: "1-13",
       totalPoints: 1398.6,
       laLigaBucks: 13,
@@ -253,10 +253,10 @@ const appData = {
     { year: 2020, team: "Blondes Give Me A Chubb", owner: "Blake" }
   ],
   sackoHistory: [
-    { year: 2023, team: "Team Mu", owner: "Owner12" },
-    { year: 2022, team: "Team Lambda", owner: "Owner11" },
-    { year: 2021, team: "Team Beta", owner: "OwnerBeta" },
-    { year: 2020, team: "Team Gamma", owner: "OwnerGamma" }
+    { year: 2023, team: "Pigskin Pirates", owner: "Alex" },
+    { year: 2022, team: "Fantasy Phoenixes", owner: "Jordan" },
+    { year: 2021, team: "Blitz Brigade", owner: "Taylor" },
+    { year: 2020, team: "End Zone Elites", owner: "Carlos" }
   ],
   commentary: [
     "🔥 KRIS P. RONI dominating with 35 total La Liga Bucks! The defending champ is looking UNSTOPPABLE with perfect scores in multiple components!",
@@ -751,11 +751,7 @@ function renderEarningsChart() {
         datasets: [{
           label: 'EARNINGS ($)',
           data: chartData.map(d => d.earnings),
-          backgroundColor: [
-            '#1FB8CD', '#FFC185', '#B4413C', '#ECEBD5', '#5D878F',
-            '#DB4545', '#D2BA4C', '#964325', '#944454', '#13343B',
-            '#FF1493', '#8A2BE2'
-          ],
+          backgroundColor: '#20B2AA',
           borderColor: '#FFFFFF',
           borderWidth: 2
         }]
@@ -765,13 +761,7 @@ function renderEarningsChart() {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            labels: {
-              color: '#20B2AA',
-              font: {
-                family: 'Orbitron, monospace',
-                weight: 'bold'
-              }
-            }
+            display: false
           }
         },
         scales: {
