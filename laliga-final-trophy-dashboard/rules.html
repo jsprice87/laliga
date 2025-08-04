@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Liga del Fuego - League Rules</title>
+    <link rel="icon" type="image/png" href="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Champions Banner Top -->
+        <div class="banner-top champions-banner">
+            <div class="banner-content">
+                <span class="banner-text" id="champions-banner">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/98e35486-b07f-4353-95ef-c032a1dc9655.png" class="banner-trophy" alt="Trophy">
+                    CHAMPIONS: 2023 Kris P. Roni 
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/98e35486-b07f-4353-95ef-c032a1dc9655.png" class="banner-trophy" alt="Trophy">
+                    2022 Vonnies Chubbies 
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/98e35486-b07f-4353-95ef-c032a1dc9655.png" class="banner-trophy" alt="Trophy">
+                </span>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="game-logo">
+                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/1972bb8d-ba6c-4439-a5de-4cc2ccc524f8.png" class="main-trophy" alt="La Liga Del Fuego Trophy">
+                        <div class="logo-text">LA LIGA<br>DEL FUEGO</div>
+                        <div class="logo-subtitle">LEAGUE RULES '25</div>
+                    </div>
+                </div>
+                <div class="header-stats">
+                    <div class="stat-box">
+                        <div class="stat-label">SEASON</div>
+                        <div class="stat-value">2025</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">TEAMS</div>
+                        <div class="stat-value">12</div>
+                    </div>
+                    <div class="stat-box">
+                        <button class="btn btn-outline game-button" onclick="window.location.href='index.html'">DASHBOARD</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <div class="nav-menu">
+                <button class="nav-button" onclick="window.location.href='index.html'">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
+                    <span class="button-text">LEADERBOARD</span>
+                </button>
+                <button class="nav-button" onclick="window.location.href='index.html'">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
+                    <span class="button-text">MATCHUPS</span>
+                </button>
+                <button class="nav-button" onclick="window.location.href='index.html'">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
+                    <span class="button-text">TEAMS</span>
+                </button>
+                <button class="nav-button" onclick="window.location.href='playoff-bracket.html'">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
+                    <span class="button-text">BRACKET</span>
+                </button>
+                <button class="nav-button" onclick="window.location.href='index.html'">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
+                    <span class="button-text">MONEY BOARD</span>
+                </button>
+                <button class="nav-button active">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
+                    <span class="button-text">RULES</span>
+                </button>
+                <button class="nav-button" onclick="window.location.href='index.html'">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
+                    <span class="button-text">ADMIN</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="content-section active">
+                <div class="section-header">
+                    <div class="section-title">
+                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
+                        LA LIGA DEL FUEGO RULES
+                    </div>
+                </div>
+
+                <div class="rules-container">
+                    <!-- League Structure -->
+                    <div class="rule-card game-panel">
+                        <div class="panel-header">
+                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            LEAGUE STRUCTURE
+                        </div>
+                        <div class="rule-content">
+                            <ul>
+                                <li><strong>TEAMS:</strong> 12 teams compete in La Liga del Fuego</li>
+                                <li><strong>SEASON:</strong> 17 weeks (14 regular season + 3 playoff weeks)</li>
+                                <li><strong>PLATFORM:</strong> ESPN Fantasy Football</li>
+                                <li><strong>DRAFT:</strong> Snake draft format with randomized order</li>
+                                <li><strong>SCHEDULE:</strong> Regular season weeks 1-14, playoffs weeks 15-17</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- La Liga Bucks Scoring -->
+                    <div class="rule-card game-panel">
+                        <div class="panel-header">
+                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            LA LIGA BUCKS SCORING SYSTEM
+                        </div>
+                        <div class="rule-content">
+                            <p><strong>Each team earns La Liga Bucks in three categories every week:</strong></p>
+                            
+                            <div class="scoring-component">
+                                <h4>🏆 ESPN COMPONENT (1-12 POINTS)</h4>
+                                <p>Based on your current ESPN league standings:</p>
+                                <ul>
+                                    <li>1st place = 12 La Liga Bucks</li>
+                                    <li>2nd place = 11 La Liga Bucks</li>
+                                    <li>3rd place = 10 La Liga Bucks</li>
+                                    <li>... and so on ...</li>
+                                    <li>12th place = 1 La Liga Buck</li>
+                                </ul>
+                            </div>
+
+                            <div class="scoring-component">
+                                <h4>📈 CUMULATIVE COMPONENT (1-12 POINTS)</h4>
+                                <p>Based on your total season points ranking:</p>
+                                <ul>
+                                    <li>Highest total points = 12 La Liga Bucks</li>
+                                    <li>2nd highest total points = 11 La Liga Bucks</li>
+                                    <li>... and so on ...</li>
+                                    <li>Lowest total points = 1 La Liga Buck</li>
+                                </ul>
+                            </div>
+
+                            <div class="scoring-component">
+                                <h4>⚡ WEEKLY AVERAGE COMPONENT (1-12 POINTS)</h4>
+                                <p>Based on your weekly scoring average ranking (Butler Math):</p>
+                                <ul>
+                                    <li>Highest weekly average = 12 La Liga Bucks</li>
+                                    <li>2nd highest weekly average = 11 La Liga Bucks</li>
+                                    <li>... and so on ...</li>
+                                    <li>Lowest weekly average = 1 La Liga Buck</li>
+                                </ul>
+                            </div>
+
+                            <div class="max-score">
+                                <strong>MAXIMUM WEEKLY TOTAL: 36 LA LIGA BUCKS</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Playoff System -->
+                    <div class="rule-card game-panel">
+                        <div class="panel-header">
+                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            PLAYOFF SYSTEM
+                        </div>
+                        <div class="rule-content">
+                            <div class="playoff-bracket">
+                                <h4>🏆 CHAMPIONSHIP BRACKET (Top 6 Teams)</h4>
+                                <ul>
+                                    <li><strong>Seeds 1-2:</strong> Bye week, advance directly to semifinals</li>
+                                    <li><strong>Week 15 Wild Card:</strong> #3 vs #6, #4 vs #5</li>
+                                    <li><strong>Week 16 Semifinals:</strong> #1 vs Wild Card winner, #2 vs Wild Card winner</li>
+                                    <li><strong>Week 17 Championship:</strong> Semifinal winners compete for the title</li>
+                                </ul>
+                            </div>
+
+                            <div class="sacko-bracket">
+                                <h4>💀 SACKO BRACKET (Bottom 6 Teams)</h4>
+                                <ul>
+                                    <li><strong>Seeds 11-12:</strong> "Bye" week (safe from Sacko for one week)</li>
+                                    <li><strong>Week 15 Wild Card:</strong> #7 vs #8, #9 vs #10</li>
+                                    <li><strong>Week 16 Semifinals:</strong> #11 vs Wild Card winner, #12 vs Wild Card winner</li>
+                                    <li><strong>Week 17 Sacko Bowl:</strong> Semifinal winners compete to avoid the Sacko</li>
+                                    <li><strong>LOSER of Sacko Bowl = 2025 SACKO</strong></li>
+                                </ul>
+                            </div>
+
+                            <p><strong>SEEDING:</strong> Playoff seeding is determined by total La Liga Bucks at the end of week 14.</p>
+                        </div>
+                    </div>
+
+                    <!-- Money and Prizes -->
+                    <div class="rule-card game-panel">
+                        <div class="panel-header">
+                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            MONEY & PRIZES
+                        </div>
+                        <div class="rule-content">
+                            <div class="prize-structure">
+                                <h4>💰 ENTRY FEE & PRIZE POOL</h4>
+                                <ul>
+                                    <li><strong>Entry Fee:</strong> $200 per team</li>
+                                    <li><strong>Total Prize Pool:</strong> $2,400</li>
+                                </ul>
+
+                                <h4>🏅 WEEKLY BONUSES</h4>
+                                <ul>
+                                    <li><strong>Weekly High Score:</strong> $50 per week</li>
+                                    <li><strong>Total Weekly Bonuses:</strong> $850 (17 weeks × $50)</li>
+                                </ul>
+
+                                <h4>🏆 CHAMPIONSHIP PRIZES</h4>
+                                <ul>
+                                    <li><strong>1st Place (Champion):</strong> $900</li>
+                                    <li><strong>2nd Place (Runner-up):</strong> $450</li>
+                                    <li><strong>3rd Place (3rd/4th Playoff):</strong> $200</li>
+                                </ul>
+
+                                <div class="prize-total">
+                                    <strong>TOTAL PAYOUT: $2,400</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- League Conduct -->
+                    <div class="rule-card game-panel">
+                        <div class="panel-header">
+                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            LEAGUE CONDUCT & RULES
+                        </div>
+                        <div class="rule-content">
+                            <h4>⚖️ FAIR PLAY RULES</h4>
+                            <ul>
+                                <li><strong>Active Management:</strong> All teams must set valid starting lineups each week</li>
+                                <li><strong>No Collusion:</strong> All trades and transactions must be legitimate and fair</li>
+                                <li><strong>Waiver Claims:</strong> Standard ESPN waiver rules apply</li>
+                                <li><strong>Commissioner Powers:</strong> Commissioner can reverse clearly unfair trades</li>
+                            </ul>
+
+                            <h4>📅 IMPORTANT DATES</h4>
+                            <ul>
+                                <li><strong>Draft Date:</strong> TBD (Late August/Early September)</li>
+                                <li><strong>Season Start:</strong> Week 1 of NFL season</li>
+                                <li><strong>Trade Deadline:</strong> Week 10</li>
+                                <li><strong>Playoff Seeding Lock:</strong> End of Week 14</li>
+                                <li><strong>Championship:</strong> Week 17</li>
+                            </ul>
+
+                            <h4>🔄 ROSTER REQUIREMENTS</h4>
+                            <ul>
+                                <li><strong>Starting Lineup:</strong> 1 QB, 2 RB, 2 WR, 1 TE, 1 FLEX, 1 D/ST, 1 K</li>
+                                <li><strong>Bench Spots:</strong> 6 players</li>
+                                <li><strong>IR Spots:</strong> 1 spot for injured players</li>
+                                <li><strong>Total Roster:</strong> 16 players maximum</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tiebreakers -->
+                    <div class="rule-card game-panel">
+                        <div class="panel-header">
+                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            TIEBREAKERS
+                        </div>
+                        <div class="rule-content">
+                            <h4>🎯 LA LIGA BUCKS TIEBREAKERS</h4>
+                            <p>When teams are tied in La Liga Bucks, the following tiebreakers apply in order:</p>
+                            <ol>
+                                <li><strong>Total Points For:</strong> Higher total season points wins</li>
+                                <li><strong>Head-to-Head Record:</strong> Better record in games between tied teams</li>
+                                <li><strong>Division Record:</strong> Better record within division (if applicable)</li>
+                                <li><strong>Total Points Against:</strong> Lower total points against wins</li>
+                                <li><strong>Coin Flip:</strong> Final tiebreaker determined by commissioner</li>
+                            </ol>
+
+                            <h4>🏈 ESPN PLAYOFF TIEBREAKERS</h4>
+                            <p>For ESPN playoff seeding (separate from La Liga Bucks):</p>
+                            <ol>
+                                <li>Overall Record (wins-losses)</li>
+                                <li>Total Points For</li>
+                                <li>Head-to-Head Record</li>
+                                <li>Total Points Against</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Commissioner Powers -->
+                    <div class="rule-card game-panel">
+                        <div class="panel-header">
+                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            COMMISSIONER POWERS & DISPUTE RESOLUTION
+                        </div>
+                        <div class="rule-content">
+                            <h4>👑 COMMISSIONER RESPONSIBILITIES</h4>
+                            <ul>
+                                <li><strong>Rule Enforcement:</strong> Ensure all league rules are followed</li>
+                                <li><strong>Dispute Resolution:</strong> Make final decisions on rule interpretations</li>
+                                <li><strong>Trade Review:</strong> Can veto clearly unfair or collusive trades</li>
+                                <li><strong>Lineup Enforcement:</strong> Can set lineups for inactive managers</li>
+                                <li><strong>Money Management:</strong> Collect entry fees and distribute prizes</li>
+                            </ul>
+
+                            <h4>⚡ EMERGENCY PROCEDURES</h4>
+                            <ul>
+                                <li><strong>Inactive Teams:</strong> Commissioner can manage abandoned teams</li>
+                                <li><strong>Technical Issues:</strong> Commissioner can adjust for ESPN platform errors</li>
+                                <li><strong>Rule Changes:</strong> Require majority vote of active managers</li>
+                                <li><strong>Prize Disputes:</strong> Commissioner decision is final</li>
+                            </ul>
+
+                            <h4>🗳️ VOTING PROCEDURES</h4>
+                            <ul>
+                                <li><strong>Rule Changes:</strong> 2/3 majority vote required</li>
+                                <li><strong>Commissioner Changes:</strong> Majority vote required</li>
+                                <li><strong>Emergency Decisions:</strong> Commissioner has final authority</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="rule-card game-panel">
+                        <div class="panel-header">
+                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            CONTACT & SUPPORT
+                        </div>
+                        <div class="rule-content">
+                            <h4>📞 LEAGUE CONTACTS</h4>
+                            <ul>
+                                <li><strong>Commissioner:</strong> [Commissioner Name]</li>
+                                <li><strong>Co-Commissioner:</strong> [Co-Commissioner Name]</li>
+                                <li><strong>Technical Support:</strong> Dashboard issues and bugs</li>
+                            </ul>
+
+                            <h4>🌐 LEAGUE RESOURCES</h4>
+                            <ul>
+                                <li><strong>Dashboard:</strong> <a href="index.html">La Liga del Fuego Dashboard</a></li>
+                                <li><strong>ESPN League:</strong> Official ESPN Fantasy page</li>
+                                <li><strong>Bracket:</strong> <a href="playoff-bracket.html">Playoff Bracket</a></li>
+                                <li><strong>Group Chat:</strong> [Platform/Link TBD]</li>
+                            </ul>
+
+                            <h4>❓ QUESTIONS & CLARIFICATIONS</h4>
+                            <p>For rule clarifications or disputes, contact the commissioner immediately. 
+                            All rule interpretations will be posted here for transparency.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Sacko Banner Bottom -->
+        <div class="banner-bottom sacko-banner">
+            <div class="banner-content">
+                <span class="banner-text" id="sacko-banner">
+                    ▼ SACKO HALL OF SHAME: 2023 Team Zeta ▼ 2022 Team Alpha ▼ 2021 Team Beta ▼ 2020 Team Gamma ▼
+                </span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

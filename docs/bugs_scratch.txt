@@ -3,3 +3,14 @@
 All previous bugs migrated to docs/bugs.md and consolidated into current-tasks-issues.md
 
 Use this file for temporary bug notes before formal migration.
+
+- Layout bugs : See @laliga-final-trophy-dashboard/UI_Bugs_2025080401.png for graphical markup
+-- Remove "new" badges on all lines of leaderboard.
+-- Replace trophy icon in top left with 16-bit flame
+-- Remove flame icons on navigation buttons
+-- Leaderboard table alignment not columns causing misalignment
+-- Only top 6 places are being populated.  Allow user to scroll through all places.  Add retro vertical slicer bar on the right side of table
+-- Top entry shows 31 Liga Bucks.  Only 24 is possible (12+12)
+-- Category breakdown shows 3 liga buck types "ESPN" "Total" and "AVG".  Should only be "ESPN" and "Total Points" 
+-- horizontal points bars still not shown, see FEAT-010 in features.md
+-- Ranking change indicators still not shown, see FEAT-006

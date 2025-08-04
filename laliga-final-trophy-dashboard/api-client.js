@@ -6,11 +6,11 @@
  ********************/
 const API_CONFIG = {
   development: {
-    baseUrl: '/api', // Serverless functions on same domain
+    baseUrl: 'http://localhost:3001/api', // Development API server
     pollInterval: 60000 // 1 minute for development
   },
   production: {
-    baseUrl: '/api',
+    baseUrl: '/api', 
     pollInterval: 300000 // 5 minutes for production
   }
 };

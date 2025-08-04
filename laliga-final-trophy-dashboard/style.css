@@ -994,7 +994,13 @@ body {
   gap: var(--game-space-sm);
 }
 
-.week-selector {
+.season-info {
+  display: flex;
+  gap: var(--game-space-base);
+  align-items: center;
+}
+
+.year-selector, .week-selector {
   display: flex;
   align-items: center;
   gap: var(--game-space-sm);
@@ -1004,7 +1010,7 @@ body {
   font-family: var(--game-font);
 }
 
-.week-selector label {
+.year-selector label, .week-selector label {
   color: var(--game-teal);
   font-weight: 700;
   font-size: var(--game-font-size-sm);
