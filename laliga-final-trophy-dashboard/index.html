@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Liga del Fuego - 90s Video Game Dashboard</title>
-    <link rel="icon" type="image/png" href="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png">
+    <title>La Liga del Fuego - Fantasy Football League</title>
+    <link rel="icon" type="image/png" href="trophy-small.png">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,15 +17,7 @@
         <div class="banner-top champions-banner">
             <div class="banner-content">
                 <span class="banner-text" id="champions-banner">
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/98e35486-b07f-4353-95ef-c032a1dc9655.png" class="banner-trophy" alt="Trophy">
-                    CHAMPIONS: 2023 Kris P. Roni 
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/98e35486-b07f-4353-95ef-c032a1dc9655.png" class="banner-trophy" alt="Trophy">
-                    2022 Vonnies Chubbies 
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/98e35486-b07f-4353-95ef-c032a1dc9655.png" class="banner-trophy" alt="Trophy">
-                    2021 Murican Futball Crusaders 
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/98e35486-b07f-4353-95ef-c032a1dc9655.png" class="banner-trophy" alt="Trophy">
-                    2020 Blondes Give Me A Chubb 
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/98e35486-b07f-4353-95ef-c032a1dc9655.png" class="banner-trophy" alt="Trophy">
+                    <!-- Populated by JavaScript from league-history.js -->
                 </span>
             </div>
         </div>
@@ -35,7 +27,7 @@
             <div class="header-content">
                 <div class="logo-section">
                     <div class="game-logo">
-                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/1972bb8d-ba6c-4439-a5de-4cc2ccc524f8.png" class="main-trophy" alt="La Liga Del Fuego Trophy">
+                        <img src="trophy-medium.png" class="main-trophy" alt="La Liga Del Fuego Trophy">
                         <div class="logo-text">LA LIGA<br>DEL FUEGO</div>
                         <div class="logo-subtitle">FANTASY FOOTBALL '24</div>
                     </div>
@@ -67,12 +59,12 @@
                 </div>
                 <div class="header-stats">
                     <div id="user-info" class="stat-box">
-                        <!-- User authentication info populated by JavaScript -->
-                        <span class="user-welcome">Loading...</span>
+                        <div class="stat-label">LEAGUE STATUS</div>
+                        <div class="stat-value">LIVE</div>
                     </div>
                     <div class="stat-box">
                         <div class="stat-label">PRIZE POOL</div>
-                        <div class="stat-value">$1,200</div>
+                        <div class="stat-value">$2,400</div>
                     </div>
                     <div class="stat-box">
                         <div class="stat-label">TEAMS</div>
@@ -86,32 +78,28 @@
         <nav class="main-nav">
             <div class="nav-menu">
                 <button class="nav-button active" data-tab="dashboard">
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
+                    <img src="flame-logo.svg" class="nav-flame" alt="Flame">
                     <span class="button-text">LEADERBOARD</span>
                 </button>
                 <button class="nav-button" data-tab="matchups">
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
+                    <img src="flame-logo.svg" class="nav-flame" alt="Flame">
                     <span class="button-text">MATCHUPS</span>
                 </button>
                 <button class="nav-button" data-tab="teams">
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
+                    <img src="flame-logo.svg" class="nav-flame" alt="Flame">
                     <span class="button-text">TEAMS</span>
                 </button>
                 <button class="nav-button" data-tab="money">
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
+                    <img src="flame-logo.svg" class="nav-flame" alt="Flame">
                     <span class="button-text">MONEY BOARD</span>
                 </button>
                 <button class="nav-button" data-tab="commentary">
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
+                    <img src="flame-logo.svg" class="nav-flame" alt="Flame">
                     <span class="button-text">COMMENTARY</span>
                 </button>
                 <button class="nav-button" data-tab="rules">
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
+                    <img src="flame-logo.svg" class="nav-flame" alt="Flame">
                     <span class="button-text">RULES</span>
-                </button>
-                <button class="nav-button" data-tab="admin">
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="nav-trophy" alt="Trophy">
-                    <span class="button-text">ADMIN</span>
                 </button>
             </div>
         </nav>
@@ -137,19 +125,24 @@
                     </div>
                 </div>
 
-                <div class="leaderboard-container">
-                    <div class="leaderboard-header">
-                        <div class="rank-col">SEED</div>
-                        <div class="team-col">TEAM</div>
-                        <div class="record-col">RECORD</div>
-                        <div class="points-col">POINTS</div>
-                        <div class="bucks-col">BUCKS</div>
-                        <div class="breakdown-col">BREAKDOWN (MAX 12 EACH)</div>
-                        <div class="earnings-col">EARNINGS</div>
-                        <div class="high-scores-col">HIGH SCORES</div>
+                <div class="dashboard-layout">
+                    <div class="trophy-showcase">
+                        <img src="trophy-medium.png" class="large-trophy" alt="La Liga Del Fuego Trophy">
                     </div>
-                    <div class="leaderboard-body" id="leaderboard-body">
-                        <!-- Leaderboard rows will be populated by JavaScript -->
+                    <div class="leaderboard-container">
+                        <div class="leaderboard-header">
+                            <div class="rank-col">SEED</div>
+                            <div class="team-col">TEAM</div>
+                            <div class="record-col">RECORD</div>
+                            <div class="points-col">POINTS</div>
+                            <div class="bucks-col">BUCKS</div>
+                            <div class="breakdown-col">BREAKDOWN (MAX 12 EACH)</div>
+                            <div class="earnings-col">EARNINGS</div>
+                            <div class="high-scores-col">HIGH SCORES</div>
+                        </div>
+                        <div class="leaderboard-body" id="leaderboard-body">
+                            <!-- Leaderboard rows will be populated by JavaScript -->
+                        </div>
                     </div>
                 </div>
             </section>
@@ -201,7 +194,7 @@
                         <div class="prize-breakdown">
                             <div class="prize-item">
                                 <span class="prize-label">TOTAL POOL:</span>
-                                <span class="prize-value">$1,200</span>
+                                <span class="prize-value">$2,400</span>
                             </div>
                             <div class="prize-item">
                                 <span class="prize-label">WEEKLY HIGH SCORE:</span>
@@ -287,67 +280,6 @@
                 </div>
             </section>
 
-            <!-- Admin Section -->
-            <section class="content-section" id="admin-section">
-                <div class="section-header">
-                    <div class="section-title">
-                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
-                        ADMIN PANEL
-                    </div>
-                </div>
-                <div class="admin-container">
-                    <div class="admin-login" id="admin-login">
-                        <div class="login-form game-panel">
-                            <div class="panel-header">
-                                <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
-                                ADMIN LOGIN
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">USERNAME</label>
-                                <input type="text" class="form-control game-input" id="admin-username" placeholder="ENTER ADMIN USERNAME">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">PASSWORD</label>
-                                <input type="password" class="form-control game-input" id="admin-password" placeholder="ENTER PASSWORD">
-                            </div>
-                            <button class="btn btn-primary game-button" id="admin-login-btn">LOGIN</button>
-                        </div>
-                    </div>
-                    <div class="admin-panel" id="admin-panel" style="display: none;">
-                        <div class="panel-header">
-                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
-                            HISTORICAL DATA MANAGEMENT
-                        </div>
-                        <div class="admin-sections">
-                            <div class="admin-card game-panel">
-                                <div class="panel-subheader">CHAMPIONS HISTORY</div>
-                                <div class="form-group">
-                                    <label class="form-label">YEAR</label>
-                                    <input type="number" class="form-control game-input" id="champion-year" placeholder="2024">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">WINNER</label>
-                                    <input type="text" class="form-control game-input" id="champion-winner" placeholder="TEAM NAME">
-                                </div>
-                                <button class="btn btn-secondary game-button" id="add-champion">ADD CHAMPION</button>
-                            </div>
-                            <div class="admin-card game-panel">
-                                <div class="panel-subheader">SACKO HISTORY</div>
-                                <div class="form-group">
-                                    <label class="form-label">YEAR</label>
-                                    <input type="number" class="form-control game-input" id="sacko-year" placeholder="2024">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">LOSER</label>
-                                    <input type="text" class="form-control game-input" id="sacko-loser" placeholder="TEAM NAME">
-                                </div>
-                                <button class="btn btn-secondary game-button" id="add-sacko">ADD SACKO</button>
-                            </div>
-                        </div>
-                        <button class="btn btn-outline game-button" id="admin-logout">LOGOUT</button>
-                    </div>
-                </div>
-            </section>
         </main>
 
         <!-- Team Detail Modal -->
@@ -370,86 +302,17 @@
         <div class="banner-bottom sacko-banner">
             <div class="banner-content">
                 <span class="banner-text" id="sacko-banner">
-                    ▼ SACKO HALL OF SHAME: 2023 Team Zeta ▼ 2022 Team Alpha ▼ 2021 Team Beta ▼ 2020 Team Gamma ▼
+                    <!-- Populated by JavaScript from league-history.js -->
                 </span>
             </div>
         </div>
     </div>
 
-    <!-- Authentication Modal -->
-    <div class="modal-overlay" id="auth-modal" style="display: none;">
-        <div class="modal-content game-panel auth-modal">
-            <div class="modal-header">
-                <div class="panel-header" id="auth-modal-title">
-                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
-                    LOGIN TO LA LIGA DEL FUEGO
-                </div>
-            </div>
-            <div class="modal-body">
-                <!-- Login Form -->
-                <form id="auth-login-form" class="auth-form">
-                    <div class="auth-error" style="display: none;"></div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">EMAIL OR USERNAME</label>
-                        <input type="text" name="email" class="form-control game-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">PASSWORD</label>
-                        <input type="password" name="password" class="form-control game-input" required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary game-button">LOGIN</button>
-                    
-                    <div class="auth-toggle">
-                        <span>Don't have an account?</span>
-                        <button type="button" class="btn btn-link" id="show-register">REGISTER HERE</button>
-                    </div>
-                </form>
 
-                <!-- Registration Form -->
-                <form id="auth-register-form" class="auth-form" style="display: none;">
-                    <div class="auth-error" style="display: none;"></div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">USERNAME</label>
-                        <input type="text" name="username" class="form-control game-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">EMAIL</label>
-                        <input type="email" name="email" class="form-control game-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">FANTASY TEAM NAME</label>
-                        <input type="text" name="teamName" class="form-control game-input" placeholder="Optional">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">PASSWORD</label>
-                        <input type="password" name="password" class="form-control game-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">CONFIRM PASSWORD</label>
-                        <input type="password" name="confirmPassword" class="form-control game-input" required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary game-button">CREATE ACCOUNT</button>
-                    
-                    <div class="auth-toggle">
-                        <span>Already have an account?</span>
-                        <button type="button" class="btn btn-link" id="show-login">LOGIN HERE</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
+    <script src="logger.js"></script>
+    <script src="security.js"></script>
     <script src="api-client.js"></script>
-    <script src="auth.js"></script>
+    <script src="league-history.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

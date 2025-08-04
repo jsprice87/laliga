@@ -1,13 +1,5 @@
-# Features Scratch - Migrated
+# Features Scratch - Clean
 
-All features have been migrated to docs/features.md:
-- FEAT-001: Playoff Bracket Page
-- FEAT-002: Sacko Bracket System
-- FEAT-003: Invitation System
-- FEAT-004: Full Admin System
-- FEAT-005: League Rules Page
-- FEAT-006: Ranking Change Indicators
+All previous features migrated to docs/features.md and consolidated into current-tasks-issues.md
 
-This file can be used for new feature notes before formal migration.
-- Change browser tab icon to trophy-small.png
-- change main icon on dashboard to trophy-medium.png
+Use this file for temporary feature notes before formal migration.

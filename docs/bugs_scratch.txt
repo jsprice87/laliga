@@ -1,11 +1,5 @@
-# Bugs Scratch - Migrated
+# Bugs Scratch - Clean
 
-All bugs have been migrated to docs/bugs.md:
-- BUG-001: Team Names Not Properly Populated
-- BUG-002: No Account Creation System  
-- BUG-003: Incorrect Banner System
-- BUG-004: Incorrect Prize Pool Configuration
-- BUG-005: Money Board Styling Issues
-- BUG-006: Commentary Page Readability
+All previous bugs migrated to docs/bugs.md and consolidated into current-tasks-issues.md
 
-This file can be used for new bug notes before formal migration.
+Use this file for temporary bug notes before formal migration.
