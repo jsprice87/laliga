@@ -89,7 +89,7 @@ https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/7bfe9bb7
 - **High Score Tracking**: 4 weekly wins for Kris P. Roni ($200), 3 for Blondes Give Me A Chubb ($150)
 - **Earnings Visualization**: Total payouts and remaining prize pool
 - **Weekly Bonus System**: $50 per high score automatically calculated
-- **League Prize Pool**: $1,200 total with transparent distribution
+- **League Prize Pool**: $2,400 total with transparent distribution
 
 ### 📱 Mobile-Optimized Experience
 - **Responsive Design**: Perfect on phones, tablets, desktops

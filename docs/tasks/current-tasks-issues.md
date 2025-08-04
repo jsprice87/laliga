@@ -40,6 +40,9 @@
   - [ ] 1.3 Update main dashboard icon to trophy-medium.png (FEAT-008)
   - [ ] 1.4 Fix prize pool configuration to $200 buy-in, $2400 total (BUG-004)
   - [ ] 1.5 Clean up Money Board styling - remove unnecessary colors (BUG-005)
+  - [ ] 1.6 Remove "new" badges on all leaderboard lines (BUG-008)
+  - [ ] 1.7 Replace trophy icon in top left with 16-bit flame (BUG-009)
+  - [ ] 1.8 Remove flame icons on navigation buttons (BUG-010)
 
 - [ ] 2.0 **API/Backend Error Resolution** 🔧 (High Priority)
   - [ ] 2.1 Fix account creation JSON parse error (BUG-007)
@@ -47,23 +50,28 @@
   - [ ] 2.3 Fix ESPN API integration for live data loading
   - [ ] 2.4 Fix team names not properly populated (BUG-001)
 
-- [ ] 3.0 **User Experience Enhancements** 📊 (Medium Priority)
-  - [ ] 3.1 Improve Commentary page readability - fix text/background clash (BUG-006) 
-  - [ ] 3.2 Add leaderboard progress bars showing Liga Bucks breakdown (FEAT-010)
-  - [ ] 3.3 Implement ranking change indicators with up/down arrows (FEAT-006)
-  - [ ] 3.4 Fix banner system for admin-customizable champions/sackos (BUG-003)
+- [ ] 3.0 **Data Integrity and Leaderboard Fixes** 📊 (High Priority)
+  - [ ] 3.1 Fix leaderboard table column alignment issues (BUG-011)
+  - [ ] 3.2 Fix leaderboard only showing top 6 places - add scrolling and retro vertical slicer (BUG-012)
+  - [ ] 3.3 Fix incorrect maximum Liga Bucks display (31 should be max 24) (BUG-013)
+  - [ ] 3.4 Fix Liga Bucks category labels - show only "ESPN" and "Total Points" (BUG-014)
+  - [ ] 3.5 Add leaderboard progress bars showing Liga Bucks breakdown (FEAT-010)
+  - [ ] 3.6 Implement ranking change indicators with up/down arrows (FEAT-006)
 
-- [ ] 4.0 **Major Feature Development - Brackets** 🏆 (Medium Priority)
-  - [ ] 4.1 Design playoff bracket page layout with retrowave styling (FEAT-001)
-  - [ ] 4.2 Implement playoff bracket logic and live updates
-  - [ ] 4.3 Add Sacko bracket system for bottom teams (FEAT-002)
-  - [ ] 4.4 Create interactive bracket navigation and state management
+- [ ] 4.0 **User Experience Enhancements** 🎨 (Medium Priority)  
+  - [ ] 4.1 Improve Commentary page readability - fix text/background clash (BUG-006)
 
-- [ ] 5.0 **Major Feature Development - Admin & Communication** 👑 (Low Priority)
-  - [ ] 5.1 Create comprehensive League Rules page (FEAT-005)
-  - [ ] 5.2 Design HTML email invitation template matching site styling (FEAT-003)
-  - [ ] 5.3 Enhance admin system for full data management (FEAT-004)
-  - [ ] 5.4 Implement invitation system with account creation workflow
+- [ ] 5.0 **Major Feature Development - Brackets** 🏆 (Medium Priority)
+  - [ ] 5.1 Design playoff bracket page layout with retrowave styling (FEAT-001)
+  - [ ] 5.2 Implement playoff bracket logic and live updates
+  - [ ] 5.3 Add Sacko bracket system for bottom teams (FEAT-002)
+  - [ ] 5.4 Create interactive bracket navigation and state management
+
+- [ ] 6.0 **Major Feature Development - Admin & Communication** 👑 (Low Priority)
+  - [ ] 6.1 Create comprehensive League Rules page (FEAT-005)
+  - [ ] 6.2 Design HTML email invitation template matching site styling (FEAT-003)
+  - [ ] 6.3 Enhance admin system for full data management (FEAT-004)
+  - [ ] 6.4 Implement invitation system with account creation workflow
 
 ## Immediate Action Plan
 

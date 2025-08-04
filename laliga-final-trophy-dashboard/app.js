@@ -173,9 +173,9 @@ function calculateRankingChanges(teams, currentWeek) {
     const previousRank = previousWeekRankings[team.id]?.rank;
     
     if (previousRank === undefined) {
-      // New team or first week
+      // New team or first week - treat as no change
       rankingChanges[team.id] = {
-        type: 'new',
+        type: 'same',
         change: 0,
         direction: 'same',
         previousRank: null,
@@ -242,13 +242,6 @@ function generateRankingIndicator(teamId, rankingChanges) {
       
     case 'same':
       arrow = '●';
-      html = `<span class="ranking-change same">
-        <span class="ranking-arrow">${arrow}</span>
-      </span>`;
-      break;
-      
-    case 'new':
-      arrow = '';
       html = `<span class="ranking-change same">
         <span class="ranking-arrow">${arrow}</span>
       </span>`;

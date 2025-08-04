@@ -1,5 +1,5 @@
 # Features Scratch - Clean
 
-All previous features migrated to docs/features.md and consolidated into current-tasks-issues.md
+All features migrated to docs/features.md and consolidated into task list (2025-08-04)
 
 Use this file for temporary feature notes before formal migration.
