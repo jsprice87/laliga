@@ -827,8 +827,8 @@ body {
 
 /* Trophy Images Styling */
 .main-trophy {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
@@ -2821,8 +2821,8 @@ select.game-select {
   }
   
   .main-trophy {
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
   }
 }
 
@@ -2844,8 +2844,8 @@ select.game-select {
   }
   
   .main-trophy {
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
   }
   
   .logo-text {
