@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Liga del Fuego - Fantasy Football League</title>
+    <link rel="icon" type="image/png" href="trophy-small.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Champions Banner Top -->
+        <div class="banner-top champions-banner">
+            <div class="banner-content">
+                <span class="banner-text" id="champions-banner">
+                    <!-- Populated by JavaScript from league-history.js -->
+                </span>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="game-logo">
+                        <img src="laliga_logo.png" class="main-trophy" alt="La Liga Del Fuego Flame">
+                        <div class="logo-text">LA LIGA<br>DEL FUEGO</div>
+                        <div class="logo-subtitle">FANTASY FOOTBALL '24</div>
+                    </div>
+                    <div class="season-info">
+                        <div class="year-selector">
+                            <label for="year-select">YEAR:</label>
+                            <select id="year-select" class="form-control game-select">
+                                <option value="2024" selected>2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                            </select>
+                        </div>
+                        <div class="week-selector">
+                            <label for="week-select">WEEK:</label>
+                            <select id="week-select" class="form-control game-select">
+                                <option value="1">01</option>
+                                <option value="2">02</option>
+                                <option value="3">03</option>
+                                <option value="4">04</option>
+                                <option value="5">05</option>
+                                <option value="6">06</option>
+                                <option value="7">07</option>
+                                <option value="8">08</option>
+                                <option value="9">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14" selected>14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                            </select>
+                            <span class="current-indicator" id="current-indicator">[CURRENT]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-stats">
+                    <div id="user-info" class="stat-box">
+                        <div class="stat-label">LEAGUE STATUS</div>
+                        <div class="stat-value">LIVE</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">PRIZE POOL</div>
+                        <div class="stat-value">$2,400</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">TEAMS</div>
+                        <div class="stat-value">12</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <div class="nav-menu">
+                <button class="nav-button active" data-tab="dashboard">
+                    <span class="button-text">LEADERBOARD</span>
+                </button>
+                <button class="nav-button" data-tab="matchups">
+                    <span class="button-text">MATCHUPS</span>
+                </button>
+                <button class="nav-button" data-tab="teams">
+                    <span class="button-text">TEAMS</span>
+                </button>
+                <button class="nav-button" data-tab="money">
+                    <span class="button-text">MONEY BOARD</span>
+                </button>
+                <button class="nav-button" data-tab="commentary">
+                    <span class="button-text">COMMENTARY</span>
+                </button>
+                <button class="nav-button" data-tab="rules">
+                    <span class="button-text">RULES</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section class="content-section active" id="dashboard-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
+                        LA LIGA BUCKS STANDINGS
+                    </div>
+                    <div class="sort-controls">
+                        <label for="sort-by">SORT BY:</label>
+                        <select class="form-control game-select" id="sort-by">
+                            <option value="bucks">TOTAL LA LIGA BUCKS</option>
+                            <option value="espnRank">ESPN RANK</option>
+                            <option value="totalPoints">TOTAL POINTS</option>
+                            <option value="playoffSeed">PLAYOFF SEED</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="dashboard-layout">
+                    <div class="trophy-showcase">
+                        <img src="trophy-medium.png" class="large-trophy" alt="La Liga Del Fuego Trophy">
+                    </div>
+                    <div class="leaderboard-container">
+                        <div class="leaderboard-header">
+                            <div class="rank-col">SEED</div>
+                            <div class="team-col">TEAM</div>
+                            <div class="record-col">RECORD</div>
+                            <div class="points-col">POINTS</div>
+                            <div class="breakdown-col">LIGA BUCKS</div>
+                        </div>
+                        <div class="leaderboard-body" id="leaderboard-body">
+                            <!-- Leaderboard rows will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Matchups Section -->
+            <section class="content-section" id="matchups-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
+                        WEEK <span id="matchups-week">14</span> MATCHUPS
+                    </div>
+                    <div class="live-indicator" id="live-indicator">
+                        <span class="live-dot"></span>
+                        <span>GAMES COMPLETE</span>
+                    </div>
+                </div>
+                <div class="matchups-grid" id="matchups-grid">
+                    <!-- Matchups populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Teams Section -->
+            <section class="content-section" id="teams-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
+                        TEAM PROFILES
+                    </div>
+                </div>
+                <div class="teams-grid" id="teams-grid">
+                    <!-- Team cards populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Money Board Section -->
+            <section class="content-section" id="money-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
+                        MONEY BOARD
+                    </div>
+                </div>
+                <div class="money-grid">
+                    <div class="money-summary-card game-panel">
+                        <div class="panel-header">
+                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            PRIZE POOL BREAKDOWN
+                        </div>
+                        <div class="prize-breakdown">
+                            <div class="prize-item">
+                                <span class="prize-label">TOTAL POOL:</span>
+                                <span class="prize-value">$2,400</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-label">WEEKLY HIGH SCORE:</span>
+                                <span class="prize-value">$50</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-label">TOTAL PAID OUT:</span>
+                                <span class="prize-value" id="total-paid">$0</span>
+                            </div>
+                            <div class="prize-item">
+                                <span class="prize-label">REMAINING:</span>
+                                <span class="prize-value" id="remaining-pool">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="high-score-winners-card game-panel">
+                        <div class="panel-header">
+                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            WEEKLY HIGH SCORE WINNERS
+                        </div>
+                        <div class="winners-list" id="winners-list">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                <div class="earnings-chart-container game-panel">
+                    <div class="panel-header">
+                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                        TEAM EARNINGS COMPARISON
+                    </div>
+                    <canvas id="earningsChart" height="400"></canvas>
+                </div>
+            </section>
+
+            <!-- Commentary Section -->
+            <section class="content-section" id="commentary-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
+                        LEAGUE COMMENTARY
+                    </div>
+                </div>
+                <div class="commentary-container" id="commentary-container">
+                    <!-- Commentary populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Rules Section -->
+            <section class="content-section" id="rules-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
+                        LEAGUE RULES
+                    </div>
+                </div>
+                <div class="rules-container">
+                    <div class="rule-card game-panel">
+                        <div class="panel-header">
+                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            LA LIGA BUCKS SCORING SYSTEM
+                        </div>
+                        <div class="rule-content">
+                            <p>Each team earns La Liga Bucks in three categories each week:</p>
+                            <ul>
+                                <li><strong>ESPN COMPONENT (1-12 POINTS):</strong> Based on ESPN league standings (1st = 12 points, 12th = 1 point)</li>
+                                <li><strong>CUMULATIVE COMPONENT (1-12 POINTS):</strong> Based on total season points ranking</li>
+                                <li><strong>WEEKLY AVERAGE COMPONENT (1-12 POINTS):</strong> Based on weekly scoring average ranking</li>
+                            </ul>
+                            <p><strong>MAXIMUM WEEKLY TOTAL: 36 LA LIGA BUCKS</strong></p>
+                            <p>Season totals determine playoff seeding and championship eligibility.</p>
+                        </div>
+                    </div>
+                    <div class="rule-card game-panel">
+                        <div class="panel-header">
+                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            MONEY DISTRIBUTION
+                        </div>
+                        <div class="rule-content">
+                            <p>Weekly high score bonus: <strong>$50</strong></p>
+                            <p>Championship and playoff payouts determined at season end.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Team Detail Modal -->
+        <div class="modal-overlay" id="team-modal-overlay">
+            <div class="modal-content game-panel">
+                <div class="modal-header">
+                    <div class="panel-header" id="modal-team-name">
+                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                        TEAM DETAILS
+                    </div>
+                    <button class="close-modal" id="close-modal">✕</button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- Team details populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Sacko Banner Bottom -->
+        <div class="banner-bottom sacko-banner">
+            <div class="banner-content">
+                <span class="banner-text" id="sacko-banner">
+                    <!-- Populated by JavaScript from league-history.js -->
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="logger.js"></script>
+    <script src="security.js"></script>
+    <script src="api-client.js"></script>
+    <script src="league-history.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
