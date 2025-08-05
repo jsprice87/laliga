@@ -257,10 +257,8 @@ function generateRankingIndicator(teamId, rankingChanges) {
       break;
       
     case 'same':
-      arrow = '●';
-      html = `<span class="ranking-change same">
-        <span class="ranking-arrow">${arrow}</span>
-      </span>`;
+      // No indicator for no change
+      html = '';
       break;
   }
   
@@ -587,12 +585,6 @@ function renderLeaderboard() {
       </div>
       <div class="record-col team-record">${team.record}</div>
       <div class="points-col total-points">${team.totalPoints.toFixed(1)}</div>
-      <div class="bucks-col">
-        <div class="bucks-display">
-          <span class="bucks-total">${team.laLigaBucks}</span>
-          <span class="bucks-label">BUCKS</span>
-        </div>
-      </div>
       <div class="breakdown-col">
         <div class="breakdown-display">
           <div class="progress-bar-container">
@@ -608,8 +600,6 @@ function renderLeaderboard() {
           </div>
         </div>
       </div>
-      <div class="earnings-col earnings-display">${currency(team.earnings)}</div>
-      <div class="high-scores-col high-scores-count">${team.weeklyHighScores}</div>
     `;
 
     row.style.cursor = 'pointer';

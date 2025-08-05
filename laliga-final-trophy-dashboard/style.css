@@ -1303,7 +1303,7 @@ select.game-select {
   color: var(--game-bg-primary);
   padding: var(--game-space-base);
   display: grid;
-  grid-template-columns: 60px 2fr 100px 120px 100px 250px 120px 80px;
+  grid-template-columns: 60px 2fr 100px 120px 250px;
   gap: var(--game-space-sm);
   font-weight: 900;
   font-size: var(--game-font-size-xs);
@@ -1328,7 +1328,7 @@ select.game-select {
 .leaderboard-row {
   padding: var(--game-space-base);
   display: grid;
-  grid-template-columns: 60px 2fr 100px 120px 100px 250px 120px 80px;
+  grid-template-columns: 60px 2fr 100px 120px 250px;
   gap: var(--game-space-sm);
   border-bottom: var(--game-border-width) solid var(--game-purple);
   transition: all 0.2s ease;
@@ -2802,7 +2802,7 @@ select.game-select {
 @media (max-width: 1024px) {
   .leaderboard-header,
   .leaderboard-row {
-    grid-template-columns: 50px 2fr 90px 110px 90px 220px 110px 70px;
+    grid-template-columns: 50px 2fr 90px 110px 220px;
     font-size: var(--game-font-size-xs);
     gap: var(--game-space-xs);
   }
@@ -2854,7 +2854,7 @@ select.game-select {
   
   .leaderboard-header,
   .leaderboard-row {
-    grid-template-columns: 45px 1.8fr 70px 90px 70px 180px 90px 60px;
+    grid-template-columns: 45px 1.8fr 70px 90px 180px;
     font-size: var(--game-font-size-xs);
     gap: var(--game-space-xs);
   }
@@ -2922,7 +2922,7 @@ select.game-select {
   
   .leaderboard-header,
   .leaderboard-row {
-    grid-template-columns: 40px 1.5fr 60px 80px 60px 150px 80px 50px;
+    grid-template-columns: 40px 1.5fr 60px 80px 150px;
     min-width: 800px;
     font-size: var(--game-font-size-xs);
     gap: var(--game-space-xs);
