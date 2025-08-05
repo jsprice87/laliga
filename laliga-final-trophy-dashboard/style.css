@@ -1311,6 +1311,20 @@ select.game-select {
   text-shadow: 1px 1px 0 var(--game-white);
 }
 
+/* Ensure header column alignment */
+.leaderboard-header > div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leaderboard-header .breakdown-col {
+  justify-content: center;
+}
+
 .leaderboard-row {
   padding: var(--game-space-base);
   display: grid;
@@ -1322,6 +1336,26 @@ select.game-select {
   position: relative;
   align-items: center;
   background: var(--game-bg-primary);
+}
+
+/* Ensure column content alignment */
+.leaderboard-row > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.leaderboard-row .team-col {
+  white-space: normal;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.leaderboard-row .breakdown-col {
+  white-space: normal;
+  flex-direction: column;
 }
 
 .leaderboard-row:hover {
