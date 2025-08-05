@@ -1260,6 +1260,42 @@ select.game-select {
   background: var(--game-bg-secondary);
   border: var(--game-border-width-thick) solid var(--game-teal);
   box-shadow: var(--game-border-width-thick) var(--game-border-width-thick) 0 var(--game-magenta);
+  position: relative;
+}
+
+.leaderboard-body {
+  max-height: 600px;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Retro vertical scrollbar slicer */
+.leaderboard-body::-webkit-scrollbar {
+  width: 16px;
+  background: var(--game-bg-primary);
+  border-left: 2px solid var(--game-teal);
+}
+
+.leaderboard-body::-webkit-scrollbar-track {
+  background: var(--game-bg-primary);
+  border: 1px solid var(--game-purple);
+  border-radius: 0;
+}
+
+.leaderboard-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, var(--game-teal), var(--game-magenta));
+  border: 2px solid var(--game-white);
+  border-radius: 0;
+  box-shadow: inset 0 0 10px rgba(255, 20, 147, 0.5);
+}
+
+.leaderboard-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, var(--game-magenta), var(--game-teal));
+  box-shadow: inset 0 0 10px rgba(32, 178, 170, 0.5);
+}
+
+.leaderboard-body::-webkit-scrollbar-corner {
+  background: var(--game-bg-primary);
 }
 
 .leaderboard-header {
@@ -1416,6 +1452,53 @@ select.game-select {
   font-weight: 900;
   text-align: right;
   min-width: 20px;
+}
+
+/* Liga Bucks Progress Bars */
+.progress-bar-container {
+  margin-bottom: var(--game-space-xs);
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--game-bg-primary);
+  border: 1px solid var(--game-purple);
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.progress-segment {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.espn-segment {
+  background: linear-gradient(90deg, var(--game-teal), var(--game-magenta));
+  border-right: 1px solid var(--game-white);
+}
+
+.points-segment {
+  background: linear-gradient(90deg, var(--game-yellow), var(--game-green));
+}
+
+.progress-text {
+  font-size: var(--game-font-size-xs);
+  color: var(--game-white);
+  font-weight: 700;
+  text-align: center;
+}
+
+.breakdown-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--game-font-size-xs);
+  margin-top: 2px;
+}
+
+.breakdown-details .breakdown-item {
+  color: var(--game-gray);
+  font-weight: 600;
 }
 
 .earnings-display {
@@ -2685,7 +2768,7 @@ select.game-select {
 @media (max-width: 1024px) {
   .leaderboard-header,
   .leaderboard-row {
-    grid-template-columns: 50px 1.5fr 80px 100px 80px 200px 100px 60px;
+    grid-template-columns: 50px 2fr 90px 110px 90px 220px 110px 70px;
     font-size: var(--game-font-size-xs);
     gap: var(--game-space-xs);
   }
@@ -2737,7 +2820,7 @@ select.game-select {
   
   .leaderboard-header,
   .leaderboard-row {
-    grid-template-columns: 40px 1fr 60px 80px 60px 150px 80px 50px;
+    grid-template-columns: 45px 1.8fr 70px 90px 70px 180px 90px 60px;
     font-size: var(--game-font-size-xs);
     gap: var(--game-space-xs);
   }
@@ -2805,7 +2888,10 @@ select.game-select {
   
   .leaderboard-header,
   .leaderboard-row {
+    grid-template-columns: 40px 1.5fr 60px 80px 60px 150px 80px 50px;
     min-width: 800px;
+    font-size: var(--game-font-size-xs);
+    gap: var(--game-space-xs);
   }
   
   .section-title {
