@@ -10,9 +10,12 @@
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:api\"",
     "dev:frontend": "cd laliga-final-trophy-dashboard && python3 -m http.server 8000",
     "dev:api": "nodemon api/server.js",
+    "start": "node api/server.js",
+    "start:dev": "./start-dev.sh",
     "build": "npm run build:frontend",
     "build:frontend": "echo 'Static files ready for deployment'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:auth": "echo 'Open http://localhost:8000/test-auth.html to test authentication'"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +32,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "5.5",
-    "node-cron": "^4.2.1"
+    "node-cron": "^4.2.1",
+    "nodemailer": "^7.0.5"
   }
 }

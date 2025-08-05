@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Auth API</title>
+    <style>
+        body { font-family: monospace; padding: 20px; }
+        .result { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .error { background: #ffebee; border-color: #f44336; }
+        .success { background: #e8f5e8; border-color: #4caf50; }
+        button { margin: 5px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Auth API Test</h1>
+    
+    <h2>Health Check</h2>
+    <button onclick="testHealth()">Test Health Endpoint</button>
+    <div id="health-result" class="result"></div>
+    
+    <h2>Registration Test</h2>
+    <button onclick="testRegister()">Test Registration</button>
+    <div id="register-result" class="result"></div>
+    
+    <h2>Login Test</h2>
+    <button onclick="testLogin()">Test Login</button>
+    <div id="login-result" class="result"></div>
+
+    <script>
+        async function testHealth() {
+            const resultDiv = document.getElementById('health-result');
+            try {
+                console.log('Testing health endpoint...');
+                const response = await fetch('/api/health');
+                const data = await response.text();
+                
+                console.log('Health response:', { status: response.status, data });
+                
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `<strong>SUCCESS:</strong> ${data}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `<strong>ERROR ${response.status}:</strong> ${data}`;
+                }
+            } catch (error) {
+                console.error('Health test error:', error);
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>NETWORK ERROR:</strong> ${error.message}`;
+            }
+        }
+
+        async function testRegister() {
+            const resultDiv = document.getElementById('register-result');
+            const testData = {
+                username: 'testuser' + Date.now(),
+                email: 'test' + Date.now() + '@example.com',
+                password: 'TestPassword123',
+                teamName: 'Test Team'
+            };
+            
+            try {
+                console.log('Testing registration with data:', testData);
+                
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                console.log('Register response status:', response.status);
+                console.log('Register response headers:', [...response.headers.entries()]);
+                
+                const responseText = await response.text();
+                console.log('Register response text:', responseText);
+                
+                let data;
+                try {
+                    data = JSON.parse(responseText);
+                } catch (parseError) {
+                    console.error('Failed to parse JSON:', parseError);
+                    throw new Error(`Received non-JSON response: ${responseText.substring(0, 200)}...`);
+                }
+                
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `<strong>SUCCESS:</strong> User registered: ${data.user?.username}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `<strong>ERROR ${response.status}:</strong> ${data.error || 'Unknown error'}`;
+                }
+            } catch (error) {
+                console.error('Registration test error:', error);
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>ERROR:</strong> ${error.message}`;
+            }
+        }
+
+        async function testLogin() {
+            const resultDiv = document.getElementById('login-result');
+            const testData = {
+                email: 'test@example.com',
+                password: 'TestPassword123'
+            };
+            
+            try {
+                console.log('Testing login with data:', testData);
+                
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                console.log('Login response status:', response.status);
+                const responseText = await response.text();
+                console.log('Login response text:', responseText);
+                
+                let data;
+                try {
+                    data = JSON.parse(responseText);
+                } catch (parseError) {
+                    throw new Error(`Received non-JSON response: ${responseText.substring(0, 200)}...`);
+                }
+                
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `<strong>SUCCESS:</strong> Login successful: ${data.user?.username}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `<strong>ERROR ${response.status}:</strong> ${data.error || 'Unknown error'}`;
+                }
+            } catch (error) {
+                console.error('Login test error:', error);
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>ERROR:</strong> ${error.message}`;
+            }
+        }
+
+        // Auto-test health on load
+        document.addEventListener('DOMContentLoaded', testHealth);
+    </script>
+</body>
+</html>

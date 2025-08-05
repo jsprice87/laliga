@@ -18,7 +18,8 @@ app.use('/api', async (req, res) => {
       ...req,
       url: req.originalUrl,
       headers: req.headers,
-      method: req.method
+      method: req.method,
+      body: req.body // Pass the already parsed body from Express
     };
     
     await handler(mockReq, res);

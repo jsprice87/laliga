@@ -80,6 +80,26 @@
 - Maintain styling consistency
 **Location**: Dashboard header  
 
+### FEAT-009: Browser Tab Title Update
+**Priority**: Low  
+**Status**: Open  
+**Description**: Change browser tab title to "La Liga del Fuego" (currently includes "90s video games" text)  
+**Requirements**:
+- Update HTML title tag
+- Remove gaming references from title
+**Location**: HTML head section  
+
+### FEAT-010: Leaderboard Team Progress Bars
+**Priority**: Medium  
+**Status**: Open  
+**Description**: Add horizontal two-tone bar on each Teams row in the leaderboard showing Liga Bucks breakdown  
+**Requirements**:
+- Two-part horizontal bars showing ESPN rank vs Total Points For contributions
+- Text indicator showing total Liga Bucks ("22 Total Liga Bucks")  
+- Additional row showing W/L, ESPN Rank, Total Points For, Total Points Against
+- Rank #1 should have longest Liga Bucks bar
+**Location**: Leaderboard section team rows  
+
 ## Implemented Features
 
 _Features will be moved here when completed._
