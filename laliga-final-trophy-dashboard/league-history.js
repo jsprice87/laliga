@@ -19,7 +19,7 @@ const LEAGUE_HISTORY = {
     
     sackos: [
         { year: 2024, loser: "Shteebe Bogey" },
-        { year: 2023, loser: "Un-Evan Language" },
+        { year: 2023, loser: "Un-Evan Languish" },
         { year: 2022, loser: "Kwiss McKissass" },
         { year: 2021, loser: "Justine Prissy" },
         { year: 2019, loser: "Adum Limpwood" },

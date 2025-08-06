@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- VERSION: 2025-08-05-ESPN-API-FIXES-DEPLOYED -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Liga del Fuego - Fantasy Football League</title>
@@ -41,28 +42,8 @@
                                 <option value="2021">2021</option>
                             </select>
                         </div>
-                        <div class="week-selector">
-                            <label for="week-select">WEEK:</label>
-                            <select id="week-select" class="form-control game-select">
-                                <option value="1">01</option>
-                                <option value="2">02</option>
-                                <option value="3">03</option>
-                                <option value="4">04</option>
-                                <option value="5">05</option>
-                                <option value="6">06</option>
-                                <option value="7">07</option>
-                                <option value="8">08</option>
-                                <option value="9">09</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14" selected>14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                            </select>
-                            <span class="current-indicator" id="current-indicator">[CURRENT]</span>
+                        <div class="season-status">
+                            <span class="current-indicator" id="current-indicator">SEASON TOTALS</span>
                         </div>
                     </div>
                 </div>
@@ -153,9 +134,33 @@
                         <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
                         WEEK <span id="matchups-week">14</span> MATCHUPS
                     </div>
-                    <div class="live-indicator" id="live-indicator">
-                        <span class="live-dot"></span>
-                        <span>GAMES COMPLETE</span>
+                    <div class="matchups-controls">
+                        <div class="week-selector">
+                            <label for="matchups-week-select">WEEK:</label>
+                            <select id="matchups-week-select" class="form-control game-select">
+                                <option value="1">01</option>
+                                <option value="2">02</option>
+                                <option value="3">03</option>
+                                <option value="4">04</option>
+                                <option value="5">05</option>
+                                <option value="6">06</option>
+                                <option value="7">07</option>
+                                <option value="8">08</option>
+                                <option value="9">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14" selected>14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                            </select>
+                        </div>
+                        <div class="live-indicator" id="live-indicator">
+                            <span class="live-dot"></span>
+                            <span>GAMES COMPLETE</span>
+                        </div>
                     </div>
                 </div>
                 <div class="matchups-grid" id="matchups-grid">

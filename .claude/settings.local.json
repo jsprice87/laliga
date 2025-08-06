@@ -36,7 +36,8 @@
       "Bash(npm run dev:*)",
       "Bash(brew tap:*)",
       "Bash(./start-dev.sh:*)",
-      "Bash(/Users/justin/projects/laliga/start-dev.sh:*)"
+      "Bash(/Users/justin/projects/laliga/start-dev.sh:*)",
+      "WebFetch(domain:laligadelfuego.vercel.app)"
     ],
     "deny": []
   }

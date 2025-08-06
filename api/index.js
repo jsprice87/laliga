@@ -1,6 +1,7 @@
 const { fetchESPNTeams } = require('./espn/fetchTeams');
 const { fetchESPNMatchups } = require('./espn/fetchMatchups');
 const { calculateLaLigaBucks } = require('./laliga/calculateBucks');
+const { calculateLigaBucksForSeason, getWeeklyMatchups } = require('./laliga/calculateLigaBucks');
 const { updateWeeklyData, updateCurrentWeek } = require('./laliga/updateWeekly');
 const { getTeams, getMatchups } = require('./database/schemas');
 const { connectToMongoDB } = require('./database/connect');
@@ -47,24 +48,43 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // Teams endpoint
+    // Teams endpoint - now with improved Liga Bucks calculation
     if (pathname === '/api/teams') {
       const { week = 14, season = 2024, live } = Object.fromEntries(url.searchParams);
       
       if (live === 'true') {
-        const teams = await fetchESPNTeams(process.env.ESPN_LEAGUE_ID, season, week);
-        const teamsWithBucks = calculateLaLigaBucks(teams);
-        return res.status(200).json(teamsWithBucks);
+        try {
+          // Use new comprehensive Liga Bucks calculation
+          const ligaBucksData = await calculateLigaBucksForSeason(process.env.ESPN_LEAGUE_ID, parseInt(season));
+          return res.status(200).json(ligaBucksData);
+        } catch (error) {
+          console.warn('Liga Bucks calculation failed, falling back to basic method:', error.message);
+          // Fallback to original method
+          const teams = await fetchESPNTeams(process.env.ESPN_LEAGUE_ID, season, week);
+          const teamsWithBucks = calculateLaLigaBucks(teams);
+          return res.status(200).json(teamsWithBucks);
+        }
       } else {
         const teams = await getTeams(season);
         return res.status(200).json(teams);
       }
     }
 
-    // Matchups endpoint
+    // Matchups endpoint - enhanced for weekly data
     if (pathname === '/api/matchups') {
       const { week = 14, season = 2024 } = Object.fromEntries(url.searchParams);
       
+      // Try new weekly matchups function first
+      try {
+        const weeklyMatchups = await getWeeklyMatchups(process.env.ESPN_LEAGUE_ID, parseInt(season), parseInt(week));
+        if (weeklyMatchups && weeklyMatchups.length > 0) {
+          return res.status(200).json(weeklyMatchups);
+        }
+      } catch (error) {
+        console.warn('New weekly matchups failed, trying fallback methods:', error.message);
+      }
+      
+      // Fallback to existing methods
       let matchups = await getMatchups(week, season);
       
       if (!matchups || matchups.length === 0) {
