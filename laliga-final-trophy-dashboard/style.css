@@ -1787,20 +1787,21 @@ select.game-select {
 }
 
 .commentary-item {
-  background: var(--game-bg-secondary);
+  background: rgba(26, 26, 46, 0.95);
   border-left: var(--game-border-width-thick) solid var(--game-teal);
   padding: var(--game-space-lg);
   font-style: italic;
-  color: var(--game-white);
+  color: #FFFFFF;
   border-top: var(--game-border-width) solid var(--game-purple);
   border-bottom: var(--game-border-width) solid var(--game-purple);
   border-right: var(--game-border-width) solid var(--game-purple);
   margin-bottom: var(--game-space-base);
-  line-height: 1.6;
+  line-height: 1.8;
   font-size: var(--game-font-size-base);
-  font-weight: 400;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  box-shadow: inset 0 0 0 1px rgba(32, 178, 170, 0.1);
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(32, 178, 170, 0.2);
+  backdrop-filter: blur(2px);
 }
 
 /* Authentication */

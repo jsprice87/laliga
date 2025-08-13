@@ -62,32 +62,12 @@
 - Color coding for gains/losses
 **Location**: Leaderboard section  
 
-### FEAT-007: Browser Tab Icon Update
+### FEAT-008: Dashboard Main Icon Update ✅
 **Priority**: Low  
-**Status**: Open  
-**Description**: Change browser tab icon to trophy-small.png  
-**Requirements**:
-- Update favicon in HTML head
-- Ensure proper icon sizing and format
-**Location**: HTML head section  
-
-### FEAT-008: Dashboard Main Icon Update
-**Priority**: Low  
-**Status**: Open  
+**Status**: Completed  
 **Description**: Change main icon on dashboard to trophy-medium.png  
-**Requirements**:
-- Update main dashboard logo/icon
-- Maintain styling consistency
-**Location**: Dashboard header  
-
-### FEAT-009: Browser Tab Title Update
-**Priority**: Low  
-**Status**: Open  
-**Description**: Change browser tab title to "La Liga del Fuego" (currently includes "90s video games" text)  
-**Requirements**:
-- Update HTML title tag
-- Remove gaming references from title
-**Location**: HTML head section  
+**Resolution**: Updated main dashboard icon to trophy-medium.png
+**Completed Date**: 2025-08-12  
 
 ### FEAT-010: Leaderboard Team Progress Bars
 **Priority**: Medium  
@@ -102,4 +82,16 @@
 
 ## Implemented Features
 
-_Features will be moved here when completed._
+### FEAT-007: Browser Tab Icon Update ✅
+**Priority**: Low  
+**Status**: Completed  
+**Description**: Change browser tab icon to trophy-small.png  
+**Resolution**: Updated favicon to trophy-small.png in HTML head
+**Completed Date**: 2025-08-06
+
+### FEAT-009: Browser Tab Title Update ✅
+**Priority**: Low  
+**Status**: Completed  
+**Description**: Change browser tab title to "La Liga del Fuego" (currently includes "90s video games" text)  
+**Resolution**: Updated HTML title tag to "La Liga del Fuego - Fantasy Football League"
+**Completed Date**: 2025-08-06

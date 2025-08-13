@@ -994,8 +994,8 @@ function renderEarningsChart() {
         datasets: [{
           label: 'EARNINGS ($)',
           data: chartData.map(d => d.earnings),
-          backgroundColor: '#20B2AA',
-          borderColor: '#FFFFFF',
+          backgroundColor: '#8A2BE2',
+          borderColor: '#00FFFF',
           borderWidth: 2
         }]
       },
