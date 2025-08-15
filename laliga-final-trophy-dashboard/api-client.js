@@ -100,6 +100,14 @@ class LaLigaAPI {
     });
   }
 
+  // Ingest complete season data from ESPN API into MongoDB
+  async ingestSeasonData(season) {
+    console.log(`🔍 DEBUG: Triggering ESPN data ingestion for season ${season}`);
+    return this.fetch(`/ingest-season/${season}`, {
+      method: 'POST'
+    });
+  }
+
   // Health check
   async healthCheck() {
     return this.fetch('/health');

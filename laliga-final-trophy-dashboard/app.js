@@ -66,22 +66,6 @@ function getTeamByName(name) {
  * Data Management    *
  ********************/
 // Demo team data for fallback when API fails
-function getDemoTeamData() {
-  return [
-    { id: 1, name: "Kris P. Roni", owner: "Kris McKissack", record: "11-3-0", totalPoints: 1876.2, laLigaBucks: 24, espnRank: 1, espnComponent: 12, totalPointsComponent: 12, playoffSeed: 1, earnings: 200, weeklyHighScores: 4 },
-    { id: 2, name: "Murican Futball Crusaders", owner: "Scott Williams", record: "10-4-0", totalPoints: 1834.5, laLigaBucks: 22, espnRank: 2, espnComponent: 11, totalPointsComponent: 11, playoffSeed: 2, earnings: 100, weeklyHighScores: 2 },
-    { id: 3, name: "Vonnies Chubbies", owner: "Jeff Parr", record: "9-5-0", totalPoints: 1798.3, laLigaBucks: 20, espnRank: 3, espnComponent: 10, totalPointsComponent: 10, playoffSeed: 3, earnings: 50, weeklyHighScores: 1 },
-    { id: 4, name: "Blondes Give Me A Chubb", owner: "Adam Haywood", record: "9-5-0", totalPoints: 1912.7, laLigaBucks: 21, espnRank: 4, espnComponent: 9, totalPointsComponent: 12, playoffSeed: 4, earnings: 150, weeklyHighScores: 3 },
-    { id: 5, name: "The Peeping Tomlins", owner: "Eric Butler", record: "8-6-0", totalPoints: 1756.4, laLigaBucks: 17, espnRank: 5, espnComponent: 8, totalPointsComponent: 9, playoffSeed: 5, earnings: 100, weeklyHighScores: 2 },
-    { id: 6, name: "Nothing to CTE Here", owner: "Matthew Kelsall", record: "7-7-0", totalPoints: 1689.5, laLigaBucks: 13, espnRank: 6, espnComponent: 7, totalPointsComponent: 6, playoffSeed: 6, earnings: 0, weeklyHighScores: 0 },
-    { id: 7, name: "Hurts in the Brown Bachs", owner: "Niklas Markley", record: "6-8-0", totalPoints: 1642.8, laLigaBucks: 11, espnRank: 7, espnComponent: 6, totalPointsComponent: 5, playoffSeed: 7, earnings: 50, weeklyHighScores: 1 },
-    { id: 8, name: "Purple Reign", owner: "Boston Weir", record: "5-9-0", totalPoints: 1623.1, laLigaBucks: 9, espnRank: 8, espnComponent: 5, totalPointsComponent: 4, playoffSeed: 8, earnings: 0, weeklyHighScores: 0 },
-    { id: 9, name: "I am Magic Claw", owner: "Shane Williams", record: "4-10-0", totalPoints: 1587.2, laLigaBucks: 7, espnRank: 9, espnComponent: 4, totalPointsComponent: 3, playoffSeed: 9, earnings: 0, weeklyHighScores: 0 },
-    { id: 10, name: "California Sunday School", owner: "Justin Price", record: "4-10-0", totalPoints: 1564.9, laLigaBucks: 5, espnRank: 10, espnComponent: 3, totalPointsComponent: 2, playoffSeed: 10, earnings: 0, weeklyHighScores: 0 },
-    { id: 11, name: "The Annexation of Puerto Rico", owner: "Brian Butler", record: "3-11-0", totalPoints: 1521.4, laLigaBucks: 3, espnRank: 11, espnComponent: 2, totalPointsComponent: 1, playoffSeed: 11, earnings: 0, weeklyHighScores: 0 },
-    { id: 12, name: "Show me your TDs", owner: "Mike Haywood", record: "2-12-0", totalPoints: 1478.6, laLigaBucks: 2, espnRank: 12, espnComponent: 1, totalPointsComponent: 1, playoffSeed: 12, earnings: 0, weeklyHighScores: 0 }
-  ];
-}
 
 function showDataLoadingError(message) {
   const leaderboardBody = document.getElementById('leaderboard-body');
@@ -107,21 +91,7 @@ function showDataLoadingError(message) {
   }
 }
 
-function getDemoMatchupData() {
-  return [
-    // Week 14 matchups
-    { week: 14, team1: "Mahomes Sweet Home", team2: "Dawgs By 90", team1Score: 139.9, team2Score: 139.0, status: "final" },
-    { week: 14, team1: "Purple Reign", team2: "Blondes Give Me A Chubb", team1Score: 120.7, team2Score: 126.3, status: "final" },
-    { week: 14, team1: "Hurts in the Brown Bachs", team2: "Kris P. Roni", team1Score: 130.1, team2Score: 99.0, status: "final" },
-    
-    // Week 13 matchups
-    { week: 13, team1: "Mahomes Sweet Home", team2: "Purple Reign", team1Score: 135.8, team2Score: 114.6, status: "final" },
-    { week: 13, team1: "Dawgs By 90", team2: "Blondes Give Me A Chubb", team1Score: 131.7, team2Score: 129.5, status: "final" },
-    { week: 13, team1: "Hurts in the Brown Bachs", team2: "Kris P. Roni", team1Score: 124.7, team2Score: 142.8, status: "final" },
-    
-    // Add more weeks as needed...
-  ];
-}
+
 
 /********************
  * Banner Update System *
@@ -764,33 +734,114 @@ function setupSeasonSelectors() {
   }
 }
 
+// Calculate all derived stats locally from raw MongoDB data
+function calculateLocalStats() {
+  console.log(`🔍 DEBUG: Calculating local stats from MongoDB data...`);
+  
+  if (!appData.teams || appData.teams.length === 0) {
+    console.warn('⚠️ No teams data available for local calculations');
+    return;
+  }
+  
+  // Calculate Liga Bucks for each team locally
+  appData.teams = appData.teams.map(team => {
+    // ESPN Component: Based on current standings/ranking (1-12 points)
+    const espnComponent = team.espnComponent || calculateESPNComponent(team);
+    
+    // Total Points Component: Based on total points for the season (1-12 points)  
+    const totalPointsComponent = team.totalPointsComponent || calculateTotalPointsComponent(team);
+    
+    // Total Liga Bucks (max 24)
+    const laLigaBucks = espnComponent + totalPointsComponent;
+    
+    return {
+      ...team,
+      espnComponent,
+      totalPointsComponent,
+      laLigaBucks,
+      // Ensure proper data structure
+      totalPoints: team.totalPoints || team.points || 0,
+      record: team.record || '0-0-0',
+      owner: team.owner || team.primaryOwner || 'Unknown'
+    };
+  });
+  
+  console.log(`✅ Local stats calculated for ${appData.teams.length} teams`);
+}
+
+// Helper functions for Liga Bucks calculation
+function calculateESPNComponent(team) {
+  // Default ESPN component based on playoff seed or rank
+  const rank = team.playoffSeed || team.espnRank || 12;
+  return Math.max(1, Math.min(12, 13 - rank));
+}
+
+function calculateTotalPointsComponent(team) {
+  // Calculate based on total points ranking among all teams
+  if (!appData.teams || appData.teams.length === 0) return 1;
+  
+  const sortedByPoints = [...appData.teams].sort((a, b) => (b.totalPoints || b.points || 0) - (a.totalPoints || a.points || 0));
+  const teamIndex = sortedByPoints.findIndex(t => t.id === team.id || t.espnId === team.espnId);
+  return Math.max(1, Math.min(12, 12 - teamIndex));
+}
+
 async function loadHistoricalData(year, week) {
-  console.log(`📊 Loading historical data for ${year} Week ${week}`);
+  console.log(`📊 Loading data for ${year} Week ${week}`);
+  console.log(`🔍 DEBUG: API Client available:`, !!window.laLigaAPI);
   
   try {
-    if (window.laLigaAPI) {
-      const historicalTeams = await window.laLigaAPI.getTeams(year, week);
-      if (historicalTeams && historicalTeams.length > 0) {
-        appData.teams = historicalTeams;
-        console.log(`✅ Loaded ${historicalTeams.length} teams for ${year}`);
-        
-        const historicalMatchups = await window.laLigaAPI.getMatchups(year, week);
-        if (historicalMatchups) {
-          appData.matchups = historicalMatchups;
-        }
-        
-        renderLeaderboard();
-        renderMatchups();
-        renderTeamProfiles();
-      } else {
-        showDataLoadingError(`No historical data available for ${year} Week ${week}`);
-      }
-    } else {
-      showDataLoadingError('API client not available for historical data');
+    if (!window.laLigaAPI) {
+      showDataLoadingError('API client not available');
+      return;
     }
+    
+    // Fetch teams data for the selected year from MongoDB
+    console.log(`🔍 DEBUG: Fetching teams from MongoDB for year ${year}...`);
+    const teams = await window.laLigaAPI.getTeams(year);
+    console.log(`🔍 DEBUG: Received teams data:`, teams?.length || 0, 'teams');
+    
+    if (!teams || teams.length === 0) {
+      console.log(`🔍 DEBUG: No teams data in MongoDB for ${year}, triggering ESPN data ingestion...`);
+      // Trigger data ingestion for this year from ESPN API
+      await window.laLigaAPI.ingestSeasonData(year);
+      // Retry fetching after ingestion
+      const retryTeams = await window.laLigaAPI.getTeams(year);
+      if (!retryTeams || retryTeams.length === 0) {
+        showDataLoadingError(`No team data available for ${year} after ESPN ingestion attempt`);
+        return;
+      }
+      appData.teams = retryTeams;
+    } else {
+      appData.teams = teams;
+    }
+    
+    console.log(`✅ Loaded ${appData.teams.length} teams for ${year} from MongoDB`);
+    console.log(`🔍 DEBUG: Sample team data:`, appData.teams[0]);
+    
+    // Fetch matchups data for the selected week/year from MongoDB
+    console.log(`🔍 DEBUG: Fetching matchups from MongoDB for year ${year} week ${week}...`);
+    const matchups = await window.laLigaAPI.getMatchups(year, week);
+    console.log(`🔍 DEBUG: Received matchups data:`, matchups?.length || 0, 'matchups');
+    
+    if (!matchups || matchups.length === 0) {
+      console.log(`🔍 DEBUG: No matchups data in MongoDB for ${year} week ${week}`);
+      appData.matchups = [];
+    } else {
+      appData.matchups = matchups;
+      console.log(`🔍 DEBUG: Sample matchup data:`, matchups[0]);
+    }
+    
+    // Calculate all derived stats locally from raw MongoDB data
+    calculateLocalStats();
+    
+    renderLeaderboard();
+    renderMatchups();
+    renderTeamProfiles();
+    
   } catch (error) {
-    console.error(`❌ Failed to load historical data for ${year}:`, error);
-    showDataLoadingError(`Failed to load historical data for ${year}: ${error.message}`);
+    console.error(`❌ Failed to load data for ${year}:`, error);
+    console.log(`🔍 DEBUG: Error details:`, error.stack);
+    showDataLoadingError(`Failed to load data for ${year}: ${error.message}`);
   }
 }
 
@@ -2016,13 +2067,33 @@ async function init() {
           console.log('✅ LIVE TEAM DATA LOADED FROM ESPN API!');
         } else {
           console.error('❌ No live team data available from ESPN API');
-          console.log('⚠️ Loading fallback demo data with all 12 teams...');
-          appData.teams = getDemoTeamData();
+          console.log('⚠️ Attempting to load from MongoDB...');
+          const mongoTeams = await window.laLigaAPI.getTeams(appData.league.season);
+          if (mongoTeams && mongoTeams.length > 0) {
+            appData.teams = mongoTeams;
+            console.log('✅ TEAM DATA LOADED FROM MONGODB!');
+          } else {
+            showDataLoadingError('No team data available from ESPN API or MongoDB');
+            return;
+          }
         }
       } catch (error) {
         console.error('❌ Failed to load live team data:', error);
-        console.log('⚠️ Loading fallback demo data with all 12 teams...');
-        appData.teams = getDemoTeamData();
+        console.log('⚠️ Attempting to load from MongoDB...');
+        try {
+          const mongoTeams = await window.laLigaAPI.getTeams(appData.league.season);
+          if (mongoTeams && mongoTeams.length > 0) {
+            appData.teams = mongoTeams;
+            console.log('✅ TEAM DATA LOADED FROM MONGODB!');
+          } else {
+            showDataLoadingError('No team data available from ESPN API or MongoDB');
+            return;
+          }
+        } catch (mongoError) {
+          console.error('❌ Failed to load from MongoDB:', mongoError);
+          showDataLoadingError('Failed to load team data from all sources');
+          return;
+        }
       }
       
       // Load live matchup data
@@ -2032,19 +2103,40 @@ async function init() {
           appData.matchups = liveMatchups;
           console.log('✅ LIVE MATCHUP DATA LOADED FROM ESPN API!');
         } else {
-          console.log('⚠️ No live matchup data available, loading demo data...');
-          appData.matchups = getDemoMatchupData();
+          console.log('⚠️ No live matchup data available, loading from MongoDB...');
+          const mongoMatchups = await window.laLigaAPI.getMatchups(appData.league.season, appData.league.currentWeek);
+          if (mongoMatchups && mongoMatchups.length > 0) {
+            appData.matchups = mongoMatchups;
+            console.log('✅ MATCHUP DATA LOADED FROM MONGODB!');
+          } else {
+            console.log('⚠️ No matchup data available from any source');
+            appData.matchups = [];
+          }
         }
       } catch (error) {
-        console.warn('⚠️ Failed to load live matchup data, using demo data:', error);
-        appData.matchups = getDemoMatchupData();
+        console.warn('⚠️ Failed to load live matchup data, trying MongoDB:', error);
+        try {
+          const mongoMatchups = await window.laLigaAPI.getMatchups(appData.league.season, appData.league.currentWeek);
+          if (mongoMatchups && mongoMatchups.length > 0) {
+            appData.matchups = mongoMatchups;
+            console.log('✅ MATCHUP DATA LOADED FROM MONGODB!');
+          } else {
+            console.log('⚠️ No matchup data available from any source');
+            appData.matchups = [];
+          }
+        } catch (mongoError) {
+          console.error('❌ Failed to load matchups from MongoDB:', mongoError);
+          appData.matchups = [];
+        }
       }
     } else {
-      console.error('❌ API CONNECTION FAILED - Loading demo data');
-      console.log('⚠️ Loading fallback demo data with all 12 teams...');
-      appData.teams = getDemoTeamData();
-      appData.matchups = getDemoMatchupData();
+      console.error('❌ API CONNECTION FAILED - Cannot load data');
+      showDataLoadingError('API connection failed - no data available');
+      return;
     }
+    
+    // Calculate local stats from loaded data
+    calculateLocalStats();
     
     // Banners already populated by populateBanners() from league-history.js
     

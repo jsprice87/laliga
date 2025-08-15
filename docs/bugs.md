@@ -63,7 +63,9 @@
 **Status**: Resolved  
 **Description**: Only top 6 places are being populated. Allow user to scroll through all places. Add retro vertical slicer bar on the right side of table  
 **Resolution**: Leaderboard already has proper scrolling with retro-styled vertical scrollbar  
-**Resolved Date**: 2025-08-12  
+**Resolved Date**: 2025-08-12
+
+  
 
 ## Resolved Issues
 
@@ -101,3 +103,17 @@
 **Description**: Category breakdown shows 3 liga buck types "ESPN" "Total" and "AVG". Should only be "ESPN" and "Total Points"  
 **Resolution**: Updated to 2-component system showing only ESPN and Total Points components  
 **Resolved Date**: 2025-08-06
+
+### BUG-015: Matchups Screen Shows Only 2 Matchups ✅
+**Priority**: High  
+**Status**: Resolved  
+**Description**: Only two matchups are populating on the Matchups screen. There should ALWAYS be 6 matchups.  
+**Resolution**: Fixed demo matchup data to include all 6 matchups per week (12 teams = 6 matchups)  
+**Resolved Date**: 2025-08-12
+
+### BUG-016: Historical Data System Not Working ✅
+**Priority**: High  
+**Status**: Resolved  
+**Description**: 2023, 2022, etc historical data is still not working. Need complete data architecture redesign.  
+**Resolution**: Implemented separate historical vs live data architecture with local calculations and comprehensive debug logging  
+**Resolved Date**: 2025-08-12

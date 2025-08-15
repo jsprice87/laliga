@@ -3,7 +3,7 @@ const { fetchESPNMatchups } = require('./espn/fetchMatchups');
 const { calculateLaLigaBucks } = require('./laliga/calculateBucks');
 const { calculateLigaBucksForSeason, getWeeklyMatchups } = require('./laliga/calculateLigaBucks');
 const { updateWeeklyData, updateCurrentWeek } = require('./laliga/updateWeekly');
-const { getTeams, getMatchups } = require('./database/schemas');
+const { getTeams, getMatchups, saveTeams, saveMatchups } = require('./database/schemas');
 const { connectToMongoDB } = require('./database/connect');
 const { registerUser, loginUser, getUserById, generateResetToken, resetPassword, validateResetToken } = require('./auth/temp-auth');
 
@@ -118,6 +118,57 @@ module.exports = async function handler(req, res) {
         return res.status(200).json(result);
       } else {
         return res.status(400).json({ error: 'Must specify week parameter or current=true' });
+      }
+    }
+
+    // Season data ingestion endpoint
+    if (pathname.startsWith('/api/ingest-season/') && req.method === 'POST') {
+      const season = parseInt(pathname.split('/')[3]);
+      
+      if (!season || season < 2020 || season > 2025) {
+        return res.status(400).json({ error: 'Invalid season year' });
+      }
+      
+      console.log(`🔍 DEBUG: Ingesting complete season data for ${season}`);
+      
+      try {
+        // Fetch complete season data from ESPN API
+        const espnTeams = await fetchESPNTeams(process.env.LEAGUE_ID, season);
+        console.log(`🔍 DEBUG: Fetched ${espnTeams?.length || 0} teams from ESPN for ${season}`);
+        
+        if (espnTeams && espnTeams.length > 0) {
+          // Store teams in MongoDB
+          await saveTeams(espnTeams, season);
+          console.log(`✅ Stored ${espnTeams.length} teams in MongoDB for ${season}`);
+        }
+        
+        // Fetch and store matchups for all weeks
+        const allMatchups = [];
+        for (let week = 1; week <= 17; week++) {
+          try {
+            const weekMatchups = await fetchESPNMatchups(process.env.LEAGUE_ID, season, week);
+            if (weekMatchups && weekMatchups.length > 0) {
+              await saveMatchups(weekMatchups, week, season);
+              allMatchups.push(...weekMatchups);
+              console.log(`✅ Stored ${weekMatchups.length} matchups for ${season} Week ${week}`);
+            }
+          } catch (weekError) {
+            console.warn(`⚠️ Failed to fetch week ${week} for ${season}:`, weekError.message);
+          }
+        }
+        
+        return res.status(200).json({ 
+          message: `Season ${season} data ingested successfully`,
+          teams: espnTeams?.length || 0,
+          matchups: allMatchups.length,
+          timestamp: new Date().toISOString()
+        });
+        
+      } catch (error) {
+        console.error(`❌ Failed to ingest season ${season}:`, error);
+        return res.status(500).json({ 
+          error: `Failed to ingest season ${season}: ${error.message}` 
+        });
       }
     }
 
