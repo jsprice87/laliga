@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:api\"",
-    "dev:frontend": "cd laliga-final-trophy-dashboard && python3 -m http.server 8000",
+    "dev:frontend": "cd public && python3 -m http.server 4000",
     "dev:api": "nodemon api/server.js",
     "start": "node api/server.js",
     "start:dev": "./start-dev.sh",

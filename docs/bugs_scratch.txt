@@ -1,5 +1,0 @@
-# Bugs Scratch - Clean
-
-All bugs migrated to docs/bugs.md and consolidated into task list (2025-08-12)
-
-Use this file for temporary bug notes before formal migration.

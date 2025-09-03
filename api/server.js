@@ -1,4 +1,5 @@
 // Local development server for testing API endpoints
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const handler = require('./index.js');

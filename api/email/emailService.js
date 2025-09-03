@@ -19,9 +19,11 @@ class EmailService {
       }
     };
 
-    // For development, use a test account if no config is provided
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-      console.log('⚠️ No email configuration found. Using development mode.');
+    // For development, use a test account if no config is provided or if using placeholder values
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || 
+        process.env.EMAIL_USER === 'your-email@gmail.com' || 
+        process.env.EMAIL_PASS === 'your-app-password') {
+      console.log('⚠️ No email configuration found or using placeholder values. Using development mode.');
       this.setupDevelopmentMode();
       return;
     }

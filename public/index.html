@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- VERSION: 2025-08-05-ESPN-API-FIXES-DEPLOYED -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Liga del Fuego - Fantasy Football League</title>
-    <link rel="icon" type="image/png" href="trophy-small.png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/trophy-small.png">
+    <link rel="stylesheet" href="js/styles/main.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,11 +13,12 @@
 </head>
 <body>
     <div class="app-container">
+        <!-- VERIFICATION KEY: CLAUDE_BANNER_FIX_ACTIVE -->
         <!-- Champions Banner Top -->
         <div class="banner-top champions-banner">
             <div class="banner-content">
                 <span class="banner-text" id="champions-banner">
-                    <!-- Populated by JavaScript from league-history.js -->
+                    <!-- Populated by JavaScript -->
                 </span>
             </div>
         </div>
@@ -28,37 +28,23 @@
             <div class="header-content">
                 <div class="logo-section">
                     <div class="game-logo">
-                        <img src="laliga_logo.png" class="main-trophy" alt="La Liga Del Fuego Flame">
+                        <img src="assets/laliga_logo.png" class="main-trophy" alt="La Liga Del Fuego logo">
                         <div class="logo-text">LA LIGA<br>DEL FUEGO</div>
-                        <div class="logo-subtitle">FANTASY FOOTBALL '24</div>
+                        <div class="logo-subtitle">FANTASY FOOTBALL '25</div>
                     </div>
                     <div class="season-info">
                         <div class="year-selector">
                             <label for="year-select">YEAR:</label>
                             <select id="year-select" class="form-control game-select">
-                                <option value="2024" selected>2024</option>
+                                <option value="2025" selected>2025</option>
+                                <option value="2024">2024</option>
                                 <option value="2023">2023</option>
                                 <option value="2022">2022</option>
-                                <option value="2021">2021</option>
                             </select>
                         </div>
                         <div class="season-status">
-                            <span class="current-indicator" id="current-indicator">SEASON TOTALS</span>
+                            <span class="current-indicator" id="current-indicator">CURRENT SEASON</span>
                         </div>
-                    </div>
-                </div>
-                <div class="header-stats">
-                    <div id="user-info" class="stat-box">
-                        <div class="stat-label">LEAGUE STATUS</div>
-                        <div class="stat-value">LIVE</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">PRIZE POOL</div>
-                        <div class="stat-value">$2,400</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">TEAMS</div>
-                        <div class="stat-value">12</div>
                     </div>
                 </div>
             </div>
@@ -75,6 +61,9 @@
                 </button>
                 <button class="nav-button" data-tab="teams">
                     <span class="button-text">TEAMS</span>
+                </button>
+                <button class="nav-button" data-tab="playoff-bracket">
+                    <span class="button-text">PLAYOFF BRACKET</span>
                 </button>
                 <button class="nav-button" data-tab="money">
                     <span class="button-text">MONEY BOARD</span>
@@ -94,7 +83,6 @@
             <section class="content-section active" id="dashboard-section">
                 <div class="section-header">
                     <div class="section-title">
-                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
                         LA LIGA BUCKS STANDINGS
                     </div>
                     <div class="sort-controls">
@@ -110,7 +98,7 @@
 
                 <div class="dashboard-layout">
                     <div class="trophy-showcase">
-                        <img src="trophy-medium.png" class="large-trophy" alt="La Liga Del Fuego Trophy">
+                        <img src="assets/trophy-medium.png" class="large-trophy" alt="La Liga Del Fuego Trophy">
                     </div>
                     <div class="leaderboard-container">
                         <div class="leaderboard-header">
@@ -125,20 +113,33 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Liga Bucks Progression Chart -->
+                <div class="progression-chart-container game-panel">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <img src="assets/trophy-small.png" class="title-trophy" alt="Trophy">
+                            TEAM PROGRESSION CHART
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="progressionChart" width="800" height="400"></canvas>
+                    </div>
+                </div>
             </section>
 
             <!-- Matchups Section -->
             <section class="content-section" id="matchups-section">
                 <div class="section-header">
                     <div class="section-title">
-                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
-                        WEEK <span id="matchups-week">14</span> MATCHUPS
+                        <img src="assets/trophy-medium.png" class="title-trophy" alt="Trophy">
+                        WEEK <span id="matchups-week">1</span> MATCHUPS
                     </div>
                     <div class="matchups-controls">
                         <div class="week-selector">
                             <label for="matchups-week-select">WEEK:</label>
                             <select id="matchups-week-select" class="form-control game-select">
-                                <option value="1">01</option>
+                                <option value="1" selected>01</option>
                                 <option value="2">02</option>
                                 <option value="3">03</option>
                                 <option value="4">04</option>
@@ -151,7 +152,7 @@
                                 <option value="11">11</option>
                                 <option value="12">12</option>
                                 <option value="13">13</option>
-                                <option value="14" selected>14</option>
+                                <option value="14">14</option>
                                 <option value="15">15</option>
                                 <option value="16">16</option>
                                 <option value="17">17</option>
@@ -159,7 +160,7 @@
                         </div>
                         <div class="live-indicator" id="live-indicator">
                             <span class="live-dot"></span>
-                            <span>GAMES COMPLETE</span>
+                            <span>SEASON NOT STARTED</span>
                         </div>
                     </div>
                 </div>
@@ -172,7 +173,7 @@
             <section class="content-section" id="teams-section">
                 <div class="section-header">
                     <div class="section-title">
-                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
+                        <img src="assets/trophy-medium.png" class="title-trophy" alt="Trophy">
                         TEAM PROFILES
                     </div>
                 </div>
@@ -181,18 +182,54 @@
                 </div>
             </section>
 
+            <!-- Playoff Bracket Section -->
+            <section class="content-section" id="playoff-bracket-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <img src="assets/trophy-medium.png" class="title-trophy" alt="Trophy">
+                        PLAYOFF BRACKETS
+                    </div>
+                </div>
+                
+                <div class="bracket-layout">
+                    <!-- Champions Bracket -->
+                    <div class="champions-bracket game-panel">
+                        <div class="bracket-header">
+                            <img src="assets/trophy-small.png" class="panel-trophy" alt="Trophy">
+                            CHAMPIONS BRACKET
+                            <div class="bracket-subtitle">Fight for Glory</div>
+                        </div>
+                        <div class="bracket-container" id="champions-bracket">
+                            <!-- Champions bracket populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Sacko Bracket -->
+                    <div class="sacko-bracket game-panel">
+                        <div class="bracket-header sacko-header">
+                            <div class="sacko-emoji">💩</div>
+                            SACKO BRACKET
+                            <div class="bracket-subtitle">Battle to Avoid Last Place</div>
+                        </div>
+                        <div class="bracket-container" id="sacko-bracket">
+                            <!-- Sacko bracket populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Money Board Section -->
             <section class="content-section" id="money-section">
                 <div class="section-header">
                     <div class="section-title">
-                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
+                        <img src="assets/trophy-medium.png" class="title-trophy" alt="Trophy">
                         MONEY BOARD
                     </div>
                 </div>
                 <div class="money-grid">
                     <div class="money-summary-card game-panel">
                         <div class="panel-header">
-                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            <img src="assets/trophy-small.png" class="panel-trophy" alt="Trophy">
                             PRIZE POOL BREAKDOWN
                         </div>
                         <div class="prize-breakdown">
@@ -210,23 +247,23 @@
                             </div>
                             <div class="prize-item">
                                 <span class="prize-label">REMAINING:</span>
-                                <span class="prize-value" id="remaining-pool">$0</span>
+                                <span class="prize-value" id="remaining-pool">$2,400</span>
                             </div>
                         </div>
                     </div>
                     <div class="high-score-winners-card game-panel">
                         <div class="panel-header">
-                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            <img src="assets/trophy-small.png" class="panel-trophy" alt="Trophy">
                             WEEKLY HIGH SCORE WINNERS
                         </div>
                         <div class="winners-list" id="winners-list">
-                            <!-- Populated by JavaScript -->
+                            <div class="no-data-message">Season not started - no winners yet</div>
                         </div>
                     </div>
                 </div>
                 <div class="earnings-chart-container game-panel">
                     <div class="panel-header">
-                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                        <img src="assets/trophy-small.png" class="panel-trophy" alt="Trophy">
                         TEAM EARNINGS COMPARISON
                     </div>
                     <canvas id="earningsChart" height="400"></canvas>
@@ -237,7 +274,7 @@
             <section class="content-section" id="commentary-section">
                 <div class="section-header">
                     <div class="section-title">
-                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
+                        <img src="assets/trophy-medium.png" class="title-trophy" alt="Trophy">
                         LEAGUE COMMENTARY
                     </div>
                 </div>
@@ -250,14 +287,14 @@
             <section class="content-section" id="rules-section">
                 <div class="section-header">
                     <div class="section-title">
-                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/2654d16a-5210-45b4-a46b-ad75bc134bd8.png" class="title-trophy" alt="Trophy">
+                        <img src="assets/trophy-medium.png" class="title-trophy" alt="Trophy">
                         LEAGUE RULES
                     </div>
                 </div>
                 <div class="rules-container">
                     <div class="rule-card game-panel">
                         <div class="panel-header">
-                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            <img src="assets/trophy-small.png" class="panel-trophy" alt="Trophy">
                             LA LIGA BUCKS SCORING SYSTEM
                         </div>
                         <div class="rule-content">
@@ -273,7 +310,7 @@
                     </div>
                     <div class="rule-card game-panel">
                         <div class="panel-header">
-                            <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                            <img src="assets/trophy-small.png" class="panel-trophy" alt="Trophy">
                             MONEY DISTRIBUTION
                         </div>
                         <div class="rule-content">
@@ -291,7 +328,7 @@
             <div class="modal-content game-panel">
                 <div class="modal-header">
                     <div class="panel-header" id="modal-team-name">
-                        <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/e0e0d2d9-5f81-49e5-9100-c536e96857b5.png" class="panel-trophy" alt="Trophy">
+                        <img src="assets/trophy-small.png" class="panel-trophy" alt="Trophy">
                         TEAM DETAILS
                     </div>
                     <button class="close-modal" id="close-modal">✕</button>
@@ -306,17 +343,13 @@
         <div class="banner-bottom sacko-banner">
             <div class="banner-content">
                 <span class="banner-text" id="sacko-banner">
-                    <!-- Populated by JavaScript from league-history.js -->
+                    <!-- Populated by JavaScript -->
                 </span>
             </div>
         </div>
     </div>
 
-
-    <script src="logger.js"></script>
-    <script src="security.js"></script>
-    <script src="api-client.js"></script>
-    <script src="league-history.js"></script>
-    <script src="app.js"></script>
+    <!-- Modern Module Loading -->
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

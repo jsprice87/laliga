@@ -59,17 +59,17 @@ API_PID=$!
 sleep 2
 
 echo "🌐 Starting frontend server..."
-cd laliga-final-trophy-dashboard
-python3 -m http.server 8000 &
+cd public
+python3 -m http.server 4000 &
 FRONTEND_PID=$!
 cd ..
 
 echo ""
 echo "✅ Development environment is running!"
 echo ""
-echo "🔗 Dashboard:     http://localhost:8000"
+echo "🔗 Dashboard:     http://localhost:4000"
 echo "🔗 API Health:    http://localhost:3001/api/health"
-echo "🔗 Auth Test:     http://localhost:8000/test-auth.html"
+echo "🔗 Auth Test:     http://localhost:4000/test-auth.html"
 echo ""
 echo "📝 To stop: Press Ctrl+C"
 echo ""

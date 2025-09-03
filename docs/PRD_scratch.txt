@@ -1,0 +1,68 @@
+Executive summary:
+A fun-first fantasy football dashborad for La Liga del Fuego league with a retro, 90s video game, 8/16-bit graphics theme.  The web app will pull directly from ESPN API.
+It will pull raw historical scores and calculate results to generate both LIVE and HISTORICAL data.
+
+Historical data will only really need to be pulled into the MongoDB database once, as it never changes.
+
+////PAGES//////
+All pages:
+Top banner - Champions banner.  Slow scroll across the top of the screen, list of champions.  Custom data and hard-coded.  Not pulled from ESPN API.
+Bottom banner - Sacko (losers) banner.  Slow scroll across the bottom of the screen, list of losers.  Custom data and hard-coded.  Not pulled from ESPN API.
+Main header across the top with page navigation.
+
+Home Page:
+The home page displays a large image of our trophy next to the leaderboard. The image is trophy-medium.png
+Leaderboard - Shows the current leaderboard for the current year with live data.
+Shows a list of team names, their current rank, their amount of rise or fall from the last week, their Liga Bucks score and a breakdown of the two parts of Liga Bucks.
+Each "row" should show these columns: "Seed", "Team", "Record", "Points For", and "Liga Bucks"
+In the "Liga Bucks" column, along with a printed total number of Liga Bucks and a breakdown of each Liga Buck category, there should have a Power Bar similar to the amount of life a player has in a video game.  
+The Power Bar should be two-tone to clearly show how much of their "Power" comes from ESPN rank and how much comes from "Points For".  Max Power is 24 Liga Bucks (first place in both categories), Min power is 2 Liga Bucks (last place in both categories)
+
+Lower on the Home Page, below the trophy and leaderboard, there should be a line chart showing how all teams have risen and fallen in the ranks week to week.
+
+Matchups:
+The matchup page should show 6 "cards" with a matchup on each card for a total of 12 teams.
+Each card should show the team logo, the team name, their current win-loss record and their CURRENT score.
+Very important: When first visiting this page, it should default to the CURRENT week. When CURRENT week is selected, the scores should be pulled in LIVE from ESPN.
+Very important: The Matchups page should have a week number selector that lets the user look back through the scores from previous weeks. That data will be pulled from the database rather than live from the ESPN API (or a more elegant solution of managing live vs historical data)
+
+Money Board:
+The Money Board page should show a printout of all the earnings for each team so far.  The highest scoring team in the league in a given week earns $50.
+The rest of the money is paid out at the end of the tournament.
+There should be a table of each team and their earnings along with a bar chart.
+There should also be a table of each week 1 through 14 and the team name of the high scorer that week
+
+Playoff Bracket:
+There is a Champions Bracket and a Sacko Bracket.  This page should show a graphical, dynamic playoff bracket that updates at the end of each week (Tuesday morning at 2AM).  This will give people a snapshot of the playoffs as they stand after each week.
+The top two seeds get a first round bye,  The bottom two seeds get a first round bye.
+Seeding and matchups are standard tournament layout for the champions bracket.
+For the sacko bracket, to become Sacko, you have to lose every game in the sacko playoffs.  The first round bye for the lowest two seeds counts as their first loss.
+If two teams lose in the sacko bowl they both "advance" to the next round.
+
+Teams: A page with all sorts of deeper detail about each team.  The ability to click on a given team and have it pop up even more detail.
+
+Rules:
+A simple page with League Rules and Scoring as an FYI.
+////PAGES//////
+
+//////////////
+Guidelines:
+Layout should be dynamic everywhere and mobile friendly.  Mobile friendly is very iportant.
+All metrics, including each teams' rank, points for, and Liga Bucks as calculated on each individual week, for all historical weeks in the league history should be calculated by THIS app and stored in the database.
+Only live updates should come from ESPN API, and at the end of the week (Wednesday morning at 9 AM EST) the data should be pulled from ESPN one more time in case of any stat corrections and pushed to the database for future "historical" retrieval.
+
+Liga Bucks:
+50% ESPN rank
+50% Total Points For
+to calculate: 
+ 1. Find Total Points For
+ 1.1. Search through matchup data for current and subsequent weeks, sum all points scored for each individual team.  Sum of all points scored for a given team SO FAR in the season is Total Points For.
+ 1.1.1. For historical years, use week 14 as the last week.
+ 1.2. Assign the teams a rank based on Total Points For
+ 1.2.1 assign Liga Bucks.  12 Bucks for the #1 Ranked Team, 1 Buck for the 12th place team.
+ 2. ESPN rank
+ 2.1. Find win-loss record for each team.  Search through matchup data for currently selected and subsequent weeks and sum wins and losses.
+ 2.1.2. If there is a win-loss tie, the team with the highest points-for is ranked higher
+ 2.2. Assign the teams a rank based on ESPN Rank
+ 2.2.1 assign Liga Bucks.  12 Bucks for the #1 Ranked Team, 1 Buck for the 12th place team.
+ 2.3. Note: Ties are recorded in the third position in a Win-Loss number "3-5-1" means, 3 wins, 5 losses, 1 tie

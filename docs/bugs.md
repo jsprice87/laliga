@@ -108,12 +108,12 @@
 **Priority**: High  
 **Status**: Resolved  
 **Description**: Only two matchups are populating on the Matchups screen. There should ALWAYS be 6 matchups.  
-**Resolution**: Fixed demo matchup data to include all 6 matchups per week (12 teams = 6 matchups)  
-**Resolved Date**: 2025-08-12
+**Resolution**: Completely eliminated hardcoded data - now uses dynamic ESPN API → MongoDB → Frontend flow with guaranteed 6 matchups per week  
+**Resolved Date**: 2025-08-14
 
 ### BUG-016: Historical Data System Not Working ✅
 **Priority**: High  
 **Status**: Resolved  
 **Description**: 2023, 2022, etc historical data is still not working. Need complete data architecture redesign.  
-**Resolution**: Implemented separate historical vs live data architecture with local calculations and comprehensive debug logging  
-**Resolved Date**: 2025-08-12
+**Resolution**: Complete dynamic data architecture: ESPN API ingestion → MongoDB storage → local stat calculations → year selector functionality  
+**Resolved Date**: 2025-08-14

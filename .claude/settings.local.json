@@ -44,7 +44,10 @@
       "mcp__puppeteer__puppeteer_click",
       "mcp__puppeteer__puppeteer_evaluate",
       "mcp__puppeteer__puppeteer_select",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(node:*)",
+      "WebFetch(domain:www.mongodb.com)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }
