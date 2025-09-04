@@ -26,15 +26,19 @@ export class MoneyBoard {
   updatePrizeBreakdown() {
     const moneyStats = this.state.getMoneyStats();
     
+    console.log('MoneyBoard: Money stats:', moneyStats);
+    
     const totalPaidElement = document.getElementById('total-paid');
     const remainingPoolElement = document.getElementById('remaining-pool');
     
     if (totalPaidElement) {
-      totalPaidElement.textContent = `$${moneyStats.totalPaid.toLocaleString()}`;
+      const totalPaid = moneyStats?.totalPaid || 0;
+      totalPaidElement.textContent = `$${totalPaid.toLocaleString()}`;
     }
     
     if (remainingPoolElement) {
-      remainingPoolElement.textContent = `$${moneyStats.remaining.toLocaleString()}`;
+      const remaining = moneyStats?.remaining || 2400; // Default pool size
+      remainingPoolElement.textContent = `$${remaining.toLocaleString()}`;
     }
   }
 
@@ -55,7 +59,16 @@ export class MoneyBoard {
 
   renderEarningsChart() {
     const canvas = document.getElementById('earningsChart');
-    if (!canvas) return;
+    if (!canvas) {
+      console.warn('MoneyBoard: earningsChart canvas not found');
+      return;
+    }
+
+    // Check if Chart.js is available
+    if (typeof Chart === 'undefined') {
+      console.warn('MoneyBoard: Chart.js not available, skipping chart render');
+      return;
+    }
 
     // Destroy existing chart
     if (this.chart) {
@@ -63,8 +76,23 @@ export class MoneyBoard {
     }
 
     const teams = this.state.getTeams();
-    const teamNames = teams.map(team => team.name);
+    
+    if (!teams || teams.length === 0) {
+      console.log('MoneyBoard: No teams data available for chart');
+      // Display empty state message in canvas area
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00FFFF';
+      ctx.font = '16px Orbitron';
+      ctx.textAlign = 'center';
+      ctx.fillText('No earnings data available', canvas.width / 2, canvas.height / 2);
+      return;
+    }
+
+    const teamNames = teams.map(team => team.name || 'Unknown Team');
     const earnings = teams.map(team => team.earnings || 0);
+    
+    console.log('MoneyBoard: Rendering chart with', teams.length, 'teams, earnings:', earnings);
 
     const ctx = canvas.getContext('2d');
     

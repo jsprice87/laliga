@@ -128,7 +128,17 @@ export class Leaderboard {
       <div class="breakdown-col">
         <div class="total-bucks">${(() => {
           console.log('🎯 LEADERBOARD RENDER - Team:', team.name, 'laLigaBucks:', team.laLigaBucks, 'type:', typeof team.laLigaBucks);
-          return team.laLigaBucks || 0;
+          
+          // Handle both object format {total: X} and direct number format
+          let ligaBucksValue = 0;
+          if (typeof team.laLigaBucks === 'object' && team.laLigaBucks !== null) {
+            ligaBucksValue = team.laLigaBucks.total || 0;
+          } else if (typeof team.laLigaBucks === 'number') {
+            ligaBucksValue = team.laLigaBucks;
+          }
+          
+          console.log('🎯 LIGA BUCKS DISPLAY VALUE:', ligaBucksValue);
+          return ligaBucksValue;
         })()}</div>
       </div>
       <div class="power-bar-spanning">

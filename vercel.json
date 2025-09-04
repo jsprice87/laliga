@@ -1,9 +1,39 @@
 {
   "version": 2,
-  "env": {
-    "ESPN_S2": "ESPN_S2",
-    "ESPN_SWID": "ESPN_SWID", 
-    "ESPN_LEAGUE_ID": "ESPN_LEAGUE_ID",
-    "MONGODB_URI": "MONGODB_URI"
-  }
+  "builds": [
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "maxDuration": 60
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/public/js/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/public/assets/$1"
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|svg|ico|html))",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/index.html"
+    }
+  ]
 }

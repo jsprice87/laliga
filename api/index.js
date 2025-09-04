@@ -1,15 +1,15 @@
-const { fetchESPNTeams } = require('./espn/fetchTeams');
-const { fetchESPNMatchups } = require('./espn/fetchMatchups');
-const { fetchESPNLeague } = require('./espn/fetchLeague');
-const { calculateLaLigaBucks } = require('./laliga/calculateBucks');
-const { calculateLigaBucksForSeason, getWeeklyMatchups } = require('./laliga/calculateLigaBucks');
-const { updateWeeklyData, updateCurrentWeek } = require('./laliga/updateWeekly');
-const { getTeams, getMatchups, saveTeams, saveMatchups, saveLeague } = require('./database/schemas');
-const { connectToMongoDB } = require('./database/connect');
-const { registerUser, loginUser, getUserById, generateResetToken, resetPassword, validateResetToken } = require('./auth/temp-auth');
-const { transformESPNMatchups } = require('./utils/transformMatchups');
-const { ensureCurrentSeasonData } = require('./utils/autoIngest');
-const { ingestCleanSeason } = require('./utils/cleanIngestion');
+const { fetchESPNTeams } = require('../lib/espn/fetchTeams');
+const { fetchESPNMatchups } = require('../lib/espn/fetchMatchups');
+const { fetchESPNLeague } = require('../lib/espn/fetchLeague');
+const { calculateLaLigaBucks } = require('../lib/laliga/calculateBucks');
+const { calculateLigaBucksForSeason, getWeeklyMatchups } = require('../lib/laliga/calculateLigaBucks');
+const { updateWeeklyData, updateCurrentWeek } = require('../lib/laliga/updateWeekly');
+const { getTeams, getMatchups, saveTeams, saveMatchups, saveLeague } = require('../lib/database/schemas');
+const { connectToMongoDB } = require('../lib/database/connect');
+const { registerUser, loginUser, getUserById, generateResetToken, resetPassword, validateResetToken } = require('../lib/auth/temp-auth');
+const { transformESPNMatchups } = require('../lib/utils/transformMatchups');
+const { ensureCurrentSeasonData } = require('../lib/utils/autoIngest');
+const { ingestCleanSeason } = require('../lib/utils/cleanIngestion');
 
 module.exports = async function handler(req, res) {
   // Enable CORS
@@ -52,92 +52,16 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // Teams endpoint - now with improved Liga Bucks calculation
+    // Teams endpoint - use TeamsController
     if (pathname === '/api/teams') {
-      const { week = 14, season = 2025, live } = Object.fromEntries(url.searchParams);
-      
-      if (live === 'true') {
-        // Special handling for 2025 season
-        if (parseInt(season) >= 2025) {
-          return res.status(200).json({
-            season: parseInt(season),
-            status: 'countdown',
-            message: '🔥 COUNTDOWN TO 2025 SEASON 🔥',
-            details: 'First game: Eagles vs Cowboys, September 4th, 8:20 PM ET',
-            teams: [],
-            leagueInfo: {
-              name: 'La Liga del Fuego',
-              draftStatus: 'Upcoming',
-              seasonStart: '2025-09-04T20:20:00-04:00'
-            }
-          });
-        }
-        
-        try {
-          // Use new comprehensive Liga Bucks calculation
-          const ligaBucksData = await calculateLigaBucksForSeason(process.env.ESPN_LEAGUE_ID, parseInt(season));
-          return res.status(200).json(ligaBucksData);
-        } catch (error) {
-          console.warn('Liga Bucks calculation failed, falling back to basic method:', error.message);
-          // Fallback to original method
-          const teams = await fetchESPNTeams(process.env.ESPN_LEAGUE_ID, season, week);
-          const teamsWithBucks = calculateLaLigaBucks(teams);
-          return res.status(200).json(teamsWithBucks);
-        }
-      } else {
-        // Ensure current season data is available before serving from MongoDB
-        await ensureCurrentSeasonData(parseInt(season));
-        
-        const teams = await getTeams(season);
-        return res.status(200).json(teams);
-      }
+      const TeamsController = require('../lib/controllers/teamsController');
+      return await TeamsController.getTeams(req, res);
     }
 
-    // Matchups endpoint - enhanced for weekly data
+    // Matchups endpoint - use MatchupsController
     if (pathname === '/api/matchups') {
-      const { week = 14, season = 2025 } = Object.fromEntries(url.searchParams);
-      
-      // Special handling for 2025 season
-      if (parseInt(season) >= 2025) {
-        return res.status(200).json({
-          season: parseInt(season),
-          week: parseInt(week),
-          status: 'countdown',
-          message: '🔥 COUNTDOWN TO 2025 SEASON 🔥',
-          details: 'Matchups will be available when the season begins',
-          matchups: []
-        });
-      }
-      
-      // Ensure current season data is available before serving from MongoDB
-      await ensureCurrentSeasonData(parseInt(season));
-      
-      // Try new weekly matchups function first
-      try {
-        const weeklyMatchups = await getWeeklyMatchups(process.env.ESPN_LEAGUE_ID, parseInt(season), parseInt(week));
-        if (weeklyMatchups && weeklyMatchups.length > 0) {
-          return res.status(200).json(weeklyMatchups);
-        }
-      } catch (error) {
-        console.warn('New weekly matchups failed, trying fallback methods:', error.message);
-      }
-      
-      // Fallback to MongoDB data
-      let matchups = await getMatchups(week, season);
-      
-      if (!matchups || matchups.length === 0) {
-        try {
-          // Last resort: fetch and transform ESPN data directly
-          const espnMatchups = await fetchESPNMatchups(process.env.ESPN_LEAGUE_ID, season, week);
-          const transformedMatchups = await transformESPNMatchups(espnMatchups, parseInt(week), parseInt(season));
-          matchups = transformedMatchups;
-        } catch (espnError) {
-          console.warn('ESPN matchups unavailable:', espnError.message);
-          matchups = [];
-        }
-      }
-      
-      return res.status(200).json(matchups);
+      const MatchupsController = require('../lib/controllers/matchupsController');
+      return await MatchupsController.getMatchups(req, res);
     }
 
     // Update endpoint

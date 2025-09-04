@@ -1,0 +1,15 @@
+# Ignore development files
+.env
+.env.local
+*.log
+node_modules/
+.DS_Store
+
+# Ignore backup and development files
+*.backup
+*.monolithic
+api/index.js.backup
+api/index.js.monolithic
+
+# Keep lib directory as modules (not functions)
+!lib/**/*

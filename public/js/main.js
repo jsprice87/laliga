@@ -20,7 +20,6 @@ import { Matchups } from './components/matchups.js';
 import { Teams } from './components/teams.js';
 import { PlayoffBracket } from './components/playoff-bracket.js';
 import { MoneyBoard } from './components/money-board.js';
-import { Commentary } from './components/commentary.js';
 import { Rules } from './components/rules.js';
 import { Modal } from './components/modal.js';
 
@@ -54,7 +53,6 @@ class LaLigaApp {
       teams: new Teams(this.state, this.dataService),
       playoffBracket: new PlayoffBracket(this.state, this.dataService),
       moneyBoard: new MoneyBoard(this.state, this.dataService),
-      commentary: new Commentary(this.state),
       rules: new Rules(),
       modal: new Modal(this.state)
     };
@@ -535,7 +533,6 @@ class LaLigaApp {
         this.components.moneyBoard.render();
         break;
       case 'commentary':
-        this.components.commentary.render();
         break;
       case 'rules':
         this.components.rules.render();
