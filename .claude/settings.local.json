@@ -47,7 +47,9 @@
       "Bash(echo:*)",
       "Bash(node:*)",
       "WebFetch(domain:www.mongodb.com)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(git log:*)",
+      "Read(//private/tmp/**)"
     ],
     "deny": []
   }

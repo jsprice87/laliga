@@ -18,9 +18,25 @@ export class MoneyBoard {
   }
 
   render() {
+    console.log('💰 MoneyBoard: Starting render process');
     this.updatePrizeBreakdown();
     this.updateHighScoreWinners();
     this.renderEarningsChart();
+    console.log('💰 MoneyBoard: Render complete');
+  }
+
+  /**
+   * Ensure team data is loaded before rendering charts
+   */
+  async ensureTeamDataLoaded() {
+    const teams = this.state.getTeams();
+    if (!teams || teams.length === 0) {
+      console.log('MoneyBoard: Team data not loaded, requesting fresh data...');
+      // Trigger data load via the app's data service
+      if (window.laLigaApp && window.laLigaApp.loadSeasonData) {
+        await window.laLigaApp.loadSeasonData(this.state.getCurrentYear());
+      }
+    }
   }
 
   updatePrizeBreakdown() {
@@ -49,12 +65,86 @@ export class MoneyBoard {
     const currentYear = this.state.getCurrentYear();
     
     if (currentYear === 2025) {
-      winnersContainer.innerHTML = '<div class="no-data-message">Season not started - no winners yet</div>';
+      // Calculate actual weekly winners from matchup data
+      console.log('💰 MoneyBoard: Calculating weekly high score winners...');
+      const weeklyWinners = this.calculateWeeklyHighScoreWinners();
+      console.log('💰 MoneyBoard: Found', weeklyWinners.length, 'weekly winners:', weeklyWinners);
+      
+      if (weeklyWinners.length === 0) {
+        winnersContainer.innerHTML = '<div class="no-data-message">No weekly winners yet - matchup data loading...</div>';
+        return;
+      }
+      
+      // Display actual winners
+      winnersContainer.innerHTML = weeklyWinners.map(winner => `
+        <div class="winner-item">
+          <div class="winner-week">Week ${winner.week}</div>
+          <div class="winner-team">${winner.teamName}</div>
+          <div class="winner-score">${winner.score} pts</div>
+          <div class="winner-prize">$50</div>
+        </div>
+      `).join('');
       return;
     }
 
-    // Mock data for now - would be loaded from API
+    // Historical seasons - show placeholder for now
     winnersContainer.innerHTML = '<div class="no-data-message">No weekly winners data available</div>';
+  }
+
+  /**
+   * Calculate weekly high score winners from matchup data
+   */
+  calculateWeeklyHighScoreWinners() {
+    const matchups = this.state.getMatchups();
+    const winners = [];
+    
+    if (!matchups || matchups.length === 0) {
+      return winners;
+    }
+    
+    // Group matchups by week
+    const weeklyMatchups = {};
+    matchups.forEach(matchup => {
+      if (!weeklyMatchups[matchup.week]) {
+        weeklyMatchups[matchup.week] = [];
+      }
+      weeklyMatchups[matchup.week].push(matchup);
+    });
+    
+    // Find highest scorer for each completed week
+    Object.keys(weeklyMatchups).forEach(week => {
+      const weekMatchups = weeklyMatchups[week];
+      let highestScore = 0;
+      let winnerData = null;
+      
+      weekMatchups.forEach(matchup => {
+        // Check team1 score
+        if (matchup.team1Score > highestScore) {
+          highestScore = matchup.team1Score;
+          winnerData = {
+            week: parseInt(week),
+            teamName: matchup.team1?.name || 'Unknown Team',
+            score: matchup.team1Score
+          };
+        }
+        
+        // Check team2 score
+        if (matchup.team2Score > highestScore) {
+          highestScore = matchup.team2Score;
+          winnerData = {
+            week: parseInt(week),
+            teamName: matchup.team2?.name || 'Unknown Team', 
+            score: matchup.team2Score
+          };
+        }
+      });
+      
+      if (winnerData && highestScore > 0) {
+        winners.push(winnerData);
+      }
+    });
+    
+    return winners.sort((a, b) => a.week - b.week);
   }
 
   renderEarningsChart() {
@@ -79,18 +169,27 @@ export class MoneyBoard {
     
     if (!teams || teams.length === 0) {
       console.log('MoneyBoard: No teams data available for chart');
-      // Display empty state message in canvas area
+      // Display loading state message in canvas area
       const ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = '#00FFFF';
       ctx.font = '16px Orbitron';
       ctx.textAlign = 'center';
-      ctx.fillText('No earnings data available', canvas.width / 2, canvas.height / 2);
+      ctx.fillText('Loading team earnings data...', canvas.width / 2, canvas.height / 2);
       return;
     }
 
     const teamNames = teams.map(team => team.name || 'Unknown Team');
-    const earnings = teams.map(team => team.earnings || 0);
+    // For 2025 season, earnings will be 0 until prizes are awarded
+    // For historical seasons, earnings would come from stored data
+    const earnings = teams.map(team => {
+      // Early 2025 season - no earnings yet, but show 0 instead of undefined
+      const currentYear = this.state.getCurrentYear();
+      if (currentYear === 2025) {
+        return team.earnings || 0; // All will be 0 for early season
+      }
+      return team.earnings || 0;
+    });
     
     console.log('MoneyBoard: Rendering chart with', teams.length, 'teams, earnings:', earnings);
 

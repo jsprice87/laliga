@@ -69,22 +69,10 @@ export class DataService {
         return processedData;
       }
       
-      // If no data or countdown status, return null for 2025
-      if (year === 2025) {
-        this.logger.info('No live data for 2025, season not started');
-        return null;
-      }
-      
       throw new Error('No live data available');
       
     } catch (error) {
       this.logger.error(`Failed to load live data for ${year}:`, error);
-      
-      // For 2025, this is expected (season not started)
-      if (year === 2025) {
-        return null;
-      }
-      
       throw error;
     }
   }
@@ -478,27 +466,43 @@ export class DataService {
     console.log('Processing matchups data:', data);
     const matchups = data.matchups || [];
     
+    // Get teams data for name lookups
+    const teams = this.state.getTeams();
+    const teamNameMap = {};
+    teams.forEach(team => {
+      teamNameMap[team.id] = team.name;
+    });
+    console.log('Team name map created with', Object.keys(teamNameMap).length, 'teams');
+    
     const processedMatchups = matchups.map(matchup => {
       console.log('Processing individual matchup:', matchup);
       
+      // Handle ESPN format (away/home) vs expected format (team1/team2)
+      const away = matchup.away;
+      const home = matchup.home;
+      
+      // Extract team info and scores from ESPN structure
+      const team1Info = {
+        id: away?.teamId,
+        name: teamNameMap[away?.teamId] || `Team ${away?.teamId}`,
+        score: away?.totalPoints || 0
+      };
+      
+      const team2Info = {
+        id: home?.teamId,
+        name: teamNameMap[home?.teamId] || `Team ${home?.teamId}`,
+        score: home?.totalPoints || 0
+      };
+      
       const processed = {
-        ...matchup,
-        id: matchup.id || `${matchup.week}-${matchup.team1?.id}-${matchup.team2?.id}`,
-        week: matchup.week || 1,
-        team1: {
-          ...matchup.team1,
-          // Extract score from different possible locations
-          score: matchup.team1?.score || 0
-        },
-        team2: {
-          ...matchup.team2,
-          // Extract score from different possible locations  
-          score: matchup.team2?.score || 0
-        },
+        id: matchup.id || `${matchup.matchupPeriodId}-${team1Info.id}-${team2Info.id}`,
+        week: matchup.matchupPeriodId || 1,
+        team1: team1Info,
+        team2: team2Info,
         // Also store scores at top level for backward compatibility
-        team1Score: matchup.team1?.score || 0,
-        team2Score: matchup.team2?.score || 0,
-        status: matchup.status || 'scheduled'
+        team1Score: team1Info.score,
+        team2Score: team2Info.score,
+        status: matchup.winner ? 'final' : 'scheduled'
       };
       
       console.log('Processed matchup:', processed);

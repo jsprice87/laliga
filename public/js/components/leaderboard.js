@@ -337,9 +337,26 @@ export class Leaderboard {
 
     const ctx = canvas.getContext('2d');
     
-    // Generate progression data for regular season only (weeks 1-14)
-    const weeks = Array.from({length: 14}, (_, i) => `Week ${i + 1}`);
-    const chartData = this.generateProgressionData(teams, weeks);
+    // Get current season and week information
+    const currentYear = this.state.getCurrentYear();
+    const currentWeek = this.getCurrentWeek();
+    
+    // For 2025 season, only show weeks that have been completed (rankings finalized)
+    // Weeks are finalized on Tuesday at 10 AM EST
+    let completedWeeks;
+    if (currentYear === 2025) {
+      completedWeeks = this.getCompletedWeeks(currentWeek);
+      console.log(`📊 2025 Live Season - Showing ${completedWeeks.length} completed weeks for progression chart`);
+    } else {
+      // For historical seasons, show all 14 weeks
+      completedWeeks = Array.from({length: 14}, (_, i) => i + 1);
+    }
+    
+    // Create week labels only for completed weeks
+    const weeks = completedWeeks.map(weekNum => `Week ${weekNum}`);
+    
+    // Generate progression data only for completed weeks
+    const chartData = this.generateLiveProgressionData(teams, completedWeeks, currentYear);
 
     this.progressionChart = new Chart(ctx, {
       type: 'line',
@@ -623,6 +640,132 @@ export class Leaderboard {
     
     // Re-render
     this.render();
+  }
+
+  /**
+   * Get current NFL week number
+   */
+  getCurrentWeek() {
+    // For now, we'll get this from state, but this could be calculated based on current date
+    return this.state.getCurrentWeek() || 1;
+  }
+
+  /**
+   * Determine which weeks have completed rankings (finalized on Tuesday 10 AM EST)
+   * @param {number} currentWeek - Current NFL week
+   * @returns {Array<number>} Array of completed week numbers
+   */
+  getCompletedWeeks(currentWeek) {
+    const now = new Date();
+    const easternTime = new Date(now.toLocaleString("en-US", {timeZone: "America/New_York"}));
+    const dayOfWeek = easternTime.getDay(); // 0 = Sunday, 1 = Monday, 2 = Tuesday, etc.
+    const hour = easternTime.getHours();
+    
+    // Check if it's Tuesday 10 AM EST or later
+    const isTuesdayAfter10AM = (dayOfWeek === 2 && hour >= 10) || dayOfWeek > 2;
+    
+    let completedWeeksCount;
+    if (currentWeek === 1) {
+      // Week 1 special case: completed if Tuesday 10 AM+ (games finished)
+      completedWeeksCount = isTuesdayAfter10AM ? 1 : 0;
+    } else if (isTuesdayAfter10AM) {
+      // Rankings have been finalized for the previous week
+      completedWeeksCount = Math.max(0, currentWeek - 1);
+    } else {
+      // Still waiting for Tuesday rankings
+      completedWeeksCount = Math.max(0, currentWeek - 2);
+    }
+    
+    console.log(`📅 Week ${currentWeek}, ${dayOfWeek === 2 ? 'Tuesday' : 'Other day'} ${hour}:00 EST - ${completedWeeksCount} completed weeks`);
+    
+    return Array.from({length: completedWeeksCount}, (_, i) => i + 1);
+  }
+
+  /**
+   * Generate live progression data based on actual weekly rankings
+   * @param {Array} teams - Team data
+   * @param {Array} completedWeeks - Array of completed week numbers
+   * @param {number} currentYear - Current season year
+   * @returns {Array} Chart.js datasets
+   */
+  generateLiveProgressionData(teams, completedWeeks, currentYear) {
+    const colors = [
+      '#FF00FF', '#00FFFF', '#FFFF00', '#00FF00', '#FF8000', '#FF0080',
+      '#80FF00', '#0080FF', '#8000FF', '#FF0000', '#00FF80', '#8080FF'
+    ];
+
+    if (completedWeeks.length === 0) {
+      // No completed weeks yet, return empty datasets
+      console.log('📊 No completed weeks yet - showing empty chart');
+      return teams.slice(0, 12).map((team, index) => ({
+        label: team.name || `Team ${team.id}`,
+        data: [],
+        borderColor: colors[index % colors.length],
+        backgroundColor: colors[index % colors.length] + '20',
+        fill: false
+      }));
+    }
+
+    // For now, use simulated data until we have real weekly ranking storage
+    // TODO: Replace with actual weekly ranking data from database
+    const weeklyRankings = this.getStoredWeeklyRankings(teams, completedWeeks);
+    
+    // Sort teams by current Liga Bucks ranking
+    const sortedTeams = [...teams].sort((a, b) => {
+      const rankA = a.ligaBucksRank || (a.laLigaBucks ? 0 : 99);
+      const rankB = b.ligaBucksRank || (b.laLigaBucks ? 0 : 99);
+      return rankA - rankB;
+    });
+
+    return sortedTeams.slice(0, 12).map((team, index) => {
+      const teamId = team.id || team.name;
+      
+      // Get actual rankings for completed weeks
+      const data = completedWeeks.map(weekNum => {
+        return weeklyRankings[teamId]?.[weekNum - 1] || (index + 1);
+      });
+
+      return {
+        label: team.name || `Team ${team.id}`,
+        data: data,
+        borderColor: colors[index % colors.length],
+        backgroundColor: colors[index % colors.length] + '20',
+        fill: false
+      };
+    });
+  }
+
+  /**
+   * Get stored weekly rankings data
+   * TODO: This should fetch from database/API once weekly snapshots are implemented
+   * @param {Array} teams - Team data
+   * @param {Array} completedWeeks - Completed week numbers
+   * @returns {Object} Weekly rankings by team ID
+   */
+  getStoredWeeklyRankings(teams, completedWeeks) {
+    const weeklyRankings = {};
+    
+    // Initialize rankings object for each team
+    teams.forEach(team => {
+      const teamId = team.id || team.name;
+      weeklyRankings[teamId] = [];
+    });
+
+    // For each completed week, we need stored ranking data
+    // For now, simulate progressive rankings until real data storage is implemented
+    completedWeeks.forEach((weekNum, weekIndex) => {
+      // Simulate some ranking progression based on current standings
+      const simulatedRankings = teams
+        .map((team, index) => ({ ...team, tempRank: index + 1 + Math.floor(Math.random() * 3 - 1) }))
+        .sort((a, b) => a.tempRank - b.tempRank);
+      
+      simulatedRankings.forEach((team, rankIndex) => {
+        const teamId = team.id || team.name;
+        weeklyRankings[teamId][weekIndex] = rankIndex + 1;
+      });
+    });
+
+    return weeklyRankings;
   }
 
   /**

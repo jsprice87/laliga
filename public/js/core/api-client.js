@@ -136,7 +136,7 @@ export class APIClient {
    * Get live teams data
    */
   async getTeamsLive(week, year) {
-    return this.get('/api/teams/live', { week, season: year });
+    return this.get('/api/teams', { week, season: year, live: true });
   }
 
   /**

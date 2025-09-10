@@ -68,7 +68,7 @@ export class Matchups {
     }
   }
 
-  render() {
+  async render() {
     const container = document.getElementById('matchups-grid');
     if (!container) return;
 
@@ -82,13 +82,31 @@ export class Matchups {
     console.log('All matchups in state:', allMatchups);
     
     // Get matchups for specific week
-    const matchups = this.state.getMatchupsForWeek(this.currentWeek);
-    console.log(`Matchups for week ${this.currentWeek}:`, matchups);
+    let matchups = this.state.getMatchupsForWeek(this.currentWeek);
     console.log(`Found ${matchups.length} matchups for week ${this.currentWeek}`);
     
+    // If no matchups exist for current week, try to load them
+    if (matchups.length === 0 && allMatchups.length === 0) {
+      console.log(`🔄 No matchups in state, loading for week ${this.currentWeek}...`);
+      console.groupEnd();
+      
+      // Show loading state
+      container.innerHTML = '<div class="empty-state"><div class="empty-message">Loading matchups...</div></div>';
+      
+      // Load matchups data
+      await this.loadMatchupsForWeek(this.currentWeek);
+      
+      // Get matchups again after loading
+      matchups = this.state.getMatchupsForWeek(this.currentWeek);
+      
+      // Re-start logging group
+      console.group(`🏈 MATCHUPS DEBUG - After Load - Week ${this.currentWeek}`);
+      console.log(`After loading: Found ${matchups.length} matchups for week ${this.currentWeek}`);
+    }
+    
     if (matchups.length === 0) {
-      console.warn(`❌ No matchups found for week ${this.currentWeek}`);
-      console.log('Available weeks in data:', [...new Set(allMatchups.map(m => m.week))].sort());
+      console.warn(`❌ Still no matchups found for week ${this.currentWeek}`);
+      console.log('Available weeks in data:', [...new Set(this.state.getMatchups().map(m => m.week))].sort());
       console.groupEnd();
       container.innerHTML = '<div class="empty-state"><div class="empty-message">No matchups available for this week</div></div>';
       return;
@@ -253,9 +271,9 @@ export class Matchups {
         return {
           source: 'live',
           status: 'LIVE',
-          displayText: 'SEASON NOT STARTED',
-          dotClass: 'pending',
-          indicatorClass: 'pending'
+          displayText: 'LIVE SEASON ACTIVE',
+          dotClass: 'live',
+          indicatorClass: 'live'
         };
       } else {
         return {

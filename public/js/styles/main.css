@@ -569,3 +569,64 @@
     padding: 0 2px;
   }
 }
+
+/* Live Indicator Status Styles */
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.live-dot.live {
+  background: var(--game-green);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.live-dot.pending {
+  background: var(--game-cyan);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.live-dot.scheduled {
+  background: var(--game-pink);
+}
+
+.live-dot.final {
+  background: var(--game-text-muted);
+}
+
+.live-indicator.live {
+  background: rgba(69, 237, 111, 0.1);
+  border: 1px solid rgba(69, 237, 111, 0.3);
+  color: var(--game-green);
+}
+
+.live-indicator.pending {
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: var(--game-cyan);
+}
+
+.live-indicator.scheduled {
+  background: rgba(255, 105, 180, 0.1);
+  border: 1px solid rgba(255, 105, 180, 0.3);
+  color: var(--game-pink);
+}
+
+.live-indicator.final {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--game-text-muted);
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 0.5; 
+    transform: scale(1.2); 
+  }
+}

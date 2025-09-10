@@ -160,8 +160,11 @@ class LaLigaApp {
   async loadInitialData() {
     const currentYear = this.state.getCurrentYear();
     
+    // Clear data cache to force fresh data load
+    this.dataService.clearCache();
+    
     if (currentYear === 2025) {
-      // For 2025, show zeros if no data exists
+      // Load live 2025 season data
       await this.loadCurrentSeasonData();
     } else {
       // Load historical data for other years
@@ -173,23 +176,34 @@ class LaLigaApp {
   }
 
   /**
-   * Load current season data (2025) with zero fallbacks
+   * Load current season data (2025) - LIVE SEASON ACTIVE
    */
   async loadCurrentSeasonData() {
     try {
+      console.log('🏈 LOADING LIVE 2025 SEASON DATA...');
       const data = await this.dataService.loadLiveData(2025);
       
+      console.log('🏈 RECEIVED 2025 DATA:', data);
+      
       if (data && data.teams && data.teams.length > 0) {
+        console.log('✅ 2025 LIVE DATA LOADED - Teams:', data.teams.length);
         this.state.setTeams(data.teams);
         this.state.setMatchups(data.matchups || []);
         this.state.setCurrentWeek(data.currentWeek || 1);
+        
+        // Update header to show live season
+        this.updateHeaderForLiveSeason();
+        
+        // Force refresh all components with new live data
+        this.refreshAllComponents();
       } else {
-        // No data for 2025 - show zeros
+        console.log('❌ No 2025 data found, showing season not started');
         this.showSeasonNotStarted();
       }
       
     } catch (error) {
-      this.logger.warn('No live data available for 2025, showing season not started state');
+      console.error('❌ Error loading 2025 data:', error);
+      this.logger.error('Error loading live data for 2025:', error);
       this.showSeasonNotStarted();
     }
   }
@@ -203,11 +217,18 @@ class LaLigaApp {
     this.state.setMatchups([]);
     this.state.setCurrentWeek(1);
     
-    // Update UI to show "season not started" indicators
-    this.updateSeasonStatus('SEASON NOT STARTED');
+    // Update UI to show live season status
+    this.updateSeasonStatus('LIVE SEASON ACTIVE');
     
     // Update banners with historical data (should show regardless of current season status)
     this.bannerService.updateBanners();
+  }
+
+  /**
+   * Update header for live season
+   */
+  updateHeaderForLiveSeason() {
+    this.updateSeasonStatus('LIVE SEASON ACTIVE');
   }
 
   /**
@@ -493,7 +514,7 @@ class LaLigaApp {
   /**
    * Show specific section
    */
-  showSection(sectionId) {
+  async showSection(sectionId) {
     // Hide all sections
     document.querySelectorAll('.content-section').forEach(section => {
       section.classList.remove('active');
@@ -509,19 +530,19 @@ class LaLigaApp {
     this.components.navigation.setActiveSection(sectionId);
     
     // Render section content
-    this.renderSection(sectionId);
+    await this.renderSection(sectionId);
   }
 
   /**
    * Render specific section content
    */
-  renderSection(sectionId) {
+  async renderSection(sectionId) {
     switch (sectionId) {
       case 'dashboard':
         this.components.leaderboard.render();
         break;
       case 'matchups':
-        this.components.matchups.render();
+        await this.components.matchups.render();
         break;
       case 'teams':
         this.components.teams.render();

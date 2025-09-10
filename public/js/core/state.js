@@ -76,6 +76,42 @@ export class AppState {
   }
 
   /**
+   * Get current NFL week - for live 2025 season
+   */
+  getCurrentWeek() {
+    if (this.data.currentYear === 2025) {
+      // Calculate current NFL week based on season start
+      return this.calculateCurrentNFLWeek();
+    }
+    return this.data.league.currentWeek;
+  }
+
+  /**
+   * Calculate current NFL week based on date
+   * NFL 2025 season starts September 4th, 2025
+   */
+  calculateCurrentNFLWeek() {
+    const now = new Date();
+    const seasonStart = new Date('2025-09-04T00:00:00-04:00'); // September 4th, 2025 EST
+    
+    if (now < seasonStart) {
+      return 1; // Season hasn't started yet
+    }
+    
+    // Calculate weeks since season start
+    const timeDiff = now - seasonStart;
+    const daysSinceStart = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const weeksSinceStart = Math.floor(daysSinceStart / 7);
+    
+    // NFL weeks are 1-18 (regular season weeks 1-17 + playoffs)
+    const currentWeek = Math.min(weeksSinceStart + 1, 18);
+    
+    console.log(`📅 NFL Week Calculator: ${daysSinceStart} days since season start = Week ${currentWeek}`);
+    
+    return currentWeek;
+  }
+
+  /**
    * Set current year
    */
   setCurrentYear(year) {
@@ -151,9 +187,9 @@ export class AppState {
   }
 
   /**
-   * Get current week
+   * Get league current week (fallback for historical data)
    */
-  getCurrentWeek() {
+  getLeagueCurrentWeek() {
     return this.data.league.currentWeek;
   }
 

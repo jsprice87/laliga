@@ -76,7 +76,7 @@ export class Header {
       const span = liveIndicator.querySelector('span:last-child');
       if (span) {
         if (year === 2025) {
-          span.textContent = 'SEASON NOT STARTED';
+          span.textContent = 'LIVE SEASON ACTIVE';
         } else {
           span.textContent = 'SEASON COMPLETE';
         }
