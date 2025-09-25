@@ -25,13 +25,37 @@ export class Navigation {
    */
   setupEventListeners() {
     const navButtons = document.querySelectorAll('.nav-button');
-    
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    // Mobile menu toggle
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      });
+    }
+
     navButtons.forEach(button => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
         const sectionId = button.getAttribute('data-tab');
         this.navigateToSection(sectionId);
+
+        // Close mobile menu after navigation
+        if (window.innerWidth <= 768) {
+          navMenu.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
+        }
       });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.main-nav') && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+      }
     });
   }
 
