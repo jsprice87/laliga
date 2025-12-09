@@ -41,8 +41,9 @@ export class PlayoffBracket {
       return;
     }
 
-    // Sort teams by playoff seed (1-6 for champions bracket)
-    const sortedTeams = [...teams].sort((a, b) => (a.playoffSeed || 13) - (b.playoffSeed || 13));
+    // Sort teams by La Liga Bucks (leaderboard ranking: 50% ESPN + 50% Points For)
+    // This is the correct playoff seeding - NOT ESPN rank alone
+    const sortedTeams = this.sortByLeaderboardRank(teams);
     const championTeams = sortedTeams.slice(0, 6); // Top 6 teams
 
     const bracketHTML = `
@@ -90,8 +91,9 @@ export class PlayoffBracket {
       return;
     }
 
-    // Sort teams by playoff seed (get bottom 6 teams)
-    const sortedTeams = [...teams].sort((a, b) => (a.playoffSeed || 13) - (b.playoffSeed || 13));
+    // Sort teams by La Liga Bucks (leaderboard ranking: 50% ESPN + 50% Points For)
+    // This is the correct playoff seeding - NOT ESPN rank alone
+    const sortedTeams = this.sortByLeaderboardRank(teams);
     const sackoTeams = sortedTeams.slice(6, 12); // Teams ranked 7-12
 
     const bracketHTML = `
@@ -152,11 +154,15 @@ export class PlayoffBracket {
       return '<div class="no-bracket-data">Semifinals TBD</div>';
     }
 
+    // Use leaderboardRank for display
+    const seed1 = teams[0]?.leaderboardRank || 1;
+    const seed2 = teams[1]?.leaderboardRank || 2;
+
     return `
       <div class="tournament-matchup semifinal">
         <div class="matchup-teams">
           <div class="team-slot winner">
-            <span class="seed">#1</span>
+            <span class="seed">#${seed1}</span>
             <span class="team-name">${teams[0]?.name || 'TBD'}</span>
             <span class="bye-tag">BYE</span>
           </div>
@@ -170,7 +176,7 @@ export class PlayoffBracket {
       <div class="tournament-matchup semifinal">
         <div class="matchup-teams">
           <div class="team-slot winner">
-            <span class="seed">#2</span>
+            <span class="seed">#${seed2}</span>
             <span class="team-name">${teams[1]?.name || 'TBD'}</span>
             <span class="bye-tag">BYE</span>
           </div>
@@ -205,30 +211,38 @@ export class PlayoffBracket {
   }
 
   /**
-   * Generate Sacko Wild Card round (seeds 10v11, 9v12 get auto-advance)
+   * Generate Sacko Wild Card round (7v10, 8v9, seeds 11 and 12 get bye)
    */
   generateSackoWildCard(teams) {
     if (teams.length < 6) {
       return '<div class="no-bracket-data">Not enough teams for sacko bracket</div>';
     }
 
-    // Teams ranked 7-12, so index 3 = seed 10, index 4 = seed 11
-    const matchup = { team1: teams[3], team2: teams[4] }; // 10 vs 11
+    // Teams ranked 7-12 (sackoTeams slice), so:
+    // index 0 = seed 7, index 1 = seed 8, index 2 = seed 9,
+    // index 3 = seed 10, index 4 = seed 11, index 5 = seed 12
+    const matchup1 = { team1: teams[0], team2: teams[3] }; // 7 vs 10
+    const matchup2 = { team1: teams[1], team2: teams[2] }; // 8 vs 9
+
+    // Use leaderboardRank for display - seeds 11 and 12 get bye (worst teams auto-advance)
+    const seed11 = teams[4]?.leaderboardRank || 11;
+    const seed12 = teams[5]?.leaderboardRank || 12;
 
     return `
-      ${this.createTournamentMatchup(matchup.team1, matchup.team2, 'sacko')}
+      ${this.createTournamentMatchup(matchup1.team1, matchup1.team2, 'sacko')}
+      ${this.createTournamentMatchup(matchup2.team1, matchup2.team2, 'sacko')}
       <div class="tournament-matchup bye-advance">
-        <div class="auto-advance-header">AUTO-ADVANCE</div>
+        <div class="auto-advance-header">BYE WEEK</div>
         <div class="matchup-teams">
           <div class="team-slot advance">
-            <span class="seed">#9</span>
-            <span class="team-name">${teams[2]?.name || 'TBD'}</span>
-            <span class="bye-tag">AUTO</span>
+            <span class="seed">#${seed11}</span>
+            <span class="team-name">${teams[4]?.name || 'TBD'}</span>
+            <span class="bye-tag">BYE</span>
           </div>
           <div class="team-slot advance">
-            <span class="seed">#12</span>
+            <span class="seed">#${seed12}</span>
             <span class="team-name">${teams[5]?.name || 'TBD'}</span>
-            <span class="bye-tag">AUTO</span>
+            <span class="bye-tag">BYE</span>
           </div>
         </div>
       </div>
@@ -243,11 +257,15 @@ export class PlayoffBracket {
       return '<div class="no-bracket-data">Sacko Semifinal TBD</div>';
     }
 
+    // Use leaderboardRank for display
+    const seed7 = teams[0]?.leaderboardRank || 7;
+    const seed8 = teams[1]?.leaderboardRank || 8;
+
     return `
       <div class="tournament-matchup semifinal">
         <div class="matchup-teams">
           <div class="team-slot">
-            <span class="seed">#7</span>
+            <span class="seed">#${seed7}</span>
             <span class="team-name">${teams[0]?.name || 'TBD'}</span>
           </div>
           <div class="vs-divider">VS</div>
@@ -260,7 +278,7 @@ export class PlayoffBracket {
       <div class="tournament-matchup semifinal">
         <div class="matchup-teams">
           <div class="team-slot">
-            <span class="seed">#8</span>
+            <span class="seed">#${seed8}</span>
             <span class="team-name">${teams[1]?.name || 'TBD'}</span>
           </div>
           <div class="vs-divider">VS</div>
@@ -299,8 +317,9 @@ export class PlayoffBracket {
   createTournamentMatchup(team1, team2, bracketType = 'champions') {
     const team1Name = team1?.name || 'TBD';
     const team2Name = team2?.name || 'TBD';
-    const team1Seed = team1?.playoffSeed || '?';
-    const team2Seed = team2?.playoffSeed || '?';
+    // Use leaderboardRank (La Liga Bucks rank) NOT playoffSeed (ESPN rank)
+    const team1Seed = team1?.leaderboardRank || '?';
+    const team2Seed = team2?.leaderboardRank || '?';
 
     return `
       <div class="tournament-matchup ${bracketType}">
@@ -325,6 +344,37 @@ export class PlayoffBracket {
    */
   createBracketMatchup(team1, team2, isSacko = false) {
     return this.createTournamentMatchup(team1, team2, isSacko ? 'sacko' : 'champions');
+  }
+
+  /**
+   * Sort teams by leaderboard rank (La Liga Bucks)
+   * This is the correct ranking: 50% ESPN Rank + 50% Points For
+   * Tiebreaker: Total Points For
+   */
+  sortByLeaderboardRank(teams) {
+    return [...teams].sort((a, b) => {
+      // Get La Liga Bucks value (handle both object and number formats)
+      const getBucks = (team) => {
+        if (typeof team.laLigaBucks === 'object' && team.laLigaBucks !== null) {
+          return team.laLigaBucks.total || 0;
+        }
+        return team.laLigaBucks || 0;
+      };
+
+      const bucksA = getBucks(a);
+      const bucksB = getBucks(b);
+
+      // Primary sort: La Liga Bucks (higher is better)
+      if (bucksB !== bucksA) {
+        return bucksB - bucksA;
+      }
+
+      // Tiebreaker: Total Points For (higher is better)
+      return (b.totalPoints || 0) - (a.totalPoints || 0);
+    }).map((team, index) => ({
+      ...team,
+      leaderboardRank: index + 1  // Assign rank based on sorted position
+    }));
   }
 
   /**

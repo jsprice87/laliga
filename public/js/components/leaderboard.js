@@ -11,6 +11,25 @@ export class Leaderboard {
     this.dataService = dataService;
     this.logger = new Logger('Leaderboard');
     this.currentSortCriteria = 'bucks';
+    this.isMobile = this.checkMobile();
+
+    // Update mobile state on resize
+    window.addEventListener('resize', () => {
+      const wasMobile = this.isMobile;
+      this.isMobile = this.checkMobile();
+
+      // Re-render if mobile state changed
+      if (wasMobile !== this.isMobile) {
+        this.render();
+      }
+    });
+  }
+
+  /**
+   * Check if device is mobile
+   */
+  checkMobile() {
+    return window.innerWidth <= 768;
   }
 
   /**

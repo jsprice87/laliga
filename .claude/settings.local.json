@@ -50,7 +50,8 @@
       "Bash(rm:*)",
       "Bash(git log:*)",
       "Read(//private/tmp/**)",
-      "Bash(git tag:*)"
+      "Bash(git tag:*)",
+      "Bash(lsof:*)"
     ],
     "deny": []
   }

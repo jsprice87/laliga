@@ -53,12 +53,15 @@
         <!-- Navigation -->
         <nav class="main-nav">
             <!-- Mobile Menu Toggle -->
-            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle"
+                    aria-label="Toggle navigation menu"
+                    aria-expanded="false"
+                    aria-controls="nav-menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            <div class="nav-menu" id="nav-menu">
+            <div class="nav-menu" id="nav-menu" role="navigation" aria-label="Main navigation">
                 <button class="nav-button active" data-tab="dashboard">
                     <span class="button-text">LEADERBOARD</span>
                 </button>

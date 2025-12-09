@@ -574,15 +574,20 @@
 .mobile-menu-toggle {
   display: none;
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 15px;
+  right: 15px;
   z-index: 1001;
   background: var(--game-bg-secondary);
   border: 2px solid var(--game-cyan);
-  border-radius: 8px;
-  padding: 12px;
+  border-radius: 0;
+  padding: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: 50px;
+  height: 50px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .mobile-menu-toggle:hover {
@@ -590,14 +595,18 @@
   box-shadow: 0 0 15px var(--game-cyan);
 }
 
+.mobile-menu-toggle:active {
+  transform: scale(0.95);
+}
+
 .hamburger-line {
   display: block;
-  width: 25px;
+  width: 28px;
   height: 3px;
   background: var(--game-cyan);
-  margin: 5px 0;
+  margin: 4px 0;
   transition: all 0.3s ease;
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 .mobile-menu-toggle:hover .hamburger-line {
@@ -605,7 +614,7 @@
 }
 
 .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
-  transform: rotate(45deg) translate(7px, 7px);
+  transform: rotate(45deg) translate(8px, 8px);
 }
 
 .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
@@ -613,34 +622,73 @@
 }
 
 .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -7px);
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+/* Tablet Adjustments */
+@media (max-width: 1024px) {
+  .dashboard-layout {
+    gap: var(--game-space-lg);
+  }
+
+  .trophy-showcase {
+    min-width: 300px;
+  }
+
+  .large-trophy {
+    width: 280px;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--game-space-base);
+  }
+
+  .sort-controls, .matchups-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
 /* Mobile Navigation Overlay */
 @media (max-width: 768px) {
+  /* Prevent horizontal scroll on entire page */
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+
+  body {
+    position: relative;
+  }
+
   .mobile-menu-toggle {
-    display: block;
+    display: flex;
   }
 
   .main-nav {
     position: relative;
+    top: 0;
+    border-bottom: none;
   }
 
   .nav-menu {
     position: fixed;
     top: 0;
-    right: -300px;
-    width: 280px;
+    right: -100%;
+    width: 85%;
+    max-width: 320px;
     height: 100vh;
     background: var(--game-bg-primary);
-    border-left: 2px solid var(--game-cyan);
+    border-left: 3px solid var(--game-cyan);
     flex-direction: column;
     padding: 80px 20px 20px;
-    gap: 10px;
-    transition: right 0.3s ease;
+    gap: 12px;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
     overflow-y: auto;
-    box-shadow: -5px 0 20px rgba(0, 255, 255, 0.2);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.7);
   }
 
   .nav-menu.active {
@@ -650,54 +698,564 @@
   .nav-button {
     width: 100%;
     border: 2px solid var(--game-cyan);
-    border-radius: 8px;
-    padding: 15px 20px;
+    border-radius: 0;
+    padding: 16px 20px;
     font-size: 14px;
     text-align: left;
     margin-bottom: 0;
+    margin-right: 0;
+    box-shadow: 2px 2px 0 var(--game-magenta);
   }
 
   .nav-button.active {
     background: var(--game-cyan);
     color: var(--game-bg-primary);
+    box-shadow: 3px 3px 0 var(--game-purple);
   }
 
-  /* Scrollable Tables */
-  .leaderboard-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin: 0 -20px;
-    padding: 0 20px;
+  .nav-button:hover {
+    transform: translateX(4px);
   }
 
-  .leaderboard-table {
-    min-width: 600px;
-  }
-
-  /* Sticky first column for better mobile UX */
-  .leaderboard-row > *:first-child {
-    position: sticky;
+  /* Overlay to close menu when clicking outside */
+  .nav-menu::before {
+    content: '';
+    position: fixed;
+    top: 0;
     left: 0;
-    background: var(--game-bg-primary);
-    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  .nav-menu.active::before {
+    opacity: 1;
+    pointer-events: all;
   }
 
   /* Header Layout Adjustments */
+  .header {
+    position: relative;
+    top: 0;
+  }
+
   .header-content {
     flex-direction: column;
-    gap: 20px;
-    padding: 20px;
+    gap: 16px;
+    padding: 16px;
   }
 
   .logo-section {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 15px;
+    gap: 12px;
+    width: 100%;
   }
 
   .game-logo {
-    margin-bottom: 10px;
+    flex-direction: column;
+    gap: var(--game-space-sm);
+  }
+
+  .main-trophy {
+    width: 70px;
+    height: 70px;
+  }
+
+  .logo-text {
+    font-size: 22px;
+    text-shadow:
+      2px 2px 0 var(--game-magenta),
+      4px 4px 0 var(--game-purple);
+  }
+
+  .logo-subtitle {
+    font-size: 11px;
+  }
+
+  .season-info {
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .year-selector, .week-selector {
+    flex: 1;
+    min-width: 140px;
+    justify-content: center;
+  }
+
+  /* Dashboard Layout */
+  .dashboard-layout {
+    display: block;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .trophy-showcase {
+    display: none;
+  }
+
+  /* Leaderboard Mobile Optimization - Card-based Layout */
+  .leaderboard-container {
+    border-width: 2px;
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .leaderboard-body {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+  }
+
+  /* Hide desktop table header on mobile */
+  .leaderboard-header {
+    display: none !important;
+  }
+
+  /* Convert rows to cards - OVERRIDE GRID */
+  .leaderboard-row {
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+    grid-template-columns: unset !important;
+    padding: 56px 16px 16px 16px !important;
+    gap: 0 !important;
+    border: 2px solid var(--game-purple) !important;
+    border-bottom: 2px solid var(--game-purple) !important;
+    margin-bottom: 12px !important;
+    background: var(--game-bg-secondary) !important;
+    box-shadow: 2px 2px 0 var(--game-magenta) !important;
+  }
+
+  .leaderboard-row:hover {
+    transform: none !important;
+    border-color: var(--game-cyan) !important;
+    box-shadow: 3px 3px 0 var(--game-cyan) !important;
+    background: var(--game-bg-secondary) !important;
+  }
+
+  .leaderboard-row:nth-child(odd) {
+    background: var(--game-bg-secondary) !important;
+  }
+
+  /* Reset all child divs */
+  .leaderboard-row > div {
+    position: static !important;
+    overflow: visible !important;
+    white-space: normal !important;
+  }
+
+  /* Top row: Rank + Team Info + Total Bucks */
+  .leaderboard-row > .rank-col {
+    position: absolute !important;
+    top: 12px !important;
+    left: 12px !important;
+    width: auto !important;
+  }
+
+  .rank-display {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .leaderboard-row > .team-col {
+    position: absolute !important;
+    top: 12px !important;
+    left: 60px !important;
+    right: 100px !important;
+    width: auto !important;
+  }
+
+  .team-info {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .team-logo {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .team-details {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .team-name {
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .team-owner {
+    font-size: 11px;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* Liga Bucks - Prominent display */
+  .leaderboard-row > .breakdown-col {
+    position: absolute !important;
+    top: 12px !important;
+    right: 12px !important;
+    text-align: center !important;
+    width: auto !important;
+  }
+
+  .total-bucks {
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .component-breakdown {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 4px;
+    justify-content: center;
+  }
+
+  .component-breakdown span {
+    font-size: 9px;
+    padding: 2px 4px;
+  }
+
+  /* Middle row: Record + Points in a horizontal layout */
+  .leaderboard-row > .record-col {
+    position: relative !important;
+    display: inline-flex !important;
+    width: auto !important;
+    margin-right: 16px;
+    margin-bottom: 8px;
+  }
+
+  .leaderboard-row > .points-col {
+    position: relative !important;
+    display: inline-flex !important;
+    width: auto !important;
+    margin-bottom: 8px;
+  }
+
+  .record-display {
+    gap: 6px;
+  }
+
+  .record-text {
+    font-size: 14px;
+  }
+
+  .points-display {
+    flex-direction: row !important;
+    gap: 6px;
+    align-items: baseline;
+  }
+
+  .points-value {
+    font-size: 16px;
+  }
+
+  .points-label {
+    font-size: 11px;
+  }
+
+  /* Power bar spans full width at bottom */
+  .power-bar-spanning {
+    position: relative !important;
+    padding: 0 !important;
+    margin-top: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .wide-power-bar {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .power-segments {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Chart Containers */
+  .progression-chart-container {
+    margin-top: var(--game-space-lg);
+  }
+
+  .chart-container {
+    padding: var(--game-space-base);
+    min-height: 300px;
+  }
+
+  /* Matchups Mobile */
+  .matchups-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .matchup-card {
+    padding: 16px;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .matchups-controls {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .week-selector {
+    width: 100%;
+  }
+
+  /* Teams Grid */
+  .teams-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .team-card {
+    padding: 16px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Money Board */
+  .money-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .prize-breakdown, .winners-list {
+    font-size: 13px;
+  }
+
+  /* Playoff Bracket Mobile */
+  .bracket-layout {
+    gap: var(--game-space-lg);
+  }
+
+  .bracket-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--game-space-base);
+  }
+
+  .tournament-bracket {
+    min-width: 700px;
+  }
+
+  .bracket-rounds {
+    gap: var(--game-space-base);
+  }
+
+  .tournament-round {
+    min-width: 180px;
+  }
+
+  .tournament-matchup {
+    width: 180px;
+    min-width: 180px;
+    max-width: 180px;
+    padding: var(--game-space-sm);
+  }
+
+  /* Rules Cards */
+  .rules-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .rule-card {
+    padding: 16px;
+  }
+
+  .rule-content {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* Modal Responsiveness */
+  .modal-overlay {
+    padding: 16px;
+  }
+
+  .modal-content {
+    width: 100%;
+    max-width: 100%;
+    height: calc(100vh - 32px);
+    margin: 0;
+    border-radius: 0;
+    border-width: 2px;
+  }
+
+  .modal-body {
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 16px;
+  }
+
+  .modal-header {
+    padding: 12px;
+  }
+
+  .close-modal {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    min-height: 48px;
+  }
+
+  /* Touch Target Enhancements */
+  button {
+    min-height: 48px;
+    padding: 12px 16px;
+  }
+
+  .game-select, .game-input {
+    min-height: 48px;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  select.form-control, .form-control {
+    min-height: 48px;
+    font-size: 14px;
+  }
+
+  /* Content Section Spacing */
+  .content-section {
+    padding: 16px;
+    overflow-x: hidden;
+  }
+
+  .main-content {
+    padding: var(--game-space-lg) var(--game-space-sm);
+    overflow-x: hidden;
+  }
+
+  .app-container {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  .section-header {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: var(--game-space-lg);
+    align-items: flex-start;
+  }
+
+  .section-title {
+    font-size: 18px;
+    text-shadow:
+      1px 1px 0 var(--game-magenta),
+      2px 2px 0 var(--game-purple);
+  }
+
+  .title-trophy {
+    width: 16px;
+    height: 16px;
+  }
+
+  .sort-controls {
+    width: 100%;
+    padding: 8px 12px;
+  }
+
+  .sort-controls label {
+    font-size: 11px;
+  }
+
+  /* Banner Adjustments */
+  .banner-top, .banner-bottom {
+    font-size: 11px;
+    padding: 6px 0;
+  }
+
+  .banner-text {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .banner-trophy {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Power Bar Mobile Optimization */
+  .power-bar-spanning {
+    padding: 0 var(--game-space-sm) var(--game-space-xs);
+    margin-top: var(--game-space-xs);
+  }
+
+  .power-segments {
+    height: 20px;
+  }
+
+  .segment-label {
+    font-size: 8px;
+    padding: 0 3px;
+  }
+
+  /* Game Panels */
+  .game-panel {
+    border-width: 2px;
+    box-shadow: 1px 1px 0 var(--game-magenta);
+  }
+
+  .panel-header {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .panel-trophy {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Small Mobile Adjustments (iPhone SE, small phones) */
+@media (max-width: 480px) {
+  .mobile-menu-toggle {
+    top: 10px;
+    right: 10px;
+    width: 46px;
+    height: 46px;
+    padding: 8px;
+  }
+
+  .hamburger-line {
+    width: 24px;
+  }
+
+  .header-content {
+    padding: 12px;
   }
 
   .main-trophy {
@@ -706,161 +1264,178 @@
   }
 
   .logo-text {
-    font-size: 24px;
+    font-size: 18px;
+    text-shadow:
+      1px 1px 0 var(--game-magenta),
+      2px 2px 0 var(--game-purple);
   }
 
   .logo-subtitle {
     font-size: 10px;
   }
 
-  .season-info {
-    flex-direction: row;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  /* Dashboard Layout */
-  .dashboard-layout {
-    display: block;
-  }
-
-  .trophy-showcase {
-    display: none;
-  }
-
-  /* Matchup Cards */
-  .matchups-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .matchup-card {
-    padding: 15px;
-  }
-
-  /* Teams Grid */
-  .teams-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  /* Money Board */
-  .money-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* Modal Responsiveness */
-  .modal-overlay {
-    padding: 20px;
-  }
-
-  .modal-content {
-    width: 100%;
-    max-width: 100%;
-    height: calc(100vh - 40px);
-    margin: 0;
-    border-radius: 12px;
-  }
-
-  .modal-body {
-    max-height: calc(100vh - 140px);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .close-modal {
-    width: 44px;
-    height: 44px;
-    font-size: 24px;
-  }
-
-  /* Touch Target Enhancements */
-  button, .nav-button, .form-control, select {
-    min-height: 44px;
-    padding: 12px 16px;
-  }
-
-  .sort-controls select {
-    min-height: 44px;
-    font-size: 14px;
-  }
-
-  /* Improved Spacing */
-  .content-section {
-    padding: 20px;
-  }
-
-  .section-header {
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-
-  .section-title {
-    font-size: 20px;
-  }
-
-  /* Playoff Bracket Mobile */
-  .bracket-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .bracket-tree {
-    min-width: 600px;
-  }
-
-  /* Rules Cards */
-  .rules-container {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .rule-card {
-    padding: 15px;
-  }
-
-  /* Banner Adjustments */
-  .banner-top, .banner-bottom {
-    font-size: 12px;
-    padding: 8px 10px;
-  }
-
-  .banner-text {
-    animation: scroll 15s linear infinite;
-  }
-}
-
-/* Small Mobile Adjustments */
-@media (max-width: 480px) {
-  .main-trophy {
-    width: 50px;
-    height: 50px;
-  }
-
-  .logo-text {
-    font-size: 20px;
-  }
-
-  .nav-button {
-    padding: 12px 15px;
-    font-size: 13px;
-  }
-
-  .leaderboard-row {
+  .year-selector, .week-selector {
+    min-width: 120px;
+    padding: 6px 10px;
     font-size: 11px;
   }
 
+  .nav-menu {
+    width: 90%;
+    max-width: 280px;
+    padding: 70px 16px 16px;
+  }
+
+  .nav-button {
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .title-trophy {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Small mobile uses same card layout, just slightly smaller */
+  .leaderboard-row {
+    padding: 52px 14px 14px 14px !important;
+  }
+
+  .rank-display {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .leaderboard-row > .team-col {
+    left: 56px !important;
+    right: 90px !important;
+  }
+
+  .team-logo {
+    width: 28px;
+    height: 28px;
+  }
+
+  .team-name {
+    font-size: 13px;
+  }
+
+  .team-owner {
+    font-size: 10px;
+  }
+
+  .record-text {
+    font-size: 13px;
+  }
+
+  .points-value {
+    font-size: 15px;
+  }
+
+  .total-bucks {
+    font-size: 22px;
+  }
+
+  .component-breakdown span {
+    font-size: 8px;
+    padding: 2px 3px;
+  }
+
+  .power-segments {
+    height: 18px;
+  }
+
+  .segment-label {
+    font-size: 7px;
+    padding: 0 2px;
+  }
+
   .matchup-card {
+    padding: 12px;
     font-size: 12px;
   }
 
   .team-card {
     padding: 12px;
+    font-size: 12px;
   }
 
   .content-section {
-    padding: 15px;
+    padding: 12px;
+  }
+
+  .main-content {
+    padding: var(--game-space-base) var(--game-space-xs);
+  }
+
+  .section-header {
+    gap: 10px;
+    margin-bottom: var(--game-space-base);
+  }
+
+  .sort-controls {
+    padding: 6px 10px;
+  }
+
+  .sort-controls label {
+    font-size: 10px;
+  }
+
+  .game-select, .game-input {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .banner-top, .banner-bottom {
+    font-size: 10px;
+    padding: 5px 0;
+  }
+
+  .banner-text {
+    font-size: 11px;
+  }
+
+  .chart-container {
+    padding: var(--game-space-sm);
+    min-height: 250px;
+  }
+
+  .tournament-bracket {
+    min-width: 600px;
+  }
+
+  .tournament-round {
+    min-width: 160px;
+  }
+
+  .tournament-matchup {
+    width: 160px;
+    min-width: 160px;
+    max-width: 160px;
+    padding: 8px;
+  }
+
+  .rule-content {
+    font-size: 12px;
+  }
+
+  .modal-content {
+    height: calc(100vh - 24px);
+  }
+
+  .modal-body {
+    padding: 12px;
+    max-height: calc(100vh - 100px);
+  }
+
+  .panel-header {
+    font-size: 12px;
+    padding: 6px 10px;
   }
 }
 
