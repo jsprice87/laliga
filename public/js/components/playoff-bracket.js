@@ -250,23 +250,25 @@ export class PlayoffBracket {
   }
 
   /**
-   * Generate Sacko Semifinal (seed 8 vs seed 7, WC winner vs auto-advance)
+   * Generate Sacko Semifinal (#11 and #12 bye teams vs WC winners)
    */
   generateSackoSemifinal(teams) {
-    if (teams.length < 2) {
+    if (teams.length < 6) {
       return '<div class="no-bracket-data">Sacko Semifinal TBD</div>';
     }
 
-    // Use leaderboardRank for display
-    const seed7 = teams[0]?.leaderboardRank || 7;
-    const seed8 = teams[1]?.leaderboardRank || 8;
+    // Teams ranked 7-12 (sackoTeams slice), so:
+    // index 4 = seed 11, index 5 = seed 12 (bye teams)
+    const seed11 = teams[4]?.leaderboardRank || 11;
+    const seed12 = teams[5]?.leaderboardRank || 12;
 
     return `
       <div class="tournament-matchup semifinal">
         <div class="matchup-teams">
-          <div class="team-slot">
-            <span class="seed">#${seed7}</span>
-            <span class="team-name">${teams[0]?.name || 'TBD'}</span>
+          <div class="team-slot winner">
+            <span class="seed">#${seed11}</span>
+            <span class="team-name">${teams[4]?.name || 'TBD'}</span>
+            <span class="bye-tag">BYE</span>
           </div>
           <div class="vs-divider">VS</div>
           <div class="team-slot tbd">
@@ -277,14 +279,15 @@ export class PlayoffBracket {
       </div>
       <div class="tournament-matchup semifinal">
         <div class="matchup-teams">
-          <div class="team-slot">
-            <span class="seed">#${seed8}</span>
-            <span class="team-name">${teams[1]?.name || 'TBD'}</span>
+          <div class="team-slot winner">
+            <span class="seed">#${seed12}</span>
+            <span class="team-name">${teams[5]?.name || 'TBD'}</span>
+            <span class="bye-tag">BYE</span>
           </div>
           <div class="vs-divider">VS</div>
           <div class="team-slot tbd">
-            <span class="seed">AUTO</span>
-            <span class="team-name">Auto Advance</span>
+            <span class="seed">WC</span>
+            <span class="team-name">WC Winner</span>
           </div>
         </div>
       </div>
