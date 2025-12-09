@@ -63,32 +63,40 @@ export class MoneyBoard {
     if (!winnersContainer) return;
 
     const currentYear = this.state.getCurrentYear();
-    
-    if (currentYear === 2025) {
-      // Calculate actual weekly winners from matchup data
-      console.log('💰 MoneyBoard: Calculating weekly high score winners...');
-      const weeklyWinners = this.calculateWeeklyHighScoreWinners();
-      console.log('💰 MoneyBoard: Found', weeklyWinners.length, 'weekly winners:', weeklyWinners);
-      
-      if (weeklyWinners.length === 0) {
-        winnersContainer.innerHTML = '<div class="no-data-message">No weekly winners yet - matchup data loading...</div>';
-        return;
-      }
-      
-      // Display actual winners
-      winnersContainer.innerHTML = weeklyWinners.map(winner => `
-        <div class="winner-item">
-          <div class="winner-week">Week ${winner.week}</div>
-          <div class="winner-team">${winner.teamName}</div>
-          <div class="winner-score">${winner.score} pts</div>
-          <div class="winner-prize">$50</div>
-        </div>
-      `).join('');
+
+    // Calculate actual weekly winners from matchup data
+    console.log('💰 MoneyBoard: Calculating weekly high score winners...');
+    const weeklyWinners = this.calculateWeeklyHighScoreWinners();
+    console.log('💰 MoneyBoard: Found', weeklyWinners.length, 'weekly winners:', weeklyWinners);
+
+    if (weeklyWinners.length === 0) {
+      winnersContainer.innerHTML = '<div class="no-data-message">No weekly winners yet - matchup data loading...</div>';
       return;
     }
 
-    // Historical seasons - show placeholder for now
-    winnersContainer.innerHTML = '<div class="no-data-message">No weekly winners data available</div>';
+    // Display as a proper table
+    winnersContainer.innerHTML = `
+      <table class="winners-table">
+        <thead>
+          <tr>
+            <th>WEEK</th>
+            <th>TEAM</th>
+            <th>SCORE</th>
+            <th>PRIZE</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${weeklyWinners.map(winner => `
+            <tr>
+              <td class="winner-week">${winner.week}</td>
+              <td class="winner-team">${winner.teamName}</td>
+              <td class="winner-score">${winner.score.toFixed(2)} pts</td>
+              <td class="winner-prize">$50</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
   }
 
   /**
@@ -166,7 +174,7 @@ export class MoneyBoard {
     }
 
     const teams = this.state.getTeams();
-    
+
     if (!teams || teams.length === 0) {
       console.log('MoneyBoard: No teams data available for chart');
       // Display loading state message in canvas area
@@ -179,22 +187,34 @@ export class MoneyBoard {
       return;
     }
 
-    const teamNames = teams.map(team => team.name || 'Unknown Team');
-    // For 2025 season, earnings will be 0 until prizes are awarded
-    // For historical seasons, earnings would come from stored data
-    const earnings = teams.map(team => {
-      // Early 2025 season - no earnings yet, but show 0 instead of undefined
-      const currentYear = this.state.getCurrentYear();
-      if (currentYear === 2025) {
-        return team.earnings || 0; // All will be 0 for early season
-      }
-      return team.earnings || 0;
+    // Calculate earnings from weekly high score winners
+    const weeklyWinners = this.calculateWeeklyHighScoreWinners();
+    const earningsMap = {};
+
+    // Initialize all teams with $0
+    teams.forEach(team => {
+      earningsMap[team.name] = 0;
     });
-    
+
+    // Add $50 for each weekly win
+    weeklyWinners.forEach(winner => {
+      if (earningsMap.hasOwnProperty(winner.teamName)) {
+        earningsMap[winner.teamName] += 50;
+      }
+    });
+
+    // Sort teams by earnings (highest first) for better visualization
+    const sortedTeams = [...teams].sort((a, b) => {
+      return (earningsMap[b.name] || 0) - (earningsMap[a.name] || 0);
+    });
+
+    const teamNames = sortedTeams.map(team => team.name || 'Unknown Team');
+    const earnings = sortedTeams.map(team => earningsMap[team.name] || 0);
+
     console.log('MoneyBoard: Rendering chart with', teams.length, 'teams, earnings:', earnings);
 
     const ctx = canvas.getContext('2d');
-    
+
     this.chart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -202,7 +222,7 @@ export class MoneyBoard {
         datasets: [{
           label: 'Earnings ($)',
           data: earnings,
-          backgroundColor: 'rgba(0, 255, 255, 0.2)',
+          backgroundColor: 'rgba(0, 255, 255, 0.6)',
           borderColor: 'rgba(0, 255, 255, 1)',
           borderWidth: 2
         }]
