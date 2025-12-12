@@ -351,17 +351,22 @@ export class PlayoffBracket {
 
   /**
    * Sort teams by leaderboard rank (La Liga Bucks)
-   * Uses the same sorting as the leaderboard (state.sortTeams)
-   * to ensure consistency between views
+   * Uses the pre-calculated ligaBucksRank from the data service
+   * to ensure consistency with the leaderboard
    */
   sortByLeaderboardRank(teams) {
-    // Use state's sortTeams to ensure exact same ordering as leaderboard
-    const sortedTeams = this.state.sortTeams('bucks');
+    // Sort by the pre-calculated ligaBucksRank (set by data-service.js)
+    // This ensures exact same ordering as leaderboard
+    const sortedTeams = [...teams].sort((a, b) => {
+      const rankA = a.ligaBucksRank || 99;
+      const rankB = b.ligaBucksRank || 99;
+      return rankA - rankB;
+    });
 
-    // Assign leaderboardRank based on sorted position
-    return sortedTeams.map((team, index) => ({
+    // Use ligaBucksRank as leaderboardRank for display
+    return sortedTeams.map(team => ({
       ...team,
-      leaderboardRank: index + 1
+      leaderboardRank: team.ligaBucksRank || 99
     }));
   }
 
