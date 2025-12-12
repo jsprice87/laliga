@@ -325,10 +325,27 @@ export class AppState {
    */
   sortTeams(criteria = 'bucks') {
     const teams = [...this.getTeams()];
-    
+
+    // Helper to get La Liga Bucks value (handles both object and number formats)
+    const getBucks = (team) => {
+      if (typeof team.laLigaBucks === 'object' && team.laLigaBucks !== null) {
+        return team.laLigaBucks.total || 0;
+      }
+      return team.laLigaBucks || 0;
+    };
+
     switch (criteria) {
       case 'bucks':
-        return teams.sort((a, b) => (b.laLigaBucks || 0) - (a.laLigaBucks || 0));
+        // Sort by La Liga Bucks, tiebreaker: Total Points For
+        return teams.sort((a, b) => {
+          const bucksA = getBucks(a);
+          const bucksB = getBucks(b);
+          if (bucksB !== bucksA) {
+            return bucksB - bucksA;
+          }
+          // Tiebreaker: Total Points For (higher is better)
+          return (b.totalPoints || 0) - (a.totalPoints || 0);
+        });
       case 'espnRank':
         return teams.sort((a, b) => (a.espnRank || 0) - (b.espnRank || 0));
       case 'totalPoints':
