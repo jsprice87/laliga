@@ -351,32 +351,17 @@ export class PlayoffBracket {
 
   /**
    * Sort teams by leaderboard rank (La Liga Bucks)
-   * This is the correct ranking: 50% ESPN Rank + 50% Points For
-   * Tiebreaker: Total Points For
+   * Uses the same sorting as the leaderboard (state.sortTeams)
+   * to ensure consistency between views
    */
   sortByLeaderboardRank(teams) {
-    return [...teams].sort((a, b) => {
-      // Get La Liga Bucks value (handle both object and number formats)
-      const getBucks = (team) => {
-        if (typeof team.laLigaBucks === 'object' && team.laLigaBucks !== null) {
-          return team.laLigaBucks.total || 0;
-        }
-        return team.laLigaBucks || 0;
-      };
+    // Use state's sortTeams to ensure exact same ordering as leaderboard
+    const sortedTeams = this.state.sortTeams('bucks');
 
-      const bucksA = getBucks(a);
-      const bucksB = getBucks(b);
-
-      // Primary sort: La Liga Bucks (higher is better)
-      if (bucksB !== bucksA) {
-        return bucksB - bucksA;
-      }
-
-      // Tiebreaker: Total Points For (higher is better)
-      return (b.totalPoints || 0) - (a.totalPoints || 0);
-    }).map((team, index) => ({
+    // Assign leaderboardRank based on sorted position
+    return sortedTeams.map((team, index) => ({
       ...team,
-      leaderboardRank: index + 1  // Assign rank based on sorted position
+      leaderboardRank: index + 1
     }));
   }
 
